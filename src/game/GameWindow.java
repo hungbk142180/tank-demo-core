@@ -54,61 +54,19 @@ public class GameWindow extends JFrame {
                 KeyEventPress.isAnyKeyPress = false;//
                 if(e.getKeyCode() == KeyEvent.VK_W) {
                    KeyEventPress.isUpPress = false;
-                    // quan trong v l l l l lấy ra ị trí thăng tank trong gameObject
-                    /*for(int  i = 0 ; i< GameObject.gameObjects.size();i++){
-                        System.out.println("Object  "+ i + " :"  + GameObject.gameObjects.get(i));
-                    }*/
 
-                    Vector2D current = GameObject.gameObjects.get(1).position;
-                   // Vector2D current = this.position;// vi tri hien tai sau khi di chuyen
-                    // cai dong ma min mun di chuyen dung lane
-                    int newRow  = (int) (current.y/28);
-                    // pixel tang len de sao cho dung dong mong mun
-                    float pixelNedd = current.y - newRow * 28;//
-                 //   System.out.println("pixel : "+pixelNedd);
-                    /*float x = current.y / 28;*/
-
-                    if(pixelNedd != 0 ){// muốn hoãn nhảy mà chưa hoãn được
-                            for(int i = 0;i<pixelNedd;i++){
-                                GameObject.gameObjects.get(1).position.addThis(0,-1);
-                            }
-                    }
                 }
                else if(e.getKeyCode() == KeyEvent.VK_A) {
                     KeyEventPress.isLeftPress = false;
 
-                    Vector2D current = GameObject.gameObjects.get(1).position;
-                    int newCol  = (int) (current.x/28);
-                    float pixelNedd =  current.x - newCol * 28 ;
-                    if(pixelNedd != 0 ){
-                        for(int i = 0;i<pixelNedd;i++){
-                            GameObject.gameObjects.get(1).position.addThis(-1,0);
-                        }
-                    }
                 }
                else if(e.getKeyCode() == KeyEvent.VK_S) {
                     KeyEventPress.isDownPress = false;
 
-                    Vector2D current = GameObject.gameObjects.get(1).position;
-                    int newRow  = (int) (current.y/28);
-                    float pixelNedd = (newRow + 1) * 28 - current.y;// bang dong hien tai + 1 * 28 - position hien tai
-                    if(pixelNedd != 0 ){
-                        for(int i = 0;i<pixelNedd;i++){
-                            GameObject.gameObjects.get(1).position.addThis(0,+1);
-                        }
-                    }
                 }
                else if(e.getKeyCode() == KeyEvent.VK_D) {
                     KeyEventPress.isRightPress = false;
 
-                    Vector2D current = GameObject.gameObjects.get(1).position;
-                    int newCol  = (int) (current.x/28);
-                    float pixelNedd = (newCol + 1) * 28 - current.x;
-                    if(pixelNedd != 0 ){
-                        for(int i = 0;i<pixelNedd;i++){
-                            GameObject.gameObjects.get(1).position.addThis(+1,0);
-                        }
-                    }
                 }
                else if(e.getKeyCode() == KeyEvent.VK_SPACE) {
                     KeyEventPress.isFirePress = false;

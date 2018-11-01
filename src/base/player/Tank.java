@@ -26,6 +26,7 @@ public class Tank extends GameObject implements Physics {
     float currentY = 0.0F;
     boolean[] way = new boolean[]{false,false,false,false};//up down left right
     WallManagement arr;
+    FrameCounter moveCounter;
 
     public Tank() {
         arr= new WallManagement( );;
@@ -35,6 +36,7 @@ public class Tank extends GameObject implements Physics {
         this.velocity = new Vector2D(0.0F, 0.0F);
         this.fireCounter = new FrameCounter(10);
         this.collider = new BoxCollider(52, 52);
+        this.moveCounter = new FrameCounter(6);
     }
 
     public void run() {
@@ -45,26 +47,44 @@ public class Tank extends GameObject implements Physics {
             this.currentY = this.position.y;
         }
         //
-        if (KeyEventPress.isUpPress) {
+        boolean moveCounterRun = this.moveCounter.run();
+        if (KeyEventPress.isUpPress && moveCounterRun) {
             BufferedImage imageUp = SpriteUtils.loadImage("assets/tank_image/tank2.PNG");
             ((SingleImageRenderer) this.renderer).image = imageUp;
             this.position.addThis(0.0F, -4.0F);
             this.way=new boolean[]{true,false,false,false};
-        } else if (KeyEventPress.isDownPress) {
+            this.moveCounter.reset();
+        } else if (KeyEventPress.isDownPress && moveCounterRun) {
             BufferedImage imageDown = SpriteUtils.loadImage("assets/tank_image/tank2_down.PNG");
             ((SingleImageRenderer) this.renderer).image = imageDown;
             this.position.addThis(0.0F, 4.0F);
             this.way=new boolean[]{false,true,false,false};
-        } else if (KeyEventPress.isLeftPress) {
+            this.moveCounter.reset();
+        } else if (KeyEventPress.isLeftPress && moveCounterRun) {
             BufferedImage imageLeft = SpriteUtils.loadImage("assets/tank_image/tank2_left.PNG");
             ((SingleImageRenderer) this.renderer).image = imageLeft;
             this.position.addThis(-4.0F, 0.0F);
             this.way=new boolean[]{false,false,true,false};
-        } else if (KeyEventPress.isRightPress) {
+            this.moveCounter.reset();
+        } else if (KeyEventPress.isRightPress && moveCounterRun) {
             BufferedImage imageRight = SpriteUtils.loadImage("assets/tank_image/tank2_right.PNG");
             ((SingleImageRenderer) this.renderer).image = imageRight;
             this.position.addThis(4.0F, 0.0F);
             this.way=new boolean[]{false,false,false,true};
+            this.moveCounter.reset();
+        }
+
+        if (this.way[0] && moveCounterRun == false) {
+            this.position.addThis(0,-4);
+        }
+        else if(this.way[1] && moveCounterRun == false) {
+            this.position.addThis(0,4);
+        }
+        else if(this.way[2] && moveCounterRun == false) {
+            this.position.addThis(-4,0);
+        }
+        else if(this.way[3] && moveCounterRun == false) {
+            this.position.addThis(4,0);
         }
 
         boolean fireCounterRun = this.fireCounter.run();
