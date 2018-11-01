@@ -15,5 +15,5 @@ public class Settings {
     public static final int LEFT = 2;
     public static final int RIGHT = 3;
 
-    static public int ENEMY_MOVE = 4;
+//    static public int ENEMY_MOVE_X = 4;
 }

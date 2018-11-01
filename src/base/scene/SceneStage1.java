@@ -24,7 +24,7 @@ public class SceneStage1 extends Scene {// khoi tao doi tuong o day
         enemyType1.position.set(Settings.WAY_SIZE*5, Settings.WAY_SIZE*5);
 
         this.enemyType1 = GameObject.recycle(EnemyType1.class);
-        enemyType1.position.set(Settings.WAY_SIZE*20, Settings.WAY_SIZE*5);
+        enemyType1.position.set(Settings.WAY_SIZE*21, Settings.WAY_SIZE*5);
 
 //        System.out.println("tank : "+tank.position);
        /*for(int i =0 ; i< 2 ; i++){
