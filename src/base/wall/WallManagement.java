@@ -46,23 +46,23 @@ public class WallManagement extends ArrayList<GameObject> {
                     if (rc == 1) {
                         Brick brick = (Brick) GameObject.recycle(Brick.class);
 
-                        brick.position = new Vector2D(col * tileSize,row * tileSize);
+                        brick.position = new Vector2D(col * tileSize+14,row * tileSize+14);
 
                         add(brick);
                     }
                     if (rc == 2) {
                         Stone stone = (Stone)GameObject.recycle(Stone.class);
-                        stone.position = new Vector2D(col * tileSize,row * tileSize);
+                        stone.position = new Vector2D(col * tileSize+14,row * tileSize+14);
                         add(stone);
                     }
                     if (rc == 3) {
                         Forest forest = (Forest)GameObject.recycle(Forest.class);
-                        forest.position = new Vector2D(col * tileSize,row * tileSize);
+                        forest.position = new Vector2D(col * tileSize+14,row * tileSize+14);
                         add(forest);
                     }
                     if (rc == 5) {
                         Water water = (Water)GameObject.recycle(Water.class);
-                        water.position = new Vector2D(col * tileSize,row * tileSize);
+                        water.position = new Vector2D(col * tileSize+14,row * tileSize+14);
                         add(water);
                     }
 

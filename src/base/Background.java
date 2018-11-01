@@ -43,7 +43,7 @@ public class Background extends GameObject {
 
         }
     }
-   /* @Override
+    @Override
     public void render(Graphics g) {
         g.setColor(Color.CYAN);
         for(int i = 0; i < Settings.COL_COUNT; i++) {
@@ -54,12 +54,12 @@ public class Background extends GameObject {
             g.drawLine(0, i * Settings.WAY_SIZE
                     , Settings.SCREEN_WIDHT, i * Settings.WAY_SIZE);
         }
-    }*/
+    }
 
-    @Override
-    public void render(Graphics g) {
-
-        super.render(g);
+//    @Override
+//    public void render(Graphics g) {
+//
+//        super.render(g);
 //        for (int row = 0; row < mapHeight; row++) {
 //            for (int col = 0; col < mapWidth; col++) {
 //                int rc = map[row][col];
@@ -87,6 +87,6 @@ public class Background extends GameObject {
 //               // g.fillRect( col * tileSize,  row * tileSize, tileSize, tileSize);
 //            }
 //        }
-    }
+//    }
 
 }
