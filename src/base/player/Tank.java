@@ -7,6 +7,7 @@ import base.Settings;
 import base.Vector2D;
 import base.counter.FrameCounter;
 import base.enemy.Enemy;
+import base.enemy.EnemyBullet;
 import base.event.KeyEventPress;
 import base.physics.BoxCollider;
 import base.physics.Physics;
@@ -29,13 +30,13 @@ public class Tank extends GameObject implements Physics {
     FrameCounter moveCounter;
 
     public Tank() {
-        arr= new WallManagement( );;
+        arr= new WallManagement( );
         BufferedImage image = SpriteUtils.loadImage("assets/tank_image/tank2.PNG");
         this.position = new Vector2D((float)Settings.START_PLAYER_POSITION_X, (float)Settings.START_PLAYER_POSITION_Y);
         this.renderer = new SingleImageRenderer(image);
         this.velocity = new Vector2D(0.0F, 0.0F);
         this.fireCounter = new FrameCounter(10);
-        this.collider = new BoxCollider(52, 52);
+        this.collider = new BoxCollider(53, 53);
         this.moveCounter = new FrameCounter(6);
     }
 
@@ -51,24 +52,31 @@ public class Tank extends GameObject implements Physics {
         if (KeyEventPress.isUpPress && moveCounterRun) {
             BufferedImage imageUp = SpriteUtils.loadImage("assets/tank_image/tank2.PNG");
             ((SingleImageRenderer) this.renderer).image = imageUp;
+            setPosition();
+
             this.position.addThis(0.0F, -4.0F);
             this.way=new boolean[]{true,false,false,false};
             this.moveCounter.reset();
         } else if (KeyEventPress.isDownPress && moveCounterRun) {
             BufferedImage imageDown = SpriteUtils.loadImage("assets/tank_image/tank2_down.PNG");
             ((SingleImageRenderer) this.renderer).image = imageDown;
+            setPosition();
+
             this.position.addThis(0.0F, 4.0F);
             this.way=new boolean[]{false,true,false,false};
             this.moveCounter.reset();
         } else if (KeyEventPress.isLeftPress && moveCounterRun) {
             BufferedImage imageLeft = SpriteUtils.loadImage("assets/tank_image/tank2_left.PNG");
             ((SingleImageRenderer) this.renderer).image = imageLeft;
+            setPosition();
             this.position.addThis(-4.0F, 0.0F);
             this.way=new boolean[]{false,false,true,false};
             this.moveCounter.reset();
         } else if (KeyEventPress.isRightPress && moveCounterRun) {
             BufferedImage imageRight = SpriteUtils.loadImage("assets/tank_image/tank2_right.PNG");
             ((SingleImageRenderer) this.renderer).image = imageRight;
+            setPosition();
+
             this.position.addThis(4.0F, 0.0F);
             this.way=new boolean[]{false,false,false,true};
             this.moveCounter.reset();
@@ -93,7 +101,13 @@ public class Tank extends GameObject implements Physics {
         }
         this.position.addThis(this.velocity);
 
-        if (this.checkIntersects()|| this.checkIntersectsWall()) {
+        if (    this.checkIntersects()||
+                this.checkIntersectsWall() ||
+                this.position.x-Settings.WAY_SIZE/2 <=0 ||
+                this.position.x+Settings.WAY_SIZE/2 >Settings.SCREEN_WIDHT ||
+                this.position.y-Settings.WAY_SIZE/2 <=0 ||
+                this.position.y+Settings.WAY_SIZE/2 >Settings.SCREEN_HEIGHT
+        ) {
             this.position.x = this.currentX;
             this.position.y = this.currentY;
         }
@@ -103,6 +117,8 @@ public class Tank extends GameObject implements Physics {
         Enemy enemy = (Enemy)GameObject.intersect(Enemy.class, this);
         return   enemy != null;
     }
+
+
     private boolean checkIntersectsWall(){
         for (GameObject i :
                 arr) {
@@ -149,7 +165,17 @@ public class Tank extends GameObject implements Physics {
 
     public void move(int velocityX, int velocityY) {
         this.velocity.addThis((float)velocityX, (float)velocityY);
-        this.velocity.set(this.clamp(this.velocity.x, -3.0F, 3.0F), this.clamp(this.velocity.y, -3.0F, 3.0F));
+        this.velocity.set(this.clamp(this.velocity.x, -3.0F, 3.0F),
+                        this.clamp(this.velocity.y, -3.0F, 3.0F));
+    }
+
+    public void setPosition(){
+        if(this.position.x < 0){
+            this.position.set(200, 300);
+        }
+        else if(this.position.x > Settings.SCREEN_WIDHT){
+            this.position.set(200,300);
+        }
     }
 
     public float clamp(float number, float min, float max) {

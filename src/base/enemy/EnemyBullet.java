@@ -7,6 +7,7 @@ import base.Settings;
 import base.Vector2D;
 import base.physics.BoxCollider;
 import base.physics.Physics;
+import base.player.PlayBullet;
 import base.player.Tank;
 import base.renderer.SingleImageRenderer;
 import tklibs.SpriteUtils;
@@ -27,10 +28,16 @@ public class EnemyBullet extends GameObject implements Physics {
     public void run() {
         this.position.addThis(this.velocity);
         Tank tank = (Tank)GameObject.intersect(Tank.class, this);
+        PlayBullet playBullet = (PlayBullet)GameObject.intersect(PlayBullet.class, this);
+//        EnemyBullet enemyBullet = (EnemyBullet)GameObject.intersect(EnemyBullet.class, this);
         if (tank != null) {
             tank.takeDamage(this.damage);
             this.destroy();
         }
+        if(playBullet != null){
+            this.destroy();
+        }
+
         if(this.position.y < 0 || this.position.y > Settings.SCREEN_HEIGHT ||
             this.position.x < 0 || this.position.x > Settings.SCREEN_WIDHT) {
             this.destroy();

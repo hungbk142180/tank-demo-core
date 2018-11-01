@@ -9,6 +9,7 @@ import base.GameObject;
 import base.Settings;
 import base.Vector2D;
 import base.enemy.Enemy;
+import base.enemy.EnemyBullet;
 import base.physics.BoxCollider;
 import base.physics.Physics;
 
@@ -24,6 +25,7 @@ public class PlayBullet extends GameObject implements Physics {
 
     public void run() {
         Enemy enemy = (Enemy)GameObject.intersect(Enemy.class, this);
+
         if (enemy != null) {
             enemy.takeDamage(this.damage);
             this.hitEnemy();
@@ -33,6 +35,7 @@ public class PlayBullet extends GameObject implements Physics {
         } else if (this.isActive == true) {
             this.position.addThis(this.velocity);
         }
+
     }
 
     public void hitEnemy() {
