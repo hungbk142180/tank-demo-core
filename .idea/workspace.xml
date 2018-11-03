@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
+    <list default="true" id="cbfb029f-8f69-45ff-a016-007138febb6c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/base/enemy/EnemySummoner.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/base/enemy/EnemyType2.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/base/enemy/EnemyType3.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/base/enemy/EnemyType4.java" afterDir="false" />
+=======
     <list default="true" id="5102307b-863c-4f0b-b949-ba69d5f7a183" name="Default Changelist" comment="">
+>>>>>>> e5c0ae9e2ba1640a42f56e2063caf5746d6c6636
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
 
       <change beforePath="$PROJECT_DIR$/out/production/tank-demo-core/base/enemy/EnemyBullet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tank-demo-core/base/enemy/EnemyBullet.class" afterDir="false" />
@@ -17,11 +25,27 @@
       <change beforePath="$PROJECT_DIR$/out/production/tank-demo-core/base/enemy/Enemy$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tank-demo-core/base/enemy/Enemy$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/tank-demo-core/base/enemy/Enemy$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tank-demo-core/base/enemy/Enemy$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/tank-demo-core/base/enemy/Enemy.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tank-demo-core/base/enemy/Enemy.class" afterDir="false" />
+<<<<<<< HEAD
+      <change beforePath="$PROJECT_DIR$/out/production/tank-demo-core/base/enemy/EnemyType1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tank-demo-core/base/enemy/EnemyType1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/tank-demo-core/base/player/Tank.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tank-demo-core/base/player/Tank.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/tank-demo-core/base/scene/Scene.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tank-demo-core/base/scene/Scene.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/tank-demo-core/base/scene/SceneStage1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tank-demo-core/base/scene/SceneStage1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/base/enemy/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/enemy/Enemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/base/enemy/EnemyBullet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/enemy/EnemyBullet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/base/enemy/EnemyType1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/enemy/EnemyType1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/base/player/Tank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/player/Tank.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/base/scene/Scene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/scene/Scene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/base/scene/SceneStage1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/scene/SceneStage1.java" afterDir="false" />
+=======
       <change beforePath="$PROJECT_DIR$/out/production/tank-demo-core/base/player/Tank.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tank-demo-core/base/player/Tank.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/tank-demo-core/base/scene/Scene.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tank-demo-core/base/scene/Scene.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/tank-demo-core/base/scene/SceneStage1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tank-demo-core/base/scene/SceneStage1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/tank-demo-core/base/wall/WallManagement.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tank-demo-core/base/wall/WallManagement.class" afterDir="false" />
+<<<<<<< HEAD
 
+=======
+>>>>>>> e5c0ae9e2ba1640a42f56e2063caf5746d6c6636
+>>>>>>> 5812df9e2b9f3c5101e4aec9d7ec6c4dc82780eb
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -131,6 +155,67 @@
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
     </session>
+    <session id="1685803178">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="1" />
+          <entry key="project.open.time.2" value="1" />
+          <entry key="project.opened" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="java" value="1274" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="JAVA" value="1274" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="gif" value="1" />
+          <entry key="java" value="19" />
+          <entry key="jpg" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="Image" value="2" />
+          <entry key="JAVA" value="19" />
+        </counts>
+      </usages-collector>
+    </session>
+    <session id="1619449077">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="1" />
+          <entry key="project.open.time.1" value="2" />
+          <entry key="project.opened" value="2" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="java" value="11" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="JAVA" value="11" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="java" value="497" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="JAVA" value="497" />
+        </counts>
+      </usages-collector>
+    </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
@@ -145,6 +230,34 @@
                 <element signature="e#2034#2035#0" expanded="true" />
 =======
       <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
+        <entry file="file://$PROJECT_DIR$/src/base/player/PlayBulletType1.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="132">
+              <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/base/player/PlayBullet.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="176">
+              <caret line="26" column="8" selection-start-line="26" selection-start-column="8" selection-end-line="26" selection-end-column="69" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/base/enemy/EnemySummoner.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-91">
+              <caret line="18" column="48" selection-start-line="18" selection-start-column="48" selection-end-line="18" selection-end-column="48" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1245#1246#0" expanded="true" />
+                <element signature="e#1272#1273#0" expanded="true" />
+=======
         <entry file="file://$PROJECT_DIR$/src/base/item_bonus/Boom.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="172">
@@ -153,12 +266,37 @@
                 <element signature="imports" expanded="true" />
                 <element signature="e#581#582#0" expanded="true" />
                 <element signature="e#617#618#0" expanded="true" />
+>>>>>>> e5c0ae9e2ba1640a42f56e2063caf5746d6c6636
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
+        <entry file="file://$PROJECT_DIR$/src/base/enemy/EnemyBullet.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="220">
+              <caret line="30" column="18" selection-start-line="30" selection-start-column="8" selection-end-line="30" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/base/player/Tank.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-322">
+              <caret line="156" column="67" selection-start-line="156" selection-start-column="67" selection-end-line="156" selection-end-column="67" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/base/Settings.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="44">
+              <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+=======
         <entry file="file://$PROJECT_DIR$/src/base/item_bonus/Shovel.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="289">
@@ -167,6 +305,7 @@
                 <element signature="imports" expanded="true" />
 >>>>>>> e5c0ae9e2ba1640a42f56e2063caf5746d6c6636
               </folding>
+>>>>>>> e5c0ae9e2ba1640a42f56e2063caf5746d6c6636
             </state>
           </provider>
         </entry>
@@ -184,6 +323,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/base/player/Tank.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+            <state relative-caret-position="134">
+              <caret line="48" selection-start-line="48" selection-end-line="48" />
+=======
             <state relative-caret-position="92">
               <caret line="68" column="11" lean-forward="true" selection-start-line="68" selection-start-column="11" selection-end-line="68" selection-end-column="11" />
               <folding>
@@ -191,6 +334,7 @@
                 <element signature="e#9340#9341#0" expanded="true" />
 >>>>>>> e5c0ae9e2ba1640a42f56e2063caf5746d6c6636
               </folding>
+>>>>>>> e5c0ae9e2ba1640a42f56e2063caf5746d6c6636
             </state>
           </provider>
         </entry>
@@ -216,8 +360,31 @@
 =======
         <entry file="file://$PROJECT_DIR$/src/base/scene/SceneStage1.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+            <state relative-caret-position="96">
+              <caret line="21" column="20" selection-start-line="21" selection-start-column="20" selection-end-line="21" selection-end-column="20" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/base/enemy/EnemyType1.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="330">
+              <caret line="23" column="27" selection-start-line="23" selection-start-column="27" selection-end-line="23" selection-end-column="27" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/base/enemy/EnemyType2.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="198">
+              <caret line="14" column="48" selection-start-line="14" selection-start-column="48" selection-end-line="14" selection-end-column="48" />
+=======
             <state relative-caret-position="68">
               <caret line="13" column="50" selection-start-line="13" selection-start-column="35" selection-end-line="13" selection-end-column="50" />
+>>>>>>> e5c0ae9e2ba1640a42f56e2063caf5746d6c6636
               <folding>
                 <element signature="imports" expanded="true" />
 >>>>>>> e5c0ae9e2ba1640a42f56e2063caf5746d6c6636
@@ -239,12 +406,20 @@
 =======
   <component name="FindInProjectRecents">
     <findStrings>
+<<<<<<< HEAD
+      <find>true</find>
+      <find>collider</find>
+      <find>take</find>
+      <find>des</find>
+    </findStrings>
+=======
       <find>System</find>
       <find>Forest</find>
     </findStrings>
     <dirStrings>
       <dir>G:\teckid\tank-demo-core</dir>
     </dirStrings>
+>>>>>>> e5c0ae9e2ba1640a42f56e2063caf5746d6c6636
   </component>
 >>>>>>> e5c0ae9e2ba1640a42f56e2063caf5746d6c6636
   <component name="Git.Settings">
@@ -253,6 +428,10 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+<<<<<<< HEAD
+        <option value="$PROJECT_DIR$/src/Program.java" />
+        <option value="$PROJECT_DIR$/src/base/player/PlayBullet.java" />
+=======
         <option value="$PROJECT_DIR$/src/base/wall/Iron.java" />
         <option value="$PROJECT_DIR$/src/base/wall/Stone.java" />
         <option value="$PROJECT_DIR$/src/base/wall/Brick.java" />
@@ -289,11 +468,34 @@
         <option value="$PROJECT_DIR$/src/base/item_bonus/Shovel.java" />
         <option value="$PROJECT_DIR$/src/base/item_bonus/Clock.java" />
         <option value="$PROJECT_DIR$/src/base/item_bonus/Boom.java" />
+>>>>>>> e5c0ae9e2ba1640a42f56e2063caf5746d6c6636
         <option value="$PROJECT_DIR$/src/base/player/Tank.java" />
+        <option value="$PROJECT_DIR$/src/base/enemy/EnemyType2.java" />
+        <option value="$PROJECT_DIR$/src/base/GameObject.java" />
+        <option value="$PROJECT_DIR$/src/base/enemy/EnemyType1.java" />
+        <option value="$PROJECT_DIR$/src/base/enemy/Enemy.java" />
+        <option value="$PROJECT_DIR$/src/base/scene/Scene.java" />
+        <option value="$PROJECT_DIR$/src/base/scene/SceneStage1.java" />
+        <option value="$PROJECT_DIR$/src/base/enemy/EnemyType4.java" />
+        <option value="$PROJECT_DIR$/src/base/enemy/EnemyType3.java" />
+        <option value="$PROJECT_DIR$/src/base/enemy/EnemyBullet.java" />
+        <option value="$PROJECT_DIR$/src/base/enemy/EnemySummoner.java" />
       </list>
     </option>
   </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
   <component name="ProjectFrameBounds" extendedState="6">
+<<<<<<< HEAD
+    <option name="x" value="-15" />
+    <option name="y" value="110" />
+    <option name="width" value="1025" />
+    <option name="height" value="690" />
+=======
     <option name="x" value="229" />
     <option name="y" value="17" />
     <option name="width" value="1093" />
@@ -314,17 +516,17 @@
         <subPane>
           <expand>
             <path>
-              <item name="tank-demo-core" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tank-demo-core" type="462c0819:PsiDirectoryNode" />
+              <item name="tank-demo-core-copy-02-11" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tank-demo-core-copy-02-11" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="tank-demo-core" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tank-demo-core" type="462c0819:PsiDirectoryNode" />
+              <item name="tank-demo-core-copy-02-11" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tank-demo-core-copy-02-11" type="462c0819:PsiDirectoryNode" />
               <item name="assets" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="tank-demo-core" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tank-demo-core" type="462c0819:PsiDirectoryNode" />
+              <item name="tank-demo-core-copy-02-11" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tank-demo-core-copy-02-11" type="462c0819:PsiDirectoryNode" />
               <item name="assets" type="462c0819:PsiDirectoryNode" />
               <item name="maps" type="462c0819:PsiDirectoryNode" />
             </path>
@@ -351,36 +553,38 @@
 >>>>>>> e5c0ae9e2ba1640a42f56e2063caf5746d6c6636
             </path>
             <path>
-              <item name="tank-demo-core" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tank-demo-core" type="462c0819:PsiDirectoryNode" />
+              <item name="tank-demo-core-copy-02-11" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tank-demo-core-copy-02-11" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="tank-demo-core" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tank-demo-core" type="462c0819:PsiDirectoryNode" />
+              <item name="tank-demo-core-copy-02-11" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tank-demo-core-copy-02-11" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="base" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="tank-demo-core" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tank-demo-core" type="462c0819:PsiDirectoryNode" />
+              <item name="tank-demo-core-copy-02-11" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tank-demo-core-copy-02-11" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="base" type="462c0819:PsiDirectoryNode" />
               <item name="item_bonus" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="tank-demo-core" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tank-demo-core" type="462c0819:PsiDirectoryNode" />
+              <item name="tank-demo-core-copy-02-11" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tank-demo-core-copy-02-11" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="base" type="462c0819:PsiDirectoryNode" />
               <item name="player" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="tank-demo-core" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tank-demo-core" type="462c0819:PsiDirectoryNode" />
+              <item name="tank-demo-core-copy-02-11" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tank-demo-core-copy-02-11" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="base" type="462c0819:PsiDirectoryNode" />
               <item name="scene" type="462c0819:PsiDirectoryNode" />
+<<<<<<< HEAD
+=======
             </path>
             <path>
               <item name="tank-demo-core" type="b2602c69:ProjectViewProjectNode" />
@@ -394,6 +598,7 @@
               <item name="tank-demo-core" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="game" type="462c0819:PsiDirectoryNode" />
+>>>>>>> e5c0ae9e2ba1640a42f56e2063caf5746d6c6636
             </path>
           </expand>
           <select />
@@ -405,7 +610,14 @@
   </component>
   <component name="PropertiesComponent">
 <<<<<<< HEAD
+<<<<<<< HEAD
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1541178641328" />
+=======
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1541251555177" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+>>>>>>> 5812df9e2b9f3c5101e4aec9d7ec6c4dc82780eb
 =======
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1541246771733" />
   </component>
@@ -450,7 +662,14 @@
       <created>1540907574453</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
+<<<<<<< HEAD
+      <updated>1541085872703</updated>
+      <workItem from="1541169697119" duration="10937000" />
+      <workItem from="1541218270193" duration="2000000" />
+      <workItem from="1541247194746" duration="1948000" />
+=======
       <updated>1540907574453</updated>
+>>>>>>> e5c0ae9e2ba1640a42f56e2063caf5746d6c6636
     </task>
     <task id="LOCAL-00001" summary="ăn bonus">
       <created>1541246792765</created>
@@ -462,12 +681,22 @@
     <option name="localTasksCounter" value="2" />
     <servers />
   </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="14885000" />
+  </component>
   <component name="ToolWindowManager">
+<<<<<<< HEAD
 <<<<<<< HEAD
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2647504" />
+=======
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16308725" />
+>>>>>>> 5812df9e2b9f3c5101e4aec9d7ec6c4dc82780eb
 =======
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
@@ -480,6 +709,21 @@
       <window_info id="UI Designer" order="4" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
+<<<<<<< HEAD
+      <window_info id="Learn" order="7" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3617021" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.3295964" />
+      <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.32765958" />
+      <window_info anchor="bottom" id="Database Changes" order="11" show_stripe_button="false" />
+=======
       <window_info anchor="bottom" id="Message" order="0" />
 <<<<<<< HEAD
       <window_info anchor="bottom" id="Find" order="1" />
@@ -497,6 +741,7 @@
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="bottom" id="Messages" order="10" weight="0.3276923" />
+>>>>>>> e5c0ae9e2ba1640a42f56e2063caf5746d6c6636
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -505,6 +750,7 @@
       <window_info anchor="right" id="Theme Preview" order="5" />
       <window_info anchor="right" id="Palette&#9;" order="6" />
       <window_info anchor="right" id="Maven Projects" order="7" />
+<<<<<<< HEAD
 <<<<<<< HEAD
     </layout>
     <layout-to-restore>
@@ -535,7 +781,11 @@
       <window_info anchor="right" id="Palette&#9;" order="6" />
       <window_info anchor="right" id="Maven Projects" order="7" />
 =======
+      <window_info anchor="right" id="Database" order="8" />
+>>>>>>> 5812df9e2b9f3c5101e4aec9d7ec6c4dc82780eb
+=======
       <window_info anchor="right" id="Coverage" order="8" side_tool="true" />
+>>>>>>> e5c0ae9e2ba1640a42f56e2063caf5746d6c6636
     </layout>
     <layout-to-restore>
       <window_info id="Image Layers" order="0" />
@@ -567,9 +817,17 @@
 >>>>>>> e5c0ae9e2ba1640a42f56e2063caf5746d6c6636
     </layout-to-restore>
   </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+<<<<<<< HEAD
+  <component name="antWorkspaceConfiguration">
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
+    <option name="FILTER_TARGETS" value="false" />
+=======
   <component name="VcsManagerConfiguration">
     <MESSAGE value="ăn bonus" />
     <option name="LAST_COMMIT_MESSAGE" value="ăn bonus" />
@@ -592,6 +850,7 @@
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
     </expressions>
+>>>>>>> e5c0ae9e2ba1640a42f56e2063caf5746d6c6636
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/assets/maps/item_built_map/BricksOrig.png">
@@ -753,6 +1012,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/assets/maps/item_built_map/ConcreteOrig.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -769,6 +1029,21 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-335">
           <caret line="46" column="70" selection-start-line="46" selection-start-column="70" selection-end-line="46" selection-end-column="70" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/game/GameCanvas.java">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="88">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/tank_image/enemy5left.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/tank_image/enemy5.gif">
+      <provider selected="true" editor-type-id="images" />
+>>>>>>> 5812df9e2b9f3c5101e4aec9d7ec6c4dc82780eb
 =======
         <state relative-caret-position="102">
           <caret line="14" column="34" selection-start-line="14" selection-start-column="34" selection-end-line="14" selection-end-column="34" />
@@ -806,9 +1081,14 @@
           <caret line="15" selection-start-line="15" selection-end-line="15" />
         </state>
       </provider>
+>>>>>>> e5c0ae9e2ba1640a42f56e2063caf5746d6c6636
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/game/GameCanvas.java">
+    <entry file="file://$PROJECT_DIR$/src/base/scene/SceneManager.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="44">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+=======
         <state relative-caret-position="99">
           <caret line="15" selection-start-line="15" selection-end-line="15" />
           <folding>
@@ -871,11 +1151,21 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/base/player/Tank.java">
       <provider selected="true" editor-type-id="text-editor">
 <<<<<<< HEAD
         <state relative-caret-position="-137">
           <caret line="162" lean-forward="true" selection-start-line="162" selection-end-line="162" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/base/enemy/EnemyType3.java">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="66">
+          <caret line="44" column="31" lean-forward="true" selection-start-line="44" selection-start-column="31" selection-end-line="44" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+>>>>>>> 5812df9e2b9f3c5101e4aec9d7ec6c4dc82780eb
 =======
         <state relative-caret-position="73">
           <caret line="61" selection-start-line="61" selection-end-line="61" />
@@ -884,11 +1174,32 @@
             <element signature="e#2745#2746#0" expanded="true" />
             <element signature="e#3048#3049#0" expanded="true" />
             <element signature="e#3085#3086#0" expanded="true" />
+>>>>>>> e5c0ae9e2ba1640a42f56e2063caf5746d6c6636
           </folding>
 >>>>>>> e5c0ae9e2ba1640a42f56e2063caf5746d6c6636
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/src/base/enemy/EnemyType4.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="14" column="32" selection-start-line="14" selection-start-column="32" selection-end-line="14" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/base/scene/Scene.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="14" column="39" selection-start-line="14" selection-start-column="39" selection-end-line="14" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/base/scene/SceneStage1.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="484">
+          <caret line="32" column="25" selection-start-line="32" selection-start-column="25" selection-end-line="32" selection-end-column="25" />
+=======
     <entry file="file://$PROJECT_DIR$/src/base/item_bonus/Clock.java">
       <provider selected="true" editor-type-id="text-editor">
 <<<<<<< HEAD
@@ -948,6 +1259,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="138">
           <caret line="32" column="20" selection-start-line="32" selection-start-column="20" selection-end-line="32" selection-end-column="20" />
+>>>>>>> e5c0ae9e2ba1640a42f56e2063caf5746d6c6636
           <folding>
             <element signature="imports" expanded="true" />
 >>>>>>> e5c0ae9e2ba1640a42f56e2063caf5746d6c6636
@@ -956,6 +1268,7 @@
       </provider>
     </entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/base/enemy/EnemyBullet.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="395">
@@ -963,6 +1276,26 @@
           <folding>
             <element signature="e#1798#1799#0" expanded="true" />
             <element signature="e#1828#1829#0" expanded="true" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/base/Settings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="44">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/base/enemy/EnemyType1.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="23" column="27" selection-start-line="23" selection-start-column="27" selection-end-line="23" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/base/enemy/EnemyType2.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="14" column="48" selection-start-line="14" selection-start-column="48" selection-end-line="14" selection-end-column="48" />
+>>>>>>> 5812df9e2b9f3c5101e4aec9d7ec6c4dc82780eb
 =======
     <entry file="file://$PROJECT_DIR$/src/base/item_bonus/Boom.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -980,6 +1313,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="13" column="50" selection-start-line="13" selection-start-column="35" selection-end-line="13" selection-end-column="50" />
+>>>>>>> e5c0ae9e2ba1640a42f56e2063caf5746d6c6636
           <folding>
             <element signature="imports" expanded="true" />
 >>>>>>> e5c0ae9e2ba1640a42f56e2063caf5746d6c6636
@@ -990,11 +1324,62 @@
     <entry file="file://$PROJECT_DIR$/src/base/player/PlayBullet.java">
       <provider selected="true" editor-type-id="text-editor">
 <<<<<<< HEAD
+<<<<<<< HEAD
         <state relative-caret-position="307">
           <caret line="77" column="6" selection-start-line="77" selection-start-column="6" selection-end-line="77" selection-end-column="6" />
           <folding>
             <element signature="e#1998#1999#0" expanded="true" />
             <element signature="e#2034#2035#0" expanded="true" />
+=======
+        <state relative-caret-position="-322">
+          <caret line="156" column="67" selection-start-line="156" selection-start-column="67" selection-end-line="156" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/base/enemy/EnemyBullet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="30" column="18" selection-start-line="30" selection-start-column="8" selection-end-line="30" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/base/player/PlayBulletType1.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/base/player/PlayBullet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="26" column="8" selection-start-line="26" selection-start-column="8" selection-end-line="26" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/base/GameObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="134">
+          <caret line="48" selection-start-line="48" selection-end-line="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/base/enemy/Enemy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="21" column="20" selection-start-line="21" selection-start-column="20" selection-end-line="21" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/base/enemy/EnemySummoner.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-91">
+          <caret line="18" column="48" selection-start-line="18" selection-start-column="48" selection-end-line="18" selection-end-column="48" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1245#1246#0" expanded="true" />
+            <element signature="e#1272#1273#0" expanded="true" />
+>>>>>>> 5812df9e2b9f3c5101e4aec9d7ec6c4dc82780eb
 =======
         <state relative-caret-position="92">
           <caret line="68" column="11" lean-forward="true" selection-start-line="68" selection-start-column="11" selection-end-line="68" selection-end-column="11" />

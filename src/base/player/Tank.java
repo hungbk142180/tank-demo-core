@@ -47,12 +47,12 @@ public class Tank extends GameObject implements Physics {
 
     public Tank() {
         arr= new WallManagement( );
-        BufferedImage image = SpriteUtils.loadImage("assets/tank_image/tank2.PNG");
+        BufferedImage image = SpriteUtils.loadImage("assets/tank_image/selecttank_up.png");
         this.position = new Vector2D((float)Settings.START_PLAYER_POSITION_X, (float)Settings.START_PLAYER_POSITION_Y);
         this.renderer = new SingleImageRenderer(image);
         this.velocity = new Vector2D(0.0F, 0.0F);
-        this.fireCounter = new FrameCounter(10);
-        this.collider = new BoxCollider(53, 53);
+        this.fireCounter = new FrameCounter(40);
+        this.collider = new BoxCollider(54, 54);
         this.moveCounter = new FrameCounter(6);
 
          clock = GameObject.recycle(Clock.class);
@@ -125,7 +125,7 @@ public class Tank extends GameObject implements Physics {
         //
         boolean moveCounterRun = this.moveCounter.run();
         if (KeyEventPress.isUpPress && moveCounterRun) {
-            BufferedImage imageUp = SpriteUtils.loadImage("assets/tank_image/tank2.PNG");
+            BufferedImage imageUp = SpriteUtils.loadImage("assets/tank_image/selecttank_up.png");
             ((SingleImageRenderer) this.renderer).image = imageUp;
             setPosition();
 
@@ -133,7 +133,7 @@ public class Tank extends GameObject implements Physics {
             this.way=new boolean[]{true,false,false,false};
             this.moveCounter.reset();
         } else if (KeyEventPress.isDownPress && moveCounterRun) {
-            BufferedImage imageDown = SpriteUtils.loadImage("assets/tank_image/tank2_down.PNG");
+            BufferedImage imageDown = SpriteUtils.loadImage("assets/tank_image/selecttank_down.png");
             ((SingleImageRenderer) this.renderer).image = imageDown;
             setPosition();
 
@@ -141,14 +141,14 @@ public class Tank extends GameObject implements Physics {
             this.way=new boolean[]{false,true,false,false};
             this.moveCounter.reset();
         } else if (KeyEventPress.isLeftPress && moveCounterRun) {
-            BufferedImage imageLeft = SpriteUtils.loadImage("assets/tank_image/tank2_left.PNG");
+            BufferedImage imageLeft = SpriteUtils.loadImage("assets/tank_image/selecttank_left.png");
             ((SingleImageRenderer) this.renderer).image = imageLeft;
             setPosition();
             this.position.addThis(-4.0F, 0.0F);
             this.way=new boolean[]{false,false,true,false};
             this.moveCounter.reset();
         } else if (KeyEventPress.isRightPress && moveCounterRun) {
-            BufferedImage imageRight = SpriteUtils.loadImage("assets/tank_image/tank2_right.PNG");
+            BufferedImage imageRight = SpriteUtils.loadImage("assets/tank_image/selecttank_right.png");
             ((SingleImageRenderer) this.renderer).image = imageRight;
             setPosition();
 
@@ -178,10 +178,10 @@ public class Tank extends GameObject implements Physics {
 
         if (    this.checkIntersects()||
                 this.checkIntersectsWall() ||
-                this.position.x-Settings.WAY_SIZE/2 <=0 ||
-                this.position.x+Settings.WAY_SIZE/2 >Settings.SCREEN_WIDHT ||
-                this.position.y-Settings.WAY_SIZE/2 <=0 ||
-                this.position.y+Settings.WAY_SIZE/2 >Settings.SCREEN_HEIGHT
+                this.position.x-Settings.WAY_SIZE <0 ||
+                this.position.x+Settings.WAY_SIZE >Settings.SCREEN_WIDHT ||
+                this.position.y-Settings.WAY_SIZE <0 ||
+                this.position.y+Settings.WAY_SIZE>Settings.SCREEN_HEIGHT
         ) {
             this.position.x = this.currentX;
             this.position.y = this.currentY;
@@ -227,23 +227,23 @@ public class Tank extends GameObject implements Physics {
         PlayBulletType1 bullet = (PlayBulletType1) GameObject.recycle(PlayBulletType1.class);
 
         if(this.way[0]) {
-            bullet.velocity.set(0, -8);
+            bullet.velocity.set(0, -12);
             bullet.position.set(this.position.x, this.position.y - (float) Settings.WAY_SIZE);
         }
         else if(this.way[1]) {
-            bullet.velocity.set(0, 8);
+            bullet.velocity.set(0, 12);
             bullet.position.set(this.position.x, this.position.y + (float) Settings.WAY_SIZE);
         }
         else if(this.way[2]) {
-            bullet.velocity.set(-8, 0);
+            bullet.velocity.set(-12, 0);
             bullet.position.set(this.position.x -(float) Settings.WAY_SIZE , this.position.y);
         }
         else if(this.way[3]) {
-            bullet.velocity.set(8, 0);
+            bullet.velocity.set(12, 0);
             bullet.position.set(this.position.x + (float) Settings.WAY_SIZE, this.position.y);
         }
         else {
-            bullet.velocity.set(0, -10);
+            bullet.velocity.set(0, -12);
             bullet.position.set(this.position.x, this.position.y - (float) Settings.WAY_SIZE);
         }
             this.fireCounter.reset();

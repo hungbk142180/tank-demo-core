@@ -42,6 +42,7 @@ public class EnemyBullet extends GameObject implements Physics {
         if(playBullet != null){
             this.destroy();
             playBullet.destroy();
+<<<<<<< HEAD
         }
 
         if (brick != null) {
@@ -49,6 +50,8 @@ public class EnemyBullet extends GameObject implements Physics {
         }
         if(stone != null){
             this.hitEnemy();
+=======
+>>>>>>> 5812df9e2b9f3c5101e4aec9d7ec6c4dc82780eb
         }
 
         if(this.position.y < 0 || this.position.y > Settings.SCREEN_HEIGHT ||
