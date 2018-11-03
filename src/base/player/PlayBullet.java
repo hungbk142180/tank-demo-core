@@ -75,10 +75,10 @@ public class PlayBullet extends GameObject implements Physics {
 //            this.position.addThis(this.velocity);
         }
 
-        if(this.checkIntersectBrick()){
-            this.destroy();
-            brick.destroy();
-        }
+//        if(this.checkIntersectBrick()){
+//            this.destroy();
+//            brick.destroy();
+//        }
     }
 
     private boolean checkIntersectBrick(){

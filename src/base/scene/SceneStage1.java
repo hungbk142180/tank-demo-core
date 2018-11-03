@@ -3,11 +3,11 @@ package base.scene;
 import base.Background;
 import base.GameObject;
 import base.Settings;
-<<<<<<< HEAD
+
 import base.enemy.EnemySummoner;
-=======
+
 import base.enemy.Enemy;
->>>>>>> e5c0ae9e2ba1640a42f56e2063caf5746d6c6636
+
 import base.enemy.EnemyType1;
 import base.enemy.EnemyType2;
 import base.enemy.EnemyType3;
@@ -17,11 +17,9 @@ import base.wall.Wall;
 import java.util.ArrayList;
 
 public class SceneStage1 extends Scene {// khoi tao doi tuong o day
-<<<<<<< HEAD
 
-=======
     public static ArrayList<Enemy> enemyBornManage = new ArrayList<>();
->>>>>>> e5c0ae9e2ba1640a42f56e2063caf5746d6c6636
+
     @Override
     public void destroy() {
         GameObject.clearAll();
@@ -39,7 +37,6 @@ public class SceneStage1 extends Scene {// khoi tao doi tuong o day
         enemyType1.isLife =true;
         enemyBornManage.add(enemyType1);
 
-<<<<<<< HEAD
         this.enemyType2 = GameObject.recycle(EnemyType2.class);
         enemyType2.position.set(Settings.WAY_SIZE*21, Settings.WAY_SIZE*5);
 
@@ -47,19 +44,16 @@ public class SceneStage1 extends Scene {// khoi tao doi tuong o day
         enemyType3.position.set(Settings.WAY_SIZE*10, Settings.WAY_SIZE*5);
 
         this.enemySummoner = GameObject.recycle(EnemySummoner.class);
-=======
-        this.enemyType2 = GameObject.recycle(EnemyType1.class);
-        enemyType2.position.set(Settings.WAY_SIZE*21, Settings.WAY_SIZE*5);
+
         enemyType2.isLife = true;
         enemyBornManage.add(enemyType2);
->>>>>>> e5c0ae9e2ba1640a42f56e2063caf5746d6c6636
+
 
 //        System.out.println("tank : "+tank.position);
        /*for(int i =0 ; i< 2 ; i++){
            Wall wall = GameObject.recycle(Wall.class);
            wall.position.set(154 + Settings.WAY_SIZE, 70 + Settings.WAY_SIZE);// 168 - 84 : meo hiu sao phai tru di 0.5.wayzize
        }*/
-<<<<<<< HEAD
 
         Wall wall = GameObject.recycle(Wall.class);
         wall.position.set(154,70);// 168 - 84 : meo hiu sao phai tru di 0.5.wayzize
@@ -73,7 +67,5 @@ public class SceneStage1 extends Scene {// khoi tao doi tuong o day
         Wall wall3 = GameObject.recycle(Wall.class);
         wall3.position.set(154+Settings.WAY_SIZE,70+Settings.WAY_SIZE);
 
-=======
->>>>>>> e5c0ae9e2ba1640a42f56e2063caf5746d6c6636
     }
 }
