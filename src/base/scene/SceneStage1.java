@@ -4,10 +4,16 @@ import base.Background;
 import base.GameObject;
 import base.Settings;
 
-import base.enemy.*;
+import base.enemy.EnemySummoner;
 
+import base.enemy.Enemy;
+
+import base.enemy.EnemyType1;
+import base.enemy.EnemyType2;
+import base.enemy.EnemyType3;
 import base.player.Tank;
 import base.wall.Wall;
+import base.wall.WallManagement;
 
 import java.util.ArrayList;
 
@@ -15,6 +21,8 @@ public class SceneStage1 extends Scene {// khoi tao doi tuong o day
 
 
 
+    public static ArrayList<Enemy> enemyBornManage = new ArrayList<>();
+    public static WallManagement arr;
     @Override
     public void destroy() {
         GameObject.clearAll();
@@ -22,6 +30,7 @@ public class SceneStage1 extends Scene {// khoi tao doi tuong o day
 
     @Override
     public void init() {
+        arr= new WallManagement("assets\\maps\\map_2.txt" );
 
         //GameObject.recycle(Background.class);
         this.tank = GameObject.recycle(Tank.class);
