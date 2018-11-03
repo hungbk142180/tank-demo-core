@@ -7,6 +7,7 @@ import base.physics.BoxCollider;
 import base.physics.Physics;
 import base.player.Tank;
 import base.renderer.AnimationRenderer;
+import base.renderer.SingleImageRenderer;
 import base.wall.Brick;
 import base.wall.Stone;
 import base.wall.WallManagement;
@@ -22,26 +23,28 @@ public class Enemy extends GameObject implements Physics {
     Action action;
     float currentX = 0.0F;
     float currentY = 0.0F;
-//    static boolean[] way = new boolean[]{false,false,false,false};//up down left right
-    int way = 4; // 1-up, 2-down, 3-left, 4-right
+    int way = 4; // 0-up, 1-down, 2-left, 3-right, 4-default
     FrameCounter moveCounter;
     Random random = new Random();
     int enemyMoveX;
     int enemyMoveY;
     WallManagement arr;
+    boolean isStuck = false;
+    FrameCounter startCounter;
 
     public Enemy() {
         super();
         arr = new WallManagement();
         this.position = new Vector2D(200, 100);
-        this.moveCounter = new FrameCounter(41);
+        this.moveCounter = new FrameCounter(139);
+        this.startCounter = new FrameCounter(27);
         this.defineAction();
         this.enemyMoveX = 0;
         this.enemyMoveY = 0;
     }
 
     void defineAction(){
-        ActionWait actionWait = new ActionWait(20);
+        ActionWait actionWait = new ActionWait(50);
         Action actionFire =  new Action() {
             @Override
             public void run(GameObject master) {
@@ -73,7 +76,26 @@ public class Enemy extends GameObject implements Physics {
     }
 
     public void move(){
-        //System.out.println(Setting.ENEMY_MOVE + " " + this.position.x);
+        boolean moveCounterRun = this.moveCounter.run();
+        boolean startCounterRun = this.startCounter.run();
+        if (moveCounterRun || this.isStuck || this.way == 4 && startCounterRun) {
+            this.way = random.nextInt(4);
+            this.moveCounter.reset();
+        }
+        if (this.way == 0) {
+            this.enemyMoveX = 0;
+            this.enemyMoveY = -4;
+        } else if (this.way == 1) {
+            this.enemyMoveX = 0;
+            this.enemyMoveY = 4;
+        } else if (this.way == 2) {
+            this.enemyMoveX = -4;
+            this.enemyMoveY = 0;
+        } else if (this.way == 3) {
+            this.enemyMoveX = 4;
+            this.enemyMoveY = 0;
+        }
+        this.position.addThis(enemyMoveX, enemyMoveY);
     }
     private boolean checkIntersects() {
         Tank tank = (Tank)GameObject.intersect(Tank.class, this);
@@ -102,39 +124,50 @@ public class Enemy extends GameObject implements Physics {
             this.currentY = this.position.y;
         }
         this.action.run(this);
+
         if (this.checkIntersects()|| this.checkIntersectsWall() ||
-                this.position.x-Settings.WAY_SIZE <=0 ||
+                this.position.x-Settings.WAY_SIZE <0 ||
                 this.position.x+Settings.WAY_SIZE >Settings.SCREEN_WIDHT ||
-                this.position.y-Settings.WAY_SIZE <=0 ||
+                this.position.y-Settings.WAY_SIZE <0 ||
                 this.position.y+Settings.WAY_SIZE >Settings.SCREEN_HEIGHT
         ) {
             this.position.x = this.currentX;
             this.position.y = this.currentY;
+            this.isStuck = true;
+        } else {
+            this.isStuck = false;
         }
+
+
     }
 
     public void fire() {
         EnemyBullet bullet = GameObject.recycle(EnemyBullet.class);
         if(this.way == 0) {
-            bullet.velocity.set(0, -8);
+            bullet.velocity.set(0, -12);
             bullet.position.set(this.position.x, this.position.y - (float) Settings.WAY_SIZE);
         }
         else if(this.way == 1) {
-            bullet.velocity.set(0, 8);
+            bullet.velocity.set(0, 12);
             bullet.position.set(this.position.x, this.position.y + (float) Settings.WAY_SIZE);
         }
         else if(this.way == 2) {
-            bullet.velocity.set(-8, 0);
+            bullet.velocity.set(-12, 0);
             bullet.position.set(this.position.x -(float) Settings.WAY_SIZE , this.position.y);
         }
         else if(this.way == 3) {
-            bullet.velocity.set(8, 0);
+            bullet.velocity.set(12, 0);
             bullet.position.set(this.position.x + (float) Settings.WAY_SIZE, this.position.y);
         }
     }
 
     public void takeDamage(int damage) {
 
+    }
+
+    public void destroy() {
+        super.destroy();
+        EnemySummoner.enemyNow -= 1;
     }
 
     @Override

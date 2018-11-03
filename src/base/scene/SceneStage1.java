@@ -3,11 +3,15 @@ package base.scene;
 import base.Background;
 import base.GameObject;
 import base.Settings;
+import base.enemy.EnemySummoner;
 import base.enemy.EnemyType1;
+import base.enemy.EnemyType2;
+import base.enemy.EnemyType3;
 import base.player.Tank;
 import base.wall.Wall;
 
 public class SceneStage1 extends Scene {// khoi tao doi tuong o day
+
     @Override
     public void destroy() {
         GameObject.clearAll();
@@ -23,8 +27,13 @@ public class SceneStage1 extends Scene {// khoi tao doi tuong o day
         this.enemyType1 = GameObject.recycle(EnemyType1.class);
         enemyType1.position.set(Settings.WAY_SIZE*5, Settings.WAY_SIZE*5);
 
-        this.enemyType1 = GameObject.recycle(EnemyType1.class);
-        enemyType1.position.set(Settings.WAY_SIZE*21, Settings.WAY_SIZE*5);
+        this.enemyType2 = GameObject.recycle(EnemyType2.class);
+        enemyType2.position.set(Settings.WAY_SIZE*21, Settings.WAY_SIZE*5);
+
+        this.enemyType3 = GameObject.recycle(EnemyType3.class);
+        enemyType3.position.set(Settings.WAY_SIZE*10, Settings.WAY_SIZE*5);
+
+        this.enemySummoner = GameObject.recycle(EnemySummoner.class);
 
 //        System.out.println("tank : "+tank.position);
        /*for(int i =0 ; i< 2 ; i++){
@@ -43,7 +52,6 @@ public class SceneStage1 extends Scene {// khoi tao doi tuong o day
 
         Wall wall3 = GameObject.recycle(Wall.class);
         wall3.position.set(154+Settings.WAY_SIZE,70+Settings.WAY_SIZE);
-
 
     }
 }
