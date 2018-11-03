@@ -10,6 +10,9 @@ import base.physics.Physics;
 import base.player.PlayBullet;
 import base.player.Tank;
 import base.renderer.SingleImageRenderer;
+import base.scene.SceneManager;
+import base.scene.SceneStage1;
+import base.scene.SceneStage2;
 import base.wall.Brick;
 import base.wall.Stone;
 import tklibs.SpriteUtils;
@@ -55,6 +58,7 @@ public class EnemyBullet extends GameObject implements Physics {
         if (tank != null) {
             tank.takeDamage(this.damage);
             this.destroy();
+            SceneManager.signNewScene(new SceneStage2());
         }
         if(playBullet != null){
             this.destroy();
