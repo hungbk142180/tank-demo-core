@@ -59,7 +59,11 @@ public class SceneStage1 extends Scene {// khoi tao doi tuong o day
                 "player/player_explode.wav",
                 "player/hit_brick.wav",
                 "player/hit_wall.wav",
-                "player/item-collect.wav"
+                "player/item-collect.wav",
+                "player/player_shot.wav",
+                "pause.wav",
+                "enemy/enemy-explosion-big.wav",
+                "player/powerup.wav"
         };
         SoundManage.loadSounds(fileNames);
         SoundManage.playSound("level_start.wav");

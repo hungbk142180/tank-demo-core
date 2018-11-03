@@ -72,7 +72,7 @@ public class Tank extends GameObject implements Physics {
 
 
        if(this.checkIntersectsBonus()){//clock
-           SoundManage.playSound("player/item-collect.wav");
+           SoundManage.playSound("pause.wav");
            clock.destroy();
            Enemy.checkClock = false;
        }
@@ -112,7 +112,7 @@ public class Tank extends GameObject implements Physics {
        }
 
        if(this.checkIntersectsBoomBonus()){// boom
-           SoundManage.playSound("player/item-collect.wav");
+           SoundManage.playSound("enemy/enemy-explosion-big.wav");
            boom.destroy();
               for(Enemy enemy : EnemySummoner.enemyBornManage){
                 if(enemy.isActive){
@@ -122,6 +122,7 @@ public class Tank extends GameObject implements Physics {
        }
 
        if(this.checkIntersectsGunBonus()){
+           SoundManage.playSound("player/powerup.wav");
            gun.destroy();
            this.bulletType = 2;
        }
@@ -179,6 +180,7 @@ public class Tank extends GameObject implements Physics {
 
         boolean fireCounterRun = this.fireCounter.run();
         if (KeyEventPress.isFirePress && fireCounterRun) {
+            SoundManage.playSound("player/player_shot.wav");
             this.fire();
         }
         this.position.addThis(this.velocity);
