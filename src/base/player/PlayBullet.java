@@ -42,7 +42,7 @@ public class PlayBullet extends GameObject implements Physics {
 
         if(stones.size() > 0){
             for(Stone i : stones){
-//                i.destroy();
+                //i.destroy();
                 this.destroy();
             }
 

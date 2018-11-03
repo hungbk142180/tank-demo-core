@@ -46,6 +46,9 @@ public class Tank extends GameObject implements Physics {
     Boolean checkTimeShovel = false;
     Boom boom;
     Gun gun;
+    PlayBulletType1  playBulletType1;
+    PlayBulletType2  playBulletType2;
+    int check = 0;
 
 
     public Tank() {
@@ -122,7 +125,12 @@ public class Tank extends GameObject implements Physics {
 
        if(this.checkIntersectsGunBonus()){
            gun.destroy();
+           check = 1;
+//           BufferedImage image = SpriteUtils.loadImage("assets/bullets/blue.png");
+//           ((SingleImageRenderer)bullet.renderer).image = image;
+
        }
+
 
 
 
@@ -180,7 +188,16 @@ public class Tank extends GameObject implements Physics {
 
         boolean fireCounterRun = this.fireCounter.run();
         if (KeyEventPress.isFirePress && fireCounterRun) {
-            this.fire();
+            if(check == 0) {
+                 playBulletType1 = (PlayBulletType1) GameObject.recycle(PlayBulletType1.class);
+                        fire(playBulletType1);
+            }
+            else if(check == 1){
+                 playBulletType2 = (PlayBulletType2) GameObject.recycle(PlayBulletType2.class);
+                    fire(playBulletType2);
+            }
+
+
         }
         this.position.addThis(this.velocity);
 
@@ -236,9 +253,15 @@ public class Tank extends GameObject implements Physics {
         return gun != null;
     }
 
-    private void fire() {
-        PlayBulletType1 bullet = (PlayBulletType1) GameObject.recycle(PlayBulletType1.class);
+    private void fire(PlayBullet bullet) {
 
+//        bullet = (PlayBulletType1) GameObject.recycle(PlayBulletType1.class);
+
+//        if(this.checkIntersectsGunBonus()){
+//            bullet.destroy();
+//            PlayBulletType2 bulletType2 = (PlayBulletType2)GameObject.recycle(PlayBulletType2.class);
+//
+//        }
         if(this.way[0]) {
             bullet.velocity.set(0, -12);
             bullet.position.set(this.position.x, this.position.y - (float) Settings.WAY_SIZE);
