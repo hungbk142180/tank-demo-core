@@ -4,6 +4,7 @@ import base.Background;
 import base.GameObject;
 import base.Settings;
 
+import base.SoundManage;
 import base.enemy.*;
 
 import base.player.Tank;
@@ -12,7 +13,6 @@ import base.wall.Wall;
 import java.util.ArrayList;
 
 public class SceneStage1 extends Scene {// khoi tao doi tuong o day
-
 
 
     @Override
@@ -25,24 +25,34 @@ public class SceneStage1 extends Scene {// khoi tao doi tuong o day
 
         //GameObject.recycle(Background.class);
         this.tank = GameObject.recycle(Tank.class);
-        tank.position.set(9*Settings.WAY_SIZE, 25*Settings.WAY_SIZE);
+        tank.position.set(9 * Settings.WAY_SIZE, 25 * Settings.WAY_SIZE);
 
         this.enemyType1 = GameObject.recycle(EnemyType1.class);
-        enemyType1.position.set(Settings.WAY_SIZE*5, Settings.WAY_SIZE*5);
+        enemyType1.position.set(Settings.WAY_SIZE * 5, Settings.WAY_SIZE * 5);
         EnemySummoner.enemyBornManage.add(enemyType1);
 
         this.enemyType2 = GameObject.recycle(EnemyType2.class);
-        enemyType2.position.set(Settings.WAY_SIZE*21, Settings.WAY_SIZE*5);
+        enemyType2.position.set(Settings.WAY_SIZE * 21, Settings.WAY_SIZE * 5);
         EnemySummoner.enemyBornManage.add(enemyType2);
 
         this.enemyType3 = GameObject.recycle(EnemyType3.class);
-        enemyType3.position.set(Settings.WAY_SIZE*10, Settings.WAY_SIZE*5);
+        enemyType3.position.set(Settings.WAY_SIZE * 10, Settings.WAY_SIZE * 5);
         EnemySummoner.enemyBornManage.add(enemyType3);
 
         this.enemySummoner = GameObject.recycle(EnemySummoner.class);
 
-
-
+        String[] fileNames = {
+                "level_start.wav",
+                "enemy/enemy-explosion.wav",
+                "enemy/hit_armor.wav",
+                "player/player_explode.wav",
+                "player/hit_brick.wav",
+                "player/hit_wall.wav",
+                "player/item-collect.wav"
+        };
+        SoundManage.loadSounds(fileNames);
+        SoundManage.playSound("level_start.wav");
+        
 //        System.out.println("tank : "+tank.position);
        /*for(int i =0 ; i< 2 ; i++){
            Wall wall = GameObject.recycle(Wall.class);

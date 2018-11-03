@@ -7,6 +7,7 @@ package base.player;
 
 import base.GameObject;
 import base.Settings;
+import base.SoundManage;
 import base.Vector2D;
 import base.enemy.Enemy;
 import base.enemy.EnemyBullet;
@@ -35,6 +36,7 @@ public class PlayBullet extends GameObject implements Physics {
         if(bricks.size() > 0){
             for(Brick i : bricks){
                 i.destroy();
+                SoundManage.playSound("player/hit_brick.wav");
                 this.destroy();
             }
 
@@ -43,6 +45,7 @@ public class PlayBullet extends GameObject implements Physics {
         if(stones.size() > 0){
             for(Stone i : stones){
 //                i.destroy();
+                SoundManage.playSound("player/hit_wall.wav");
                 this.destroy();
             }
 

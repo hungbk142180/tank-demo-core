@@ -4,6 +4,7 @@ package base.player;
 
 import base.GameObject;
 import base.Settings;
+import base.SoundManage;
 import base.Vector2D;
 import base.counter.FrameCounter;
 import base.enemy.Enemy;
@@ -71,6 +72,7 @@ public class Tank extends GameObject implements Physics {
 
 
        if(this.checkIntersectsBonus()){//clock
+           SoundManage.playSound("player/item-collect.wav");
            clock.destroy();
            Enemy.checkClock = false;
        }
@@ -82,6 +84,7 @@ public class Tank extends GameObject implements Physics {
            }
        }
        if(this.checkIntersectsShovelBonus()){//shovel
+           SoundManage.playSound("player/item-collect.wav");
            checkTimeShovel = true;
            shovel.destroy();
            for (int row = 0; row < 26; row++) {
@@ -109,7 +112,8 @@ public class Tank extends GameObject implements Physics {
        }
 
        if(this.checkIntersectsBoomBonus()){// boom
-            boom.destroy();
+           SoundManage.playSound("player/item-collect.wav");
+           boom.destroy();
               for(Enemy enemy : EnemySummoner.enemyBornManage){
                 if(enemy.isActive){
                         enemy.destroy();
@@ -274,6 +278,7 @@ public class Tank extends GameObject implements Physics {
     }
 
     public void takeDamage(int damage) {
+        SoundManage.playSound("player/player_explode.wav");
         this.destroy();
     }
 

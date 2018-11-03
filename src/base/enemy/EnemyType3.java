@@ -1,5 +1,6 @@
 package base.enemy;
 
+import base.SoundManage;
 import base.physics.BoxCollider;
 import base.renderer.SingleImageRenderer;
 import tklibs.SpriteUtils;
@@ -16,8 +17,10 @@ public class EnemyType3 extends Enemy {
     }
 
     public void takeDamage(int damage) {
+        SoundManage.playSound("enemy/hit_armor.wav");
         this.hp -= damage;
         if (this.hp <= 0) {
+            SoundManage.playSound("enemy/enemy-explosion.wav");
             hp = 0;
             this.destroy();
         }

@@ -1,5 +1,8 @@
 package tklibs;
 
+//import javafx.scene.media.Media;
+//import javafx.scene.media.MediaPlayer;
+
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
@@ -15,6 +18,7 @@ public class AudioUtils {
 
     /**
      * For playing sound effect: wav
+     *
      * @param audioUrl
      * @return
      */
@@ -28,7 +32,12 @@ public class AudioUtils {
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
             e.printStackTrace();
         }
-        return  null;
+        return null;
+    }
+
+    public static void playSound(Clip sound) {
+        sound.setFramePosition(0);
+        sound.start();
     }
 
     public static void initialize() {
@@ -37,13 +46,25 @@ public class AudioUtils {
 
     /**
      * For playing background music, must calll intialize first: mp3
+     *
      * @param audioUrl
      * @return
      */
-    public static MediaPlayer playMedia(String audioUrl) {
+    public static MediaPlayer loadMedia(String audioUrl) {
         String uriString = new File(audioUrl).toURI().toString();
         MediaPlayer mediaPlayer = new MediaPlayer(new Media(uriString));
-        mediaPlayer.play();
         return mediaPlayer;
+    }
+
+    public static void playMedia(MediaPlayer media) {
+        media.play();
+    }
+
+    public static void main(String[] args) {
+        initialize();
+        MediaPlayer mediaPlayer = loadMedia("assets/tank_audio/begin.mp3");
+        playMedia(mediaPlayer);
+        while (true) {
+        }
     }
 }
