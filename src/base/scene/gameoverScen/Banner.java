@@ -2,6 +2,7 @@ package base.scene.gameoverScen;
 
 import base.GameObject;
 import base.Settings;
+import base.SoundManage;
 import base.event.KeyEventPress;
 import base.renderer.SingleImageRenderer;
 import base.scene.SceneManager;
@@ -17,7 +18,6 @@ public class Banner extends GameObject {
 
     @Override
     public void run() {
-
         if(KeyEventPress.isAnyKeyPress){
             SceneManager.signNewScene(new SceneStage1());//?
         }
