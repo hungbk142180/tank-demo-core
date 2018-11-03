@@ -19,11 +19,7 @@ import base.wall.WallManagement;
 
 import java.util.ArrayList;
 
-public class SceneStage1 extends Scene {// khoi tao doi tuong o day
-
-
-
-    public static ArrayList<Enemy> enemyBornManage = new ArrayList<>();
+public class SceneStage1 extends Scene {
     public static WallManagement arr;
     @Override
     public void destroy() {
@@ -32,7 +28,7 @@ public class SceneStage1 extends Scene {// khoi tao doi tuong o day
 
     @Override
     public void init() {
-        arr= new WallManagement("assets\\maps\\map_2.txt" );
+
 
         //GameObject.recycle(Background.class);
         this.tank = GameObject.recycle(Tank.class);
@@ -51,6 +47,8 @@ public class SceneStage1 extends Scene {// khoi tao doi tuong o day
         EnemySummoner.enemyBornManage.add(enemyType3);
 
         this.enemySummoner = GameObject.recycle(EnemySummoner.class);
+
+        arr= new WallManagement("assets\\maps\\map_2.txt" );
 
         String[] fileNames = {
                 "level_start.wav",

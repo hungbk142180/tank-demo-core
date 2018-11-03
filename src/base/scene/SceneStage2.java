@@ -18,24 +18,28 @@ public class SceneStage2 extends Scene{
 
     @Override
     public void init() {//
-        SceneStage1.arr= new WallManagement("assets\\maps\\testmap.txt" );
+
        // WallManagement.fileMap = "assets\\maps\\testmap.txt";
         this.tank = GameObject.recycle(Tank.class);
         tank.position.set(9* Settings.WAY_SIZE,25 * Settings.WAY_SIZE);
+
         this.enemyType1 = GameObject.recycle(EnemyType1.class);
         enemyType1.position.set(Settings.WAY_SIZE*5, Settings.WAY_SIZE*5);
-
-       SceneStage1.enemyBornManage.add(enemyType1);
+        EnemySummoner.enemyBornManage.add(enemyType1);
 
         this.enemyType2 = GameObject.recycle(EnemyType2.class);
         enemyType2.position.set(Settings.WAY_SIZE*21, Settings.WAY_SIZE*5);
+        EnemySummoner.enemyBornManage.add(enemyType2);
 
-        this.enemyType3 = GameObject.recycle(EnemyType3.class);
-        enemyType3.position.set(Settings.WAY_SIZE*10, Settings.WAY_SIZE*5);
+        EnemySummoner.enemyLeft = 5;
+
+        SceneStage1.arr= new WallManagement("assets\\maps\\testmap.txt" );
+//
+//        this.enemyType3 = GameObject.recycle(EnemyType3.class);
+//        enemyType3.position.set(Settings.WAY_SIZE*10, Settings.WAY_SIZE*5);
+//        EnemySummoner.enemyBornManage.add(enemyType3);
 
         this.enemySummoner = GameObject.recycle(EnemySummoner.class);
-
-        SceneStage1.enemyBornManage.add(enemyType2);
 
         String[] fileNames = {
                 "level_start.wav",

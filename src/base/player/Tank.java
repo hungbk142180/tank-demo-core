@@ -1,13 +1,11 @@
-
-
 package base.player;
 
 import base.GameObject;
 import base.Settings;
-import base.SoundManage;
 import base.Vector2D;
 import base.counter.FrameCounter;
 import base.enemy.Enemy;
+import base.SoundManage;
 import base.enemy.EnemySummoner;
 import base.event.KeyEventPress;
 import base.item_bonus.Boom;
@@ -17,6 +15,7 @@ import base.item_bonus.Shovel;
 import base.physics.BoxCollider;
 import base.physics.Physics;
 import base.renderer.SingleImageRenderer;
+import base.scene.Scene;
 import base.scene.SceneStage1;
 import base.wall.*;
 
@@ -34,98 +33,81 @@ public class Tank extends GameObject implements Physics {
     boolean[] way = new boolean[]{false,false,false,false};//up down left right
  //  public static WallManagement arr;
     FrameCounter moveCounter;
-   // FrameCounter iteam_bonus;
-   // int count ;
-    Clock clock;
     int countTimeClock;
-    Shovel shovel;
     int countTimeShovel;
     Boolean checkTimeShovel = false;
-    Boom boom;
-    Gun gun;
+
     int bulletType;
 
     public Tank() {
-       // arr= new WallManagement("assets\\maps\\map_2.txt" );
+        // arr= new WallManagement("assets\\maps\\map_2.txt" );
         BufferedImage image = SpriteUtils.loadImage("assets/tank_image/selecttank_up.png");
         this.position = new Vector2D((float)Settings.START_PLAYER_POSITION_X, (float)Settings.START_PLAYER_POSITION_Y);
         this.renderer = new SingleImageRenderer(image);
         this.velocity = new Vector2D(0.0F, 0.0F);
-        this.fireCounter = new FrameCounter(40);
+        this.fireCounter = new FrameCounter(10);
         this.collider = new BoxCollider(54, 54);
         this.moveCounter = new FrameCounter(6);
         this.bulletType = 1;
 
-         clock = GameObject.recycle(Clock.class);
-         shovel = GameObject.recycle(Shovel.class);
-         boom = GameObject.recycle(Boom.class);
-         gun = GameObject.recycle(Gun.class);
-
     }
 
     public void run() {
-       /* count++;
-        System.out.println("count : " + count);
-        if(count / 60 ==0){ Clock clock = GameObject.recycle(Clock.class);
-            Clock clock = GameObject.recycle(Clock.class);
-        }*/
+        if(this.checkIntersectsBonus()){//clock
+            SoundManage.playSound("pause.wav");
+            Scene.clock.destroy();
+            Enemy.checkClock = false;
+        }
+        if(!Enemy.checkClock){//clock
+            countTimeClock++;
+            if(countTimeClock == 121){
+                Enemy.checkClock = true;
+                countTimeClock = 0;
+            }
+        }
+        if(this.checkIntersectsShovelBonus()){//shovel
+            SoundManage.playSound("player/item-collect.wav");
+            checkTimeShovel = true;
+            Scene.shovel.destroy();
+            for (int row = 0; row < 26; row++) {
+                for (int col = 0; col < 26; col++) {
+                    int rc = WallManagement.map[row][col];
+                    if(rc == -1){
+                        for(GameObject shovel : WallManagement.arrayShovel){
+                            BufferedImage newImageShovel = SpriteUtils.loadImage("assets/maps/item_built_map/ConcreteOrig.png");
+                            ((SingleImageRenderer)shovel.renderer).image = newImageShovel;
+                        }
 
-
-       if(this.checkIntersectsBonus()){//clock
-           SoundManage.playSound("pause.wav");
-           clock.destroy();
-           Enemy.checkClock = false;
-       }
-       if(!Enemy.checkClock){//clock
-           countTimeClock++;
-           if(countTimeClock == 121){
-               Enemy.checkClock = true;
-               countTimeClock = 0;
-           }
-       }
-       if(this.checkIntersectsShovelBonus()){//shovel
-           SoundManage.playSound("player/item-collect.wav");
-           checkTimeShovel = true;
-           shovel.destroy();
-           for (int row = 0; row < 26; row++) {
-               for (int col = 0; col < 26; col++) {
-                   int rc = WallManagement.map[row][col];
-                   if(rc == -1){
-                      for(GameObject shovel : WallManagement.arrayShovel){
-                          BufferedImage newImageShovel = SpriteUtils.loadImage("assets/maps/item_built_map/ConcreteOrig.png");
-                          ((SingleImageRenderer)shovel.renderer).image = newImageShovel;
-                      }
-
-                   }
-               }
-           }
-       }
-       if(checkTimeShovel){// shovel
-           countTimeShovel++;
-           if(countTimeShovel == 60){
-               for(GameObject shovel : WallManagement.arrayShovel){
-                   BufferedImage newImageBrick = SpriteUtils.loadImage("assets/maps/item_built_map/BricksOrig.png");
-                   ((SingleImageRenderer)shovel.renderer).image = newImageBrick;
-               }
-               countTimeShovel = 0;
-           }
-       }
-
-       if(this.checkIntersectsBoomBonus()){// boom
-           SoundManage.playSound("enemy/enemy-explosion-big.wav");
-           boom.destroy();
-              for(Enemy enemy : EnemySummoner.enemyBornManage){
-                if(enemy.isActive){
-                        enemy.destroy();
+                    }
                 }
-           }
-       }
+            }
+        }
+        if(checkTimeShovel){// shovel
+            countTimeShovel++;
+            if(countTimeShovel == 60){
+                for(GameObject shovel : WallManagement.arrayShovel){
+                    BufferedImage newImageBrick = SpriteUtils.loadImage("assets/maps/item_built_map/BricksOrig.png");
+                    ((SingleImageRenderer)shovel.renderer).image = newImageBrick;
+                }
+                countTimeShovel = 0;
+            }
+        }
 
-       if(this.checkIntersectsGunBonus()){
-           SoundManage.playSound("player/powerup.wav");
-           gun.destroy();
-           this.bulletType = 2;
-       }
+        if(this.checkIntersectsBoomBonus()){// boom
+            SoundManage.playSound("enemy/enemy-explosion-big.wav");
+            Scene.boom.destroy();
+            for(Enemy enemy : EnemySummoner.enemyBornManage){
+                if(enemy.isActive){
+                    enemy.destroy();
+                }
+            }
+        }
+
+        if(this.checkIntersectsGunBonus()){
+            SoundManage.playSound("player/powerup.wav");
+            Scene.gun.destroy();
+            this.bulletType = 2;
+        }
         if (!this.checkIntersects() || !this.checkIntersectsWall()) {
             this.currentX = this.position.x;
             this.currentY = this.position.y;
@@ -218,8 +200,8 @@ public class Tank extends GameObject implements Physics {
     }
 
     private boolean checkIntersectsBonus(){//Clock bonus
-           Clock clock = (Clock) GameObject.intersect(Clock.class,this);
-           return clock != null;
+        Clock clock = (Clock) GameObject.intersect(Clock.class,this);
+        return clock != null;
     }
 
     private boolean checkIntersectsShovelBonus(){// shovel bonus
@@ -290,21 +272,9 @@ public class Tank extends GameObject implements Physics {
                 bullet.renderer = new SingleImageRenderer("assets/bullets/bulletU.gif");
             }
         }
-
-
-
-            this.fireCounter.reset();
+        this.fireCounter.reset();
     }
-//
-//    public void setPositionBullet(){
-//
-//    }
-//
-//    public void move(int velocityX, int velocityY) {
-//        this.velocity.addThis((float)velocityX, (float)velocityY);
-//        this.velocity.set(this.clamp(this.velocity.x, -3.0F, 3.0F),
-//                        this.clamp(this.velocity.y, -3.0F, 3.0F));
-//    }
+
 
     public void setPosition(){
         if(this.position.x < 0){
@@ -314,10 +284,6 @@ public class Tank extends GameObject implements Physics {
             this.position.set(200,300);
         }
     }
-//
-//    public float clamp(float number, float min, float max) {
-//        return number < min ? min : (number > max ? max : number);
-//    }
 
     public void takeDamage(int damage) {
         SoundManage.playSound("player/player_explode.wav");
