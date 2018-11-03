@@ -9,14 +9,21 @@ import base.counter.FrameCounter;
 import base.enemy.Enemy;
 import base.enemy.EnemyBullet;
 import base.event.KeyEventPress;
+import base.item_bonus.Boom;
+import base.item_bonus.Clock;
+import base.item_bonus.Shovel;
 import base.physics.BoxCollider;
 import base.physics.Physics;
 import base.renderer.SingleImageRenderer;
+import base.scene.SceneStage1;
 import base.wall.*;
 
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 import tklibs.SpriteUtils;
+
+import static base.wall.WallManagement.arrayShovel;
 
 public class Tank extends GameObject implements Physics {
     FrameCounter fireCounter;
@@ -28,6 +35,15 @@ public class Tank extends GameObject implements Physics {
     boolean[] way = new boolean[]{false,false,false,false};//up down left right
     WallManagement arr;
     FrameCounter moveCounter;
+   // FrameCounter iteam_bonus;
+   // int count ;
+    Clock clock;
+    int countTimeClock;
+    Shovel shovel;
+    int countTimeShovel;
+    Boolean checkTimeShovel = false;
+    Boom boom;
+
 
     public Tank() {
         arr= new WallManagement( );
@@ -38,9 +54,68 @@ public class Tank extends GameObject implements Physics {
         this.fireCounter = new FrameCounter(10);
         this.collider = new BoxCollider(53, 53);
         this.moveCounter = new FrameCounter(6);
+
+         clock = GameObject.recycle(Clock.class);
+         shovel = GameObject.recycle(Shovel.class);
+         boom = GameObject.recycle(Boom.class);
+
     }
 
     public void run() {
+       /* count++;
+        System.out.println("count : " + count);
+        if(count / 60 ==0){ Clock clock = GameObject.recycle(Clock.class);
+            Clock clock = GameObject.recycle(Clock.class);
+        }*/
+
+
+       if(this.checkIntersectsBonus()){//clock
+           clock.destroy();
+           Enemy.checkClock = false;
+       }
+       if(!Enemy.checkClock){//clock
+           countTimeClock++;
+           if(countTimeClock == 121){
+               Enemy.checkClock = true;
+               countTimeClock = 0;
+           }
+       }
+       if(this.checkIntersectsShovelBonus()){//shovel
+           checkTimeShovel = true;
+           shovel.destroy();
+           for (int row = 0; row < 26; row++) {
+               for (int col = 0; col < 26; col++) {
+                   int rc = WallManagement.map[row][col];
+                   if(rc == -1){
+                      for(GameObject shovel : WallManagement.arrayShovel){
+                          BufferedImage newImageShovel = SpriteUtils.loadImage("assets/maps/item_built_map/ConcreteOrig.png");
+                          ((SingleImageRenderer)shovel.renderer).image = newImageShovel;
+                      }
+
+                   }
+               }
+           }
+       }
+       if(checkTimeShovel){// shovel
+           countTimeShovel++;
+           if(countTimeShovel == 60){
+               for(GameObject shovel : WallManagement.arrayShovel){
+                   BufferedImage newImageBrick = SpriteUtils.loadImage("assets/maps/item_built_map/BricksOrig.png");
+                   ((SingleImageRenderer)shovel.renderer).image = newImageBrick;
+               }
+               countTimeShovel = 0;
+           }
+       }
+
+       if(this.checkIntersectsBoomBonus()){// boom
+            boom.destroy();
+              for( Enemy enemy : SceneStage1.enemyBornManage){
+                if(enemy.isLife){
+                        enemy.destroy();
+                }
+           }
+       }
+
 
 
         if (!this.checkIntersects() || !this.checkIntersectsWall()) {
@@ -131,6 +206,21 @@ public class Tank extends GameObject implements Physics {
 
         }
         return false;
+    }
+
+    private boolean checkIntersectsBonus(){//Clock bonus
+           Clock clock = (Clock) GameObject.intersect(Clock.class,this);
+           return clock != null;
+    }
+
+    private boolean checkIntersectsShovelBonus(){// shovel bonus
+        Shovel shovel = GameObject.intersect(Shovel.class,this);
+        return shovel != null;
+    }
+
+    private boolean checkIntersectsBoomBonus(){// boom bonus
+        Boom boom = GameObject.intersect(Boom.class,this);
+        return boom != null;
     }
 
     private void fire() {
