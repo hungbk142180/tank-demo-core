@@ -11,15 +11,17 @@ import java.util.ArrayList;
 public class WallManagement extends ArrayList<GameObject> {
     public static  int [][] map=null;
     public static ArrayList<GameObject> arrayShovel;
-    public WallManagement(){
+   // public static String fileMap;
+    public WallManagement(String fileMap){
         arrayShovel = new ArrayList<>();
         int mapWidth=0;
         int mapHeight=0;
        // int [][] map=null;
         int tileSize = 28;
         try {
-            String s = "assets\\maps\\map_2.txt";
-            BufferedReader br = new BufferedReader(new FileReader(s));
+             //fileMap = "assets\\maps\\map_2.txt";
+         //   fileMap = "assets\\maps\\map_2.txt";
+            BufferedReader br = new BufferedReader(new FileReader(fileMap));
             String x,y;
             x = br.readLine();
             y = br.readLine();

@@ -13,6 +13,7 @@ import base.enemy.EnemySummoner;
 import base.event.KeyEventPress;
 import base.item_bonus.Boom;
 import base.item_bonus.Clock;
+import base.item_bonus.Gun;
 import base.item_bonus.Shovel;
 import base.physics.BoxCollider;
 import base.physics.Physics;
@@ -35,7 +36,7 @@ public class Tank extends GameObject implements Physics {
     float currentX = 0.0F;
     float currentY = 0.0F;
     boolean[] way = new boolean[]{false,false,false,false};//up down left right
-    public static WallManagement arr;
+ //  public static WallManagement arr;
     FrameCounter moveCounter;
    // FrameCounter iteam_bonus;
    // int count ;
@@ -45,21 +46,23 @@ public class Tank extends GameObject implements Physics {
     int countTimeShovel;
     Boolean checkTimeShovel = false;
     Boom boom;
+    Gun gun;
 
 
     public Tank() {
-        arr= new WallManagement( );
+       // arr= new WallManagement("assets\\maps\\map_2.txt" );
         BufferedImage image = SpriteUtils.loadImage("assets/tank_image/selecttank_up.png");
         this.position = new Vector2D((float)Settings.START_PLAYER_POSITION_X, (float)Settings.START_PLAYER_POSITION_Y);
         this.renderer = new SingleImageRenderer(image);
         this.velocity = new Vector2D(0.0F, 0.0F);
-        this.fireCounter = new FrameCounter(10);
+        this.fireCounter = new FrameCounter(40);
         this.collider = new BoxCollider(54, 54);
         this.moveCounter = new FrameCounter(6);
 
          clock = GameObject.recycle(Clock.class);
          shovel = GameObject.recycle(Shovel.class);
          boom = GameObject.recycle(Boom.class);
+         gun = GameObject.recycle(Gun.class);
 
     }
 
@@ -119,6 +122,10 @@ public class Tank extends GameObject implements Physics {
                         enemy.destroy();
                 }
            }
+       }
+
+       if(this.checkIntersectsGunBonus()){
+           gun.destroy();
        }
 
 
@@ -201,7 +208,7 @@ public class Tank extends GameObject implements Physics {
 
     private boolean checkIntersectsWall(){
         for (GameObject i :
-                arr) {
+                SceneStage1.arr) {
             if(i instanceof Brick || i instanceof Stone || i instanceof Water){
                 Brick brick = (Brick)GameObject.intersect(Brick.class, this);
                 Stone stone = (Stone)GameObject.intersect(Stone.class, this);
@@ -226,6 +233,11 @@ public class Tank extends GameObject implements Physics {
     private boolean checkIntersectsBoomBonus(){// boom bonus
         Boom boom = GameObject.intersect(Boom.class,this);
         return boom != null;
+    }
+
+    private boolean checkIntersectsGunBonus(){// gun bonus
+        Gun gun = GameObject.intersect(Gun.class,this);
+        return gun != null;
     }
 
     private void fire() {
