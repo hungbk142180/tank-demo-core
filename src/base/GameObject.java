@@ -56,6 +56,22 @@ public class GameObject {
         return null;
     }
 
+    public static <E extends GameObject> ArrayList<E> intersectManyItems(Class<E> childClass, Physics physics) {
+        ArrayList<E> items = new ArrayList<>();
+        for(GameObject go : gameObjects) {
+            if(go.isActive && childClass.isAssignableFrom(go.getClass())
+                    && go instanceof Physics && physics != go) {//
+                Physics physicsGo = (Physics) go;
+                boolean intersected = physics.getBoxCollider().intersect(physicsGo,
+                        (GameObject) physics);
+                if(intersected) {
+                    items.add((E)go);
+                }
+            }
+        }
+        return items;
+    }
+
     public static void runAll() {
         for(GameObject go : gameObjects) {
             if(go.isActive) {

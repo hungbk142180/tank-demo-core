@@ -15,6 +15,8 @@ import base.physics.Physics;
 import base.wall.Brick;
 import base.wall.Stone;
 
+import java.util.ArrayList;
+
 public class PlayBullet extends GameObject implements Physics {
     public BoxCollider collider;
     Vector2D velocity;
@@ -28,8 +30,24 @@ public class PlayBullet extends GameObject implements Physics {
     public void run() {
         Enemy enemy = (Enemy)GameObject.intersect(Enemy.class, this);
         EnemyBullet enemyBullet = (EnemyBullet)GameObject.intersect(EnemyBullet.class, this);
-        Brick brick = (Brick)GameObject.intersect(Brick.class, this);
-        Stone stone = (Stone)GameObject.intersect(Stone.class, this);
+        ArrayList<Brick> bricks = GameObject.intersectManyItems(Brick.class, this);
+        ArrayList<Stone> stones = GameObject.intersectManyItems(Stone.class, this);
+        if(bricks.size() > 0){
+            for(Brick i : bricks){
+                i.destroy();
+                this.destroy();
+            }
+
+        }
+
+        if(stones.size() > 0){
+            for(Stone i : stones){
+//                i.destroy();
+                this.destroy();
+            }
+
+        }
+
         //xu ly va cham Enemy
         if (enemy != null) {
             enemy.takeDamage(this.damage);
@@ -44,37 +62,15 @@ public class PlayBullet extends GameObject implements Physics {
         if (this.isActive == true) {
             this.position.addThis(this.velocity);
         }
-        //
 
-        //xu ly va cham gach
-        if (brick != null) {
-            brick.destroy();
-            this.destroy();
-        }
-        // xu ly va cham voi da
-        if (stone != null) {
-            stone.takeDamage(this.damage);
-            this.destroy();
-        }
-
-        //xu ly va cham EnemyBullet
         if (enemyBullet != null) {
             enemyBullet.takeDamage(this.damage);
             this.destroy();
         }
 
-//        if(this.checkIntersectBrick()){
-//            this.destroy();
-//            brick.destroy();
-//        }
     }
 
-//    private boolean checkIntersectBrick(){
-//        Brick brick = (Brick) GameObject.intersect(Brick.class,this);
-//        return brick != null;
-//    }
-
-
+    @Override
     public BoxCollider getBoxCollider() {
         return this.collider;
     }

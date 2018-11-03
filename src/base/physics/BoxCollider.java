@@ -2,10 +2,12 @@ package base.physics;
 
 import base.GameObject;
 
+import java.util.ArrayList;
+
 public class BoxCollider {
     public int width;
     public int height;
-
+    ArrayList arrayList = new ArrayList<>();
     public BoxCollider(int width, int height) {
         this.width = width;
         this.height = height;
@@ -41,4 +43,5 @@ public class BoxCollider {
                 || (this.left(master) >= oB.left(oM) && this.left(master) < oB.right(oM));
         return yIntersect && xIntersect;
     }
+
 }

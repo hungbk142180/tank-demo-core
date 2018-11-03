@@ -14,6 +14,8 @@ import base.wall.Brick;
 import base.wall.Stone;
 import tklibs.SpriteUtils;
 
+import java.util.ArrayList;
+
 public class EnemyBullet extends GameObject implements Physics {
     BoxCollider collider;
     Vector2D velocity;
@@ -33,9 +35,22 @@ public class EnemyBullet extends GameObject implements Physics {
         }
         Tank tank = (Tank)GameObject.intersect(Tank.class, this);
         PlayBullet playBullet = (PlayBullet)GameObject.intersect(PlayBullet.class, this);
-//        EnemyBullet enemyBullet = (EnemyBullet)GameObject.intersect(EnemyBullet.class, this);
-        Brick brick = (Brick)GameObject.intersect(Brick.class, this);
-        Stone stone = (Stone)GameObject.intersect(Stone.class, this);
+        ArrayList<Brick> bricks = GameObject.intersectManyItems(Brick.class, this);
+        ArrayList<Stone> stones = GameObject.intersectManyItems(Stone.class, this);
+        if(bricks.size() > 0){
+            for(Brick i : bricks){
+                i.destroy();
+                this.destroy();
+            }
+
+        }
+
+        if(stones.size() > 0){
+            for(Stone i : stones){
+                this.destroy();
+            }
+
+        }
 
         if (tank != null) {
             tank.takeDamage(this.damage);
@@ -44,14 +59,6 @@ public class EnemyBullet extends GameObject implements Physics {
         if(playBullet != null){
             this.destroy();
             playBullet.destroy();
-
-        }
-
-        if (brick != null) {
-            this.hitEnemy();
-        }
-        if(stone != null){
-            this.hitEnemy();
 
         }
 
