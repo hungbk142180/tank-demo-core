@@ -21,6 +21,6 @@ public class SingleImageRenderer extends Renderer {
         double x = master.position.x - image.getWidth() * master.anchor.x;
         double y = master.position.y - image.getHeight() * master.anchor.y;
         g.drawImage(this.image, (int)x, (int)y, null);
-       /*g.drawImage(this.image,(int)master.position.x,(int)master.position.y,null);*/
+       //g.drawImage(this.image,(int)master.position.x,(int)master.position.y,null);
     }
 }

@@ -32,6 +32,9 @@ public class Enemy extends GameObject implements Physics {
     boolean isStuck = false;
     FrameCounter startCounter;
 
+     public Boolean isLife;// check xem hien tai co o tren map khi ma da khoi tao ko
+    public static Boolean checkClock = true;
+
     public Enemy() {
         super();
         arr = new WallManagement();
@@ -41,6 +44,7 @@ public class Enemy extends GameObject implements Physics {
         this.defineAction();
         this.enemyMoveX = 0;
         this.enemyMoveY = 0;
+        isLife = false;
     }
 
     void defineAction(){
@@ -119,6 +123,9 @@ public class Enemy extends GameObject implements Physics {
 
     @Override
     public void run() {
+        if(!checkClock){
+            return;
+        }
         if (!this.checkIntersects() || !this.checkIntersectsWall()) {
             this.currentX = this.position.x;
             this.currentY = this.position.y;
