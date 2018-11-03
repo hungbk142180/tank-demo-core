@@ -2,6 +2,7 @@ package base.scene;
 
 import base.GameObject;
 import base.Settings;
+import base.SoundManage;
 import base.enemy.EnemySummoner;
 import base.enemy.EnemyType1;
 import base.enemy.EnemyType2;
@@ -36,5 +37,20 @@ public class SceneStage2 extends Scene{
 
         enemyType2.isLife = true;
         SceneStage1.enemyBornManage.add(enemyType2);
+
+        String[] fileNames = {
+                "level_start.wav",
+                "enemy/enemy-explosion.wav",
+                "enemy/hit_armor.wav",
+                "player/player_explode.wav",
+                "player/hit_brick.wav",
+                "player/hit_wall.wav",
+                "player/item-collect.wav",
+                "player/player_shot.wav",
+                "pause.wav",
+                "enemy/enemy-explosion-big.wav",
+                "player/powerup.wav"
+        };
+        SoundManage.loadSounds(fileNames);
     }
 }
