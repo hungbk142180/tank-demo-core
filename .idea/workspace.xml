@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5102307b-863c-4f0b-b949-ba69d5f7a183" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/assets/maps/item_bonus/boom.PNG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/maps/item_bonus/clock.PNG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/maps/item_bonus/gun.PNG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/maps/item_bonus/hat.PNG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/maps/item_bonus/shovel.PNG" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/maps/map_2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/assets/maps/map_2.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/tank-demo-core/base/enemy/Enemy$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tank-demo-core/base/enemy/Enemy$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/tank-demo-core/base/enemy/Enemy$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tank-demo-core/base/enemy/Enemy$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/tank-demo-core/base/enemy/Enemy.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tank-demo-core/base/enemy/Enemy.class" afterDir="false" />
@@ -16,13 +10,6 @@
       <change beforePath="$PROJECT_DIR$/out/production/tank-demo-core/base/scene/Scene.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tank-demo-core/base/scene/Scene.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/tank-demo-core/base/scene/SceneStage1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tank-demo-core/base/scene/SceneStage1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/tank-demo-core/base/wall/WallManagement.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tank-demo-core/base/wall/WallManagement.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/base/GameObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/GameObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/base/enemy/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/enemy/Enemy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/base/player/Tank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/player/Tank.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/base/renderer/SingleImageRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/renderer/SingleImageRenderer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/base/scene/Scene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/scene/Scene.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/base/scene/SceneStage1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/scene/SceneStage1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/base/wall/WallManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/wall/WallManagement.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -94,13 +81,13 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="java" value="1461" />
-          <entry key="txt" value="13" />
+          <entry key="txt" value="23" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JAVA" value="1461" />
-          <entry key="PLAIN_TEXT" value="13" />
+          <entry key="PLAIN_TEXT" value="23" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
@@ -137,8 +124,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/base/player/Tank.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="194">
-              <caret line="74" column="8" lean-forward="true" selection-start-line="74" selection-start-column="8" selection-end-line="74" selection-end-column="8" />
+            <state relative-caret-position="92">
+              <caret line="68" column="11" lean-forward="true" selection-start-line="68" selection-start-column="11" selection-end-line="68" selection-end-column="11" />
               <folding>
                 <element signature="e#9304#9305#0" expanded="true" />
                 <element signature="e#9340#9341#0" expanded="true" />
@@ -303,7 +290,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1541246760716" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1541246771733" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -347,6 +334,14 @@
       <option name="presentableId" value="Default" />
       <updated>1540907574453</updated>
     </task>
+    <task id="LOCAL-00001" summary="ăn bonus">
+      <created>1541246792765</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1541246792765</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -412,6 +407,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="ăn bonus" />
+    <option name="LAST_COMMIT_MESSAGE" value="ăn bonus" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateExpression">
@@ -730,8 +729,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/base/player/Tank.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="194">
-          <caret line="74" column="8" lean-forward="true" selection-start-line="74" selection-start-column="8" selection-end-line="74" selection-end-column="8" />
+        <state relative-caret-position="92">
+          <caret line="68" column="11" lean-forward="true" selection-start-line="68" selection-start-column="11" selection-end-line="68" selection-end-column="11" />
           <folding>
             <element signature="e#9304#9305#0" expanded="true" />
             <element signature="e#9340#9341#0" expanded="true" />
