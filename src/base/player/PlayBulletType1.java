@@ -14,8 +14,4 @@ public class PlayBulletType1 extends PlayBullet {
         this.collider = new BoxCollider(16, 16);
         this.damage = 1;
     }
-
-    public void hitEnemy() {
-        this.destroy();
-    }
 }

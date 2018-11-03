@@ -6,7 +6,11 @@ import base.Vector2D;
 import base.physics.BoxCollider;
 import base.physics.Physics;
 
+import java.util.ArrayList;
+
 public class EnemySummoner extends GameObject implements Physics {
+    public static ArrayList<Enemy> enemyBornManage = new ArrayList<>();
+
     BoxCollider collider;
     public static int enemyLeft = 3;
     public static int enemyNow = 3;
@@ -36,10 +40,12 @@ public class EnemySummoner extends GameObject implements Physics {
             this.enemyType1 = GameObject.recycle(EnemyType1.class);
             enemyType1.position.set(this.position.x, this.position.y);
             enemyLeft --;
+            EnemySummoner.enemyBornManage.add(enemyType1);
         } else if (enemyLeft >= 1) {
             this.enemyType4 = GameObject.recycle(EnemyType4.class);
             enemyType4.position.set(this.position.x, this.position.y);
             enemyLeft --;
+            EnemySummoner.enemyBornManage.add(enemyType4);
         } else {
             return;
         }

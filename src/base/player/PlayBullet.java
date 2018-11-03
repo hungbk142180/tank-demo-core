@@ -33,46 +33,34 @@ public class PlayBullet extends GameObject implements Physics {
         //xu ly va cham Enemy
         if (enemy != null) {
             enemy.takeDamage(this.damage);
-            this.hitEnemy();
-        } else if (this.position.y < 0 || this.position.y > Settings.SCREEN_HEIGHT ||
+            this.destroy();
+        }
+
+        if (this.position.y < 0 || this.position.y > Settings.SCREEN_HEIGHT ||
                 this.position.x < 0 || this.position.x > Settings.SCREEN_WIDHT) {
             this.destroy();
-        } else if (this.isActive == true) {
+        }
+
+        if (this.isActive == true) {
             this.position.addThis(this.velocity);
         }
         //
 
         //xu ly va cham gach
         if (brick != null) {
-            System.out.println("sdnfjkhsdajkfh");
-            brick.takeDamage(this.damage);
-            this.hitEnemy();
-        } else if (this.position.y < 0 || this.position.y > Settings.SCREEN_HEIGHT ||
-                this.position.x < 0 || this.position.x > Settings.SCREEN_WIDHT) {
+            brick.destroy();
             this.destroy();
-        } else if (this.isActive == true) {
-//            this.position.addThis(this.velocity);
         }
         // xu ly va cham voi da
         if (stone != null) {
             stone.takeDamage(this.damage);
-            this.hitEnemy();
-        } else if (this.position.y < 0 || this.position.y > Settings.SCREEN_HEIGHT ||
-                this.position.x < 0 || this.position.x > Settings.SCREEN_WIDHT) {
             this.destroy();
-        } else if (this.isActive == true) {
-//            this.position.addThis(this.velocity);
         }
 
         //xu ly va cham EnemyBullet
         if (enemyBullet != null) {
             enemyBullet.takeDamage(this.damage);
-            this.hitEnemy();
-        } else if (this.position.y < 0 || this.position.y > Settings.SCREEN_HEIGHT ||
-                this.position.x < 0 || this.position.x > Settings.SCREEN_WIDHT) {
             this.destroy();
-        } else if (this.isActive == true) {
-//            this.position.addThis(this.velocity);
         }
 
 //        if(this.checkIntersectBrick()){
@@ -81,14 +69,11 @@ public class PlayBullet extends GameObject implements Physics {
 //        }
     }
 
-    private boolean checkIntersectBrick(){
-        Brick brick = (Brick) GameObject.intersect(Brick.class,this);
-        return brick != null;
-    }
+//    private boolean checkIntersectBrick(){
+//        Brick brick = (Brick) GameObject.intersect(Brick.class,this);
+//        return brick != null;
+//    }
 
-    public void hitEnemy() {
-
-    }
 
     public BoxCollider getBoxCollider() {
         return this.collider;

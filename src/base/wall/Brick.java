@@ -26,23 +26,24 @@ public class Brick extends GameObject implements Physics {
         if (damage > 0) {
             this.destroy();
         }
+        System.out.println(damage);
     }
 
 //    public void run() {
-//        PlayBullet a = (PlayBullet)GameObject.intersect(PlayBullet.class,this);
-//        if(a!=null ){
-//            if(this.dem==0){
-//                this.dem++;
-//                BufferedImage imageBrick = SpriteUtils.loadImage("assets/maps/item_built_map/final.jpg");
-//                this.renderer = new SingleImageRenderer(imageBrick);
-//                this.collider = new BoxCollider(Settings.WAY_SIZE,Settings.WAY_SIZE);
-//            }
-//            else{
-////                a.destroy();
-//
-//                this.destroy();
-//            }
-//        }
+////        PlayBullet a = (PlayBullet)GameObject.intersect(PlayBullet.class,this);
+////        if(a!=null ){
+////            if(this.dem==0){
+////                this.dem++;
+////                BufferedImage imageBrick = SpriteUtils.loadImage("assets/maps/item_built_map/final.jpg");
+////                this.renderer = new SingleImageRenderer(imageBrick);
+////                this.collider = new BoxCollider(Settings.WAY_SIZE,Settings.WAY_SIZE);
+////            }
+////            else{
+//////                a.destroy();
+////
+////                this.destroy();
+////            }
+////        }
 //    }
     @Override
     public BoxCollider getBoxCollider() {

@@ -18,8 +18,8 @@ public class EnemyType3 extends Enemy {
     public void takeDamage(int damage) {
         this.hp -= damage;
         if (this.hp <= 0) {
-            this.destroy();
             hp = 0;
+            this.destroy();
         }
     }
 

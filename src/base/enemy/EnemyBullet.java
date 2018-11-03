@@ -28,7 +28,9 @@ public class EnemyBullet extends GameObject implements Physics {
     }
 
     public void run() {
-        this.position.addThis(this.velocity);
+        if (this.isActive) {
+            this.position.addThis(this.velocity);
+        }
         Tank tank = (Tank)GameObject.intersect(Tank.class, this);
         PlayBullet playBullet = (PlayBullet)GameObject.intersect(PlayBullet.class, this);
 //        EnemyBullet enemyBullet = (EnemyBullet)GameObject.intersect(EnemyBullet.class, this);

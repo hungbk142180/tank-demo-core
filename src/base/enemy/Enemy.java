@@ -28,23 +28,19 @@ public class Enemy extends GameObject implements Physics {
     Random random = new Random();
     int enemyMoveX;
     int enemyMoveY;
-    WallManagement arr;
+//    WallManagement arr;
     boolean isStuck = false;
     FrameCounter startCounter;
-
-     public Boolean isLife;// check xem hien tai co o tren map khi ma da khoi tao ko
     public static Boolean checkClock = true;
 
     public Enemy() {
         super();
-        arr = new WallManagement();
         this.position = new Vector2D(200, 100);
         this.moveCounter = new FrameCounter(139);
         this.startCounter = new FrameCounter(27);
         this.defineAction();
         this.enemyMoveX = 0;
         this.enemyMoveY = 0;
-        isLife = false;
     }
 
     void defineAction(){
@@ -108,8 +104,7 @@ public class Enemy extends GameObject implements Physics {
     }
 
     private boolean checkIntersectsWall(){
-        for (GameObject i :
-                arr) {
+        for (GameObject i :  Tank.arr) {
             if(i instanceof Brick || i instanceof Stone || i instanceof Water){
                 Brick brick = (Brick)GameObject.intersect(Brick.class, this);
                 Stone stone = (Stone)GameObject.intersect(Stone.class, this);

@@ -8,6 +8,7 @@ import base.Vector2D;
 import base.counter.FrameCounter;
 import base.enemy.Enemy;
 import base.enemy.EnemyBullet;
+import base.enemy.EnemySummoner;
 import base.event.KeyEventPress;
 import base.item_bonus.Boom;
 import base.item_bonus.Clock;
@@ -33,7 +34,7 @@ public class Tank extends GameObject implements Physics {
     float currentX = 0.0F;
     float currentY = 0.0F;
     boolean[] way = new boolean[]{false,false,false,false};//up down left right
-    WallManagement arr;
+    public static WallManagement arr;
     FrameCounter moveCounter;
    // FrameCounter iteam_bonus;
    // int count ;
@@ -51,7 +52,7 @@ public class Tank extends GameObject implements Physics {
         this.position = new Vector2D((float)Settings.START_PLAYER_POSITION_X, (float)Settings.START_PLAYER_POSITION_Y);
         this.renderer = new SingleImageRenderer(image);
         this.velocity = new Vector2D(0.0F, 0.0F);
-        this.fireCounter = new FrameCounter(40);
+        this.fireCounter = new FrameCounter(10);
         this.collider = new BoxCollider(54, 54);
         this.moveCounter = new FrameCounter(6);
 
@@ -109,8 +110,8 @@ public class Tank extends GameObject implements Physics {
 
        if(this.checkIntersectsBoomBonus()){// boom
             boom.destroy();
-              for( Enemy enemy : SceneStage1.enemyBornManage){
-                if(enemy.isLife){
+              for(Enemy enemy : EnemySummoner.enemyBornManage){
+                if(enemy.isActive){
                         enemy.destroy();
                 }
            }
