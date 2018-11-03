@@ -23,7 +23,7 @@ public class SceneStage2 extends Scene{
         tank.position.set(9* Settings.WAY_SIZE,25 * Settings.WAY_SIZE);
         this.enemyType1 = GameObject.recycle(EnemyType1.class);
         enemyType1.position.set(Settings.WAY_SIZE*5, Settings.WAY_SIZE*5);
-        enemyType1.isLife =true;
+
        SceneStage1.enemyBornManage.add(enemyType1);
 
         this.enemyType2 = GameObject.recycle(EnemyType2.class);
@@ -34,7 +34,6 @@ public class SceneStage2 extends Scene{
 
         this.enemySummoner = GameObject.recycle(EnemySummoner.class);
 
-        enemyType2.isLife = true;
         SceneStage1.enemyBornManage.add(enemyType2);
     }
 }

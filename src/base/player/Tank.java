@@ -7,7 +7,6 @@ import base.Settings;
 import base.Vector2D;
 import base.counter.FrameCounter;
 import base.enemy.Enemy;
-import base.enemy.EnemyBullet;
 import base.enemy.EnemySummoner;
 import base.event.KeyEventPress;
 import base.item_bonus.Boom;
@@ -21,11 +20,8 @@ import base.scene.SceneStage1;
 import base.wall.*;
 
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 
 import tklibs.SpriteUtils;
-
-import static base.wall.WallManagement.arrayShovel;
 
 public class Tank extends GameObject implements Physics {
     FrameCounter fireCounter;
@@ -46,7 +42,7 @@ public class Tank extends GameObject implements Physics {
     Boolean checkTimeShovel = false;
     Boom boom;
     Gun gun;
-
+    int bulletType;
 
     public Tank() {
        // arr= new WallManagement("assets\\maps\\map_2.txt" );
@@ -57,6 +53,7 @@ public class Tank extends GameObject implements Physics {
         this.fireCounter = new FrameCounter(40);
         this.collider = new BoxCollider(54, 54);
         this.moveCounter = new FrameCounter(6);
+        this.bulletType = 1;
 
          clock = GameObject.recycle(Clock.class);
          shovel = GameObject.recycle(Shovel.class);
@@ -122,15 +119,13 @@ public class Tank extends GameObject implements Physics {
 
        if(this.checkIntersectsGunBonus()){
            gun.destroy();
+           this.bulletType = 2;
        }
-
-
-
         if (!this.checkIntersects() || !this.checkIntersectsWall()) {
             this.currentX = this.position.x;
             this.currentY = this.position.y;
         }
-        //
+
         boolean moveCounterRun = this.moveCounter.run();
         if (KeyEventPress.isUpPress && moveCounterRun) {
             BufferedImage imageUp = SpriteUtils.loadImage("assets/tank_image/selecttank_up.png");
@@ -237,40 +232,73 @@ public class Tank extends GameObject implements Physics {
     }
 
     private void fire() {
-        PlayBulletType1 bullet = (PlayBulletType1) GameObject.recycle(PlayBulletType1.class);
+        if (this.bulletType == 1) {
+            PlayerBulletType1 bullet = (PlayerBulletType1) GameObject.recycle(PlayerBulletType1.class);
+            if(this.way[0]) {
+                bullet.velocity.set(0, -12);
+                bullet.position.set(this.position.x, this.position.y - (float) Settings.WAY_SIZE);
+            }
+            else if(this.way[1]) {
+                bullet.velocity.set(0, 12);
+                bullet.position.set(this.position.x, this.position.y + (float) Settings.WAY_SIZE);
+            }
+            else if(this.way[2]) {
+                bullet.velocity.set(-12, 0);
+                bullet.position.set(this.position.x -(float) Settings.WAY_SIZE , this.position.y);
+            }
+            else if(this.way[3]) {
+                bullet.velocity.set(12, 0);
+                bullet.position.set(this.position.x + (float) Settings.WAY_SIZE, this.position.y);
+            }
+            else {
+                bullet.velocity.set(0, -12);
+                bullet.position.set(this.position.x, this.position.y - (float) Settings.WAY_SIZE);
+            }
+        }
 
-        if(this.way[0]) {
-            bullet.velocity.set(0, -12);
-            bullet.position.set(this.position.x, this.position.y - (float) Settings.WAY_SIZE);
-        }
-        else if(this.way[1]) {
-            bullet.velocity.set(0, 12);
-            bullet.position.set(this.position.x, this.position.y + (float) Settings.WAY_SIZE);
-        }
-        else if(this.way[2]) {
-            bullet.velocity.set(-12, 0);
-            bullet.position.set(this.position.x -(float) Settings.WAY_SIZE , this.position.y);
-        }
-        else if(this.way[3]) {
-            bullet.velocity.set(12, 0);
-            bullet.position.set(this.position.x + (float) Settings.WAY_SIZE, this.position.y);
-        }
         else {
-            bullet.velocity.set(0, -12);
-            bullet.position.set(this.position.x, this.position.y - (float) Settings.WAY_SIZE);
+            PlayerBulletType2 bullet = (PlayerBulletType2) GameObject.recycle(PlayerBulletType2.class);
+            if(this.way[0]) {
+                bullet.velocity.set(0, -12);
+                bullet.position.set(this.position.x, this.position.y - (float) Settings.WAY_SIZE);
+                bullet.renderer = new SingleImageRenderer("assets/bullets/bulletU.gif");
+            }
+            else if(this.way[1]) {
+                bullet.velocity.set(0, 12);
+                bullet.position.set(this.position.x, this.position.y + (float) Settings.WAY_SIZE);
+                bullet.renderer = new SingleImageRenderer("assets/bullets/bulletD.gif");
+            }
+            else if(this.way[2]) {
+                bullet.velocity.set(-12, 0);
+                bullet.position.set(this.position.x -(float) Settings.WAY_SIZE , this.position.y);
+                bullet.renderer = new SingleImageRenderer("assets/bullets/bulletL.gif");
+            }
+            else if(this.way[3]) {
+                bullet.velocity.set(12, 0);
+                bullet.position.set(this.position.x + (float) Settings.WAY_SIZE, this.position.y);
+                bullet.renderer = new SingleImageRenderer("assets/bullets/bulletR.gif");
+            }
+            else {
+                bullet.velocity.set(0, -12);
+                bullet.position.set(this.position.x, this.position.y - (float) Settings.WAY_SIZE);
+                bullet.renderer = new SingleImageRenderer("assets/bullets/bulletU.gif");
+            }
         }
+
+
+
             this.fireCounter.reset();
     }
-
-    public void setPositionBullet(){
-
-    }
-
-    public void move(int velocityX, int velocityY) {
-        this.velocity.addThis((float)velocityX, (float)velocityY);
-        this.velocity.set(this.clamp(this.velocity.x, -3.0F, 3.0F),
-                        this.clamp(this.velocity.y, -3.0F, 3.0F));
-    }
+//
+//    public void setPositionBullet(){
+//
+//    }
+//
+//    public void move(int velocityX, int velocityY) {
+//        this.velocity.addThis((float)velocityX, (float)velocityY);
+//        this.velocity.set(this.clamp(this.velocity.x, -3.0F, 3.0F),
+//                        this.clamp(this.velocity.y, -3.0F, 3.0F));
+//    }
 
     public void setPosition(){
         if(this.position.x < 0){
@@ -280,13 +308,15 @@ public class Tank extends GameObject implements Physics {
             this.position.set(200,300);
         }
     }
-
-    public float clamp(float number, float min, float max) {
-        return number < min ? min : (number > max ? max : number);
-    }
+//
+//    public float clamp(float number, float min, float max) {
+//        return number < min ? min : (number > max ? max : number);
+//    }
 
     public void takeDamage(int damage) {
         this.destroy();
+        base.player.Explosion explosion = GameObject.recycle(base.player.Explosion.class);
+        explosion.position.set(this.position);
     }
 
     public BoxCollider getBoxCollider() {

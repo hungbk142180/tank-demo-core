@@ -37,7 +37,6 @@ public class PlayBullet extends GameObject implements Physics {
                 i.destroy();
                 this.destroy();
             }
-
         }
 
         if(stones.size() > 0){
@@ -45,7 +44,6 @@ public class PlayBullet extends GameObject implements Physics {
 //                i.destroy();
                 this.destroy();
             }
-
         }
 
         //xu ly va cham Enemy
@@ -61,11 +59,6 @@ public class PlayBullet extends GameObject implements Physics {
 
         if (this.isActive == true) {
             this.position.addThis(this.velocity);
-        }
-
-        if (enemyBullet != null) {
-            enemyBullet.takeDamage(this.damage);
-            this.destroy();
         }
 
     }

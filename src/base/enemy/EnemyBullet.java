@@ -45,14 +45,12 @@ public class EnemyBullet extends GameObject implements Physics {
                 i.destroy();
                 this.destroy();
             }
-
         }
 
         if(stones.size() > 0){
             for(Stone i : stones){
                 this.destroy();
             }
-
         }
 
         if (tank != null) {
@@ -60,27 +58,16 @@ public class EnemyBullet extends GameObject implements Physics {
             this.destroy();
             SceneManager.signNewScene(new SceneStage2());
         }
+
         if(playBullet != null){
             this.destroy();
             playBullet.destroy();
-
         }
 
         if(this.position.y < 0 || this.position.y > Settings.SCREEN_HEIGHT ||
             this.position.x < 0 || this.position.x > Settings.SCREEN_WIDHT) {
             this.destroy();
             return;
-        }
-    }
-
-
-    private void hitEnemy() {
-        this.destroy();
-    }
-
-    public void takeDamage(int damage) {
-        if (damage > 0) {
-            this.destroy();
         }
     }
 

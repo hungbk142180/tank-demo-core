@@ -14,16 +14,18 @@ public class GameWindow extends JFrame {
     GameCanvas canvas;
     public GameWindow() {
         //setup window
-        //this.setSize(Settings.SCREEN_WIDHT, Settings.SCREEN_HEIGHT);
+        this.setSize(Settings.SCREEN_WIDHT + Settings.WAY_SIZE*10,
+                        Settings.SCREEN_HEIGHT + Settings.WAY_SIZE + 8);
         this.setResizable(false);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setupEventListtener();
         //init game
         this.canvas = new GameCanvas();
-        this.canvas.setPreferredSize(new Dimension(Settings.SCREEN_WIDHT, Settings.SCREEN_HEIGHT));//size ko tinh sisegame window
+        this.canvas.setPreferredSize(new Dimension(Settings.SCREEN_WIDHT , Settings.SCREEN_HEIGHT));//size ko tinh sisegame window
         this.add(canvas);
         this.setVisible(true);
         this.pack();
+
     }
 
     private void setupEventListtener() {

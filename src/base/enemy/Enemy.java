@@ -33,7 +33,7 @@ public class Enemy extends GameObject implements Physics {
     boolean isStuck = false;
     FrameCounter startCounter;
 
-     public Boolean isLife;// check xem hien tai co o tren map khi ma da khoi tao ko
+//     public Boolean isLife;// check xem hien tai co o tren map khi ma da khoi tao ko
     public static Boolean checkClock = true;
 
     public Enemy() {
@@ -45,7 +45,7 @@ public class Enemy extends GameObject implements Physics {
         this.defineAction();
         this.enemyMoveX = 0;
         this.enemyMoveY = 0;
-        isLife = false;
+//        isLife = false;
     }
 
     void defineAction(){
@@ -145,8 +145,6 @@ public class Enemy extends GameObject implements Physics {
         } else {
             this.isStuck = false;
         }
-
-
     }
 
     public void fire() {
@@ -176,6 +174,8 @@ public class Enemy extends GameObject implements Physics {
     public void destroy() {
         super.destroy();
         EnemySummoner.enemyNow -= 1;
+        base.enemy.Explosion explosion = GameObject.recycle(base.enemy.Explosion.class);
+        explosion.position.set(this.position);
     }
 
     @Override
