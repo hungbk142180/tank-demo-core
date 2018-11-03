@@ -10,6 +10,8 @@ import base.physics.Physics;
 import base.player.PlayBullet;
 import base.player.Tank;
 import base.renderer.SingleImageRenderer;
+import base.wall.Brick;
+import base.wall.Stone;
 import tklibs.SpriteUtils;
 
 public class EnemyBullet extends GameObject implements Physics {
@@ -30,12 +32,23 @@ public class EnemyBullet extends GameObject implements Physics {
         Tank tank = (Tank)GameObject.intersect(Tank.class, this);
         PlayBullet playBullet = (PlayBullet)GameObject.intersect(PlayBullet.class, this);
 //        EnemyBullet enemyBullet = (EnemyBullet)GameObject.intersect(EnemyBullet.class, this);
+        Brick brick = (Brick)GameObject.intersect(Brick.class, this);
+        Stone stone = (Stone)GameObject.intersect(Stone.class, this);
+
         if (tank != null) {
             tank.takeDamage(this.damage);
             this.destroy();
         }
         if(playBullet != null){
             this.destroy();
+            playBullet.destroy();
+        }
+
+        if (brick != null) {
+            this.hitEnemy();
+        }
+        if(stone != null){
+            this.hitEnemy();
         }
 
         if(this.position.y < 0 || this.position.y > Settings.SCREEN_HEIGHT ||
@@ -45,7 +58,19 @@ public class EnemyBullet extends GameObject implements Physics {
         }
     }
 
+
+    private void hitEnemy() {
+        this.destroy();
+    }
+
+    public void takeDamage(int damage) {
+        if (damage > 0) {
+            this.destroy();
+        }
+    }
+
     public BoxCollider getBoxCollider() {
         return this.collider;
     }
+
 }
