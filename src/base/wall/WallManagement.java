@@ -9,10 +9,13 @@ import java.io.FileReader;
 import java.util.ArrayList;
 
 public class WallManagement extends ArrayList<GameObject> {
+    public static  int [][] map=null;
+    public static ArrayList<GameObject> arrayShovel;
     public WallManagement(){
+        arrayShovel = new ArrayList<>();
         int mapWidth=0;
         int mapHeight=0;
-        int [][] map=null;
+       // int [][] map=null;
         int tileSize = 28;
         try {
             String s = "assets\\maps\\map_2.txt";
@@ -45,9 +48,7 @@ public class WallManagement extends ArrayList<GameObject> {
                 }
                     if (rc == 1) {
                         Brick brick = (Brick) GameObject.recycle(Brick.class);
-
                         brick.position = new Vector2D(col * tileSize+14,row * tileSize+14);
-
                         add(brick);
                     }
                     if (rc == 2) {
@@ -64,6 +65,12 @@ public class WallManagement extends ArrayList<GameObject> {
                         Water water = (Water)GameObject.recycle(Water.class);
                         water.position = new Vector2D(col * tileSize+14,row * tileSize+14);
                         add(water);
+                    }
+                    if(rc == -1){
+                        Brick brick = (Brick) GameObject.recycle(Brick.class);
+                        brick.position = new Vector2D(col * tileSize+14,row * tileSize+14);
+                        add(brick);
+                        this.arrayShovel.add(brick);
                     }
 
                     // g.fillRect( col * tileSize,  row * tileSize, tileSize, tileSize);

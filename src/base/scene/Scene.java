@@ -8,7 +8,7 @@ public abstract class Scene {
   //  public SnackManager snackManager;
 
     public Tank tank;
-    public EnemyType1 enemyType1;
+    public EnemyType1 enemyType1,enemyType2;
     public abstract void destroy();
 
     public abstract void init();
