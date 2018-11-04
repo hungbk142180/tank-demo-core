@@ -6,10 +6,12 @@
 package base.enemy;
 
 import base.Settings;
+import base.SoundManage;
 import base.physics.BoxCollider;
 import base.renderer.SingleImageRenderer;
 import tklibs.SpriteUtils;
 
+import javax.sound.sampled.Clip;
 import java.awt.image.BufferedImage;
 
 public class EnemyType1 extends Enemy {
@@ -21,6 +23,7 @@ public class EnemyType1 extends Enemy {
 
     public void takeDamage(int damage) {
         if (damage > 0) {
+            SoundManage.playSound("enemy/enemy-explosion.wav");
             this.destroy();
         }
     }

@@ -2,6 +2,7 @@ package base.wall;
 
 import base.GameObject;
 import base.Settings;
+import base.SoundManage;
 import base.Vector2D;
 import base.physics.BoxCollider;
 import base.physics.Physics;

@@ -1,5 +1,6 @@
 package base.enemy;
 
+import base.SoundManage;
 import base.counter.FrameCounter;
 import base.physics.BoxCollider;
 import base.renderer.SingleImageRenderer;
@@ -17,6 +18,7 @@ public class EnemyType2 extends Enemy {
 
     public void takeDamage(int damage) {
         if (damage > 0) {
+            SoundManage.playSound("enemy/enemy-explosion.wav");
             this.destroy();
         }
     }

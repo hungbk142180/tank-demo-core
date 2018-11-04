@@ -6,6 +6,7 @@
 package base.enemy;
 
 import base.Settings;
+import base.SoundManage;
 import base.physics.BoxCollider;
 import base.renderer.SingleImageRenderer;
 import tklibs.SpriteUtils;
@@ -21,11 +22,12 @@ public class EnemyType4 extends Enemy {
 
     public void takeDamage(int damage) {
         if (damage > 0) {
+            SoundManage.playSound("enemy/enemy-explosion.wav");
             this.destroy();
         }
     }
 
-    public void move(){
+    public void move() {
         super.move();
         if (this.way == 0 && this.isStuck == false) {
             BufferedImage imageUp = SpriteUtils.loadImage("assets/tank_image/enemy4_up.png");

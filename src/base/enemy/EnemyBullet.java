@@ -13,7 +13,9 @@ import base.renderer.SingleImageRenderer;
 import base.scene.SceneManager;
 import base.scene.SceneStage1;
 import base.scene.SceneStage2;
+import base.scene.gameoverScen.GameoverScene;
 import base.wall.Brick;
+import base.wall.Eagle;
 import base.wall.Stone;
 import tklibs.SpriteUtils;
 
@@ -58,12 +60,15 @@ public class EnemyBullet extends GameObject implements Physics {
         if (tank != null) {
             tank.takeDamage(this.damage);
             this.destroy();
-            SceneManager.signNewScene(new SceneStage2());
+           // SceneManager.signNewScene(new SceneStage2());
         }
         if(playBullet != null){
             this.destroy();
             playBullet.destroy();
 
+        }
+        if(this.checkIntersectsEagle()){//check aegle
+            SceneManager.signNewScene(new GameoverScene());
         }
 
         if(this.position.y < 0 || this.position.y > Settings.SCREEN_HEIGHT ||
@@ -72,7 +77,10 @@ public class EnemyBullet extends GameObject implements Physics {
             return;
         }
     }
-
+    private boolean checkIntersectsEagle(){// check  eagle
+        Eagle eagle = GameObject.intersect(Eagle.class,this);
+        return eagle != null;
+    }
 
     private void hitEnemy() {
         this.destroy();

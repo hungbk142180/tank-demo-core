@@ -24,17 +24,18 @@ public class SceneStage2 extends Scene{
         this.enemyType1 = GameObject.recycle(EnemyType1.class);
         enemyType1.position.set(Settings.WAY_SIZE*5, Settings.WAY_SIZE*5);
         enemyType1.isLife =true;
-       SceneStage1.enemyBornManage.add(enemyType1);
+        EnemySummoner.enemyBornManage.add(enemyType1);
 
         this.enemyType2 = GameObject.recycle(EnemyType2.class);
         enemyType2.position.set(Settings.WAY_SIZE*21, Settings.WAY_SIZE*5);
-
-        this.enemyType3 = GameObject.recycle(EnemyType3.class);
-        enemyType3.position.set(Settings.WAY_SIZE*10, Settings.WAY_SIZE*5);
-
-        this.enemySummoner = GameObject.recycle(EnemySummoner.class);
-
         enemyType2.isLife = true;
-        SceneStage1.enemyBornManage.add(enemyType2);
+        EnemySummoner.enemyBornManage.add(enemyType2);
+
+//        this.enemyType3 = GameObject.recycle(EnemyType3.class);
+//        enemyType3.position.set(Settings.WAY_SIZE*10, Settings.WAY_SIZE*5);
+//
+//        this.enemySummoner = GameObject.recycle(EnemySummoner.class);
+
+
     }
 }

@@ -7,12 +7,17 @@ package base.player;
 
 import base.GameObject;
 import base.Settings;
+import base.SoundManage;
 import base.Vector2D;
 import base.enemy.Enemy;
 import base.enemy.EnemyBullet;
 import base.physics.BoxCollider;
 import base.physics.Physics;
+import base.scene.SceneManager;
+import base.scene.SceneStage2;
+import base.scene.gameoverScen.GameoverScene;
 import base.wall.Brick;
+import base.wall.Eagle;
 import base.wall.Stone;
 
 import java.util.ArrayList;
@@ -35,6 +40,7 @@ public class PlayBullet extends GameObject implements Physics {
         if(bricks.size() > 0){
             for(Brick i : bricks){
                 i.destroy();
+                SoundManage.playSound("player/hit_brick.wav");
                 this.destroy();
             }
 
@@ -42,7 +48,12 @@ public class PlayBullet extends GameObject implements Physics {
 
         if(stones.size() > 0){
             for(Stone i : stones){
+
                 //i.destroy();
+
+//                i.destroy();
+                SoundManage.playSound("player/hit_wall.wav");
+
                 this.destroy();
             }
 
@@ -67,7 +78,14 @@ public class PlayBullet extends GameObject implements Physics {
             enemyBullet.takeDamage(this.damage);
             this.destroy();
         }
+        if(this.checkIntersectsEagle()){//check aegle
+            SceneManager.signNewScene(new GameoverScene());
+        }
 
+    }
+    private boolean checkIntersectsEagle(){// check  eagle
+        Eagle eagle = GameObject.intersect(Eagle.class,this);
+        return eagle != null;
     }
 
     @Override

@@ -4,6 +4,8 @@ import base.Background;
 import base.GameObject;
 import base.Settings;
 
+import base.SoundManage;
+import base.enemy.*;
 import base.enemy.EnemySummoner;
 
 import base.enemy.Enemy;
@@ -50,7 +52,17 @@ public class SceneStage1 extends Scene {// khoi tao doi tuong o day
 
         this.enemySummoner = GameObject.recycle(EnemySummoner.class);
 
-
+        String[] fileNames = {
+                "level_start.wav",
+                "enemy/enemy-explosion.wav",
+                "enemy/hit_armor.wav",
+                "player/player_explode.wav",
+                "player/hit_brick.wav",
+                "player/hit_wall.wav",
+                "player/item-collect.wav"
+        };
+        SoundManage.loadSounds(fileNames);
+        SoundManage.playSound("level_start.wav");
 
 //        System.out.println("tank : "+tank.position);
        /*for(int i =0 ; i< 2 ; i++){

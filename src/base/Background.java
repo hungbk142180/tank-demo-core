@@ -38,7 +38,6 @@ public class Background extends GameObject {
                     map[row][col] = Integer.parseInt(tokens[col]);
                 }
             }
-
         }catch (Exception e){
 
         }

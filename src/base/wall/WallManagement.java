@@ -3,7 +3,10 @@ package base.wall;
 import base.GameObject;
 import base.Vector2D;
 import base.player.Tank;
+import base.renderer.SingleImageRenderer;
+import tklibs.SpriteUtils;
 
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -73,6 +76,32 @@ public class WallManagement extends ArrayList<GameObject> {
                         brick.position = new Vector2D(col * tileSize+14,row * tileSize+14);
                         add(brick);
                         this.arrayShovel.add(brick);
+                    }
+                    if (rc == 6) {
+                        Eagle eagle = (Eagle) GameObject.recycle(Eagle.class);
+                        BufferedImage imageEagle = SpriteUtils.loadImage("assets/maps/item_built_map/eagle/left1.PNG");
+                        ((SingleImageRenderer)eagle.renderer).image = imageEagle;
+                        eagle.position = new Vector2D(col * tileSize+14,row * tileSize+14);
+                        add(eagle);
+                    }
+                    if (rc == 7) {
+                        Eagle eagle = (Eagle) GameObject.recycle(Eagle.class);
+                        BufferedImage imageEagle = SpriteUtils.loadImage("assets/maps/item_built_map/eagle/right1.PNG");
+                        ((SingleImageRenderer)eagle.renderer).image = imageEagle;
+                        eagle.position = new Vector2D(col * tileSize+14,row * tileSize+14);
+                        add(eagle);
+                    }if (rc == 8) {
+                        Eagle eagle = (Eagle) GameObject.recycle(Eagle.class);
+                        BufferedImage imageEagle = SpriteUtils.loadImage("assets/maps/item_built_map/eagle/left2.PNG");
+                        ((SingleImageRenderer)eagle.renderer).image = imageEagle;
+                        eagle.position = new Vector2D(col * tileSize+14,row * tileSize+14);
+                        add(eagle);
+                    }if (rc == 9) {
+                        Eagle eagle = (Eagle) GameObject.recycle(Eagle.class);
+                        BufferedImage imageEagle = SpriteUtils.loadImage("assets/maps/item_built_map/eagle/right2.PNG");
+                        ((SingleImageRenderer)eagle.renderer).image = imageEagle;
+                        eagle.position = new Vector2D(col * tileSize+14,row * tileSize+14);
+                        add(eagle);
                     }
 
                     // g.fillRect( col * tileSize,  row * tileSize, tileSize, tileSize);
