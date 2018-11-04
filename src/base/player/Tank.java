@@ -53,6 +53,7 @@ public class Tank extends GameObject implements Physics {
     }
 
     public void run() {
+        Boom boom = GameObject.intersect(Boom.class,this);
         if(this.checkIntersectsBonus()){//clock
             SoundManage.playSound("pause.wav");
             Scene.clock.destroy();
@@ -96,11 +97,13 @@ public class Tank extends GameObject implements Physics {
         if(this.checkIntersectsBoomBonus()){// boom
             SoundManage.playSound("enemy/enemy-explosion-big.wav");
             Scene.boom.destroy();
+
             for(Enemy enemy : EnemySummoner.enemyBornManage){
                 if(enemy.isActive){
                     enemy.destroy();
                 }
             }
+
         }
 
         if(this.checkIntersectsGunBonus()){

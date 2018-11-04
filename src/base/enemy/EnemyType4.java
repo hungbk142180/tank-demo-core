@@ -33,16 +33,16 @@ public class EnemyType4 extends Enemy {
             SoundManage.playSound("enemy/enemy-explosion.wav");
             this.destroy();
             int typeOfItemBonus = random.nextInt(4);
-            if (typeOfItemBonus == 0) {
+//            if (typeOfItemBonus == 0) {
                 Scene.boom = GameObject.recycle(Boom.class);
-            } else if (typeOfItemBonus == 1) {
-                Scene.clock = GameObject.recycle(Clock.class);
-            } else if (typeOfItemBonus == 2) {
-                Scene.gun = GameObject.recycle(Gun.class);
-            } else {
-                Scene.shovel = GameObject.recycle(Shovel.class);
-
-            }
+//            } else if (typeOfItemBonus == 1) {
+//                Scene.clock = GameObject.recycle(Clock.class);
+//            } else if (typeOfItemBonus == 2) {
+//                Scene.gun = GameObject.recycle(Gun.class);
+//            } else {
+//                Scene.shovel = GameObject.recycle(Shovel.class);
+//
+//            }
         }
     }
 

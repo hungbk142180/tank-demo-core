@@ -40,7 +40,7 @@ public class EnemySummoner extends GameObject implements Physics {
             this.enemyType4 = GameObject.recycle(EnemyType4.class);
             enemyType4.position.set(this.position.x, this.position.y);
             enemyLeft --;
-            EnemySummoner.enemyBornManage.add(enemyType1);
+            EnemySummoner.enemyBornManage.add(enemyType4);
         } else if (enemyLeft >= 1) {
             this.enemyType4 = GameObject.recycle(EnemyType4.class);
             enemyType4.position.set(this.position.x, this.position.y);

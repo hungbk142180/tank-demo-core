@@ -34,9 +34,11 @@ public class SceneStage1 extends Scene {
         this.tank = GameObject.recycle(Tank.class);
         tank.position.set(9*Settings.WAY_SIZE, 25*Settings.WAY_SIZE);
 
-        this.enemyType1 = GameObject.recycle(EnemyType1.class);
-        enemyType1.position.set(Settings.WAY_SIZE*5, Settings.WAY_SIZE*5);
-        EnemySummoner.enemyBornManage.add(enemyType1);
+        this.enemySummoner = GameObject.recycle(EnemySummoner.class);
+
+        this.enemyType4 = GameObject.recycle(EnemyType4.class);
+        enemyType4.position.set(Settings.WAY_SIZE*5, Settings.WAY_SIZE*5);
+        EnemySummoner.enemyBornManage.add(enemyType4);
 
         this.enemyType2 = GameObject.recycle(EnemyType2.class);
         enemyType2.position.set(Settings.WAY_SIZE*21, Settings.WAY_SIZE*5);
@@ -46,7 +48,7 @@ public class SceneStage1 extends Scene {
         enemyType3.position.set(Settings.WAY_SIZE*10, Settings.WAY_SIZE*5);
         EnemySummoner.enemyBornManage.add(enemyType3);
 
-        this.enemySummoner = GameObject.recycle(EnemySummoner.class);
+
 
         arr= new WallManagement("assets\\maps\\map_2.txt" );
 
