@@ -1,0 +1,3211 @@
+Index: src/base/player/PlayBulletType1.java
+===================================================================
+--- src/base/player/PlayBulletType1.java	(revision 4f7081d4805804e15bebb89c5623a07de2ab16de)
++++ src/base/player/PlayBulletType1.java	(revision 4f7081d4805804e15bebb89c5623a07de2ab16de)
+@@ -1,17 +0,0 @@
+-//
+-// Source code recreated from a .class file by IntelliJ IDEA
+-// (powered by Fernflower decompiler)
+-//
+-
+-package base.player;
+-
+-import base.physics.BoxCollider;
+-import base.renderer.SingleImageRenderer;
+-
+-public class PlayBulletType1 extends PlayBullet {
+-    public PlayBulletType1() {
+-        this.renderer = new SingleImageRenderer("assets/bullets/red.png");
+-        this.collider = new BoxCollider(16, 16);
+-        this.damage = 1;
+-    }
+-}
+\ No newline at end of file
+Index: src/base/Background.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/base/Background.java	(revision 4f7081d4805804e15bebb89c5623a07de2ab16de)
++++ src/base/Background.java	(date 1541277497260)
+@@ -10,51 +10,51 @@
+ import java.io.FileReader;
+ 
+ public class Background extends GameObject {
+-
+-    private int tileSize;
+-    private int[][] map;
+-    private int mapWidth;
+-    private int mapHeight;
+-
+-    public Background(){
+-        tileSize = 28;
+-        //String s = "assets\\maps\\testmap.txt";
+-        String s = "assets\\maps\\map_2.txt";
+-        this.tileSize = tileSize;
+-        try {
+-            BufferedReader br = new BufferedReader(new FileReader(s));
+-            String x,y;
+-            x = br.readLine();
+-            y = br.readLine();
+-            mapWidth = Integer.parseInt(x);
+-            mapHeight = Integer.parseInt(y);
+-            map = new int[mapHeight][mapWidth];
+-
+-            String delimeter = " ";
+-            for(int row =0; row < mapHeight ;row++){
+-                String line = br.readLine();
+-                String[] tokens = line.split(delimeter);
+-                for(int col = 0;col<mapWidth;col++){
+-                    map[row][col] = Integer.parseInt(tokens[col]);
+-                }
+-            }
++//
++//    private int tileSize;
++//    private int[][] map;
++//    private int mapWidth;
++//    private int mapHeight;
+ 
+-        }catch (Exception e){
+-
+-        }
+-    }
+-    @Override
+-    public void render(Graphics g) {
+-        g.setColor(Color.CYAN);
+-        for(int i = 0; i < Settings.COL_COUNT; i++) {
+-            g.drawLine(i * Settings.WAY_SIZE, 0
+-                    , i * Settings.WAY_SIZE, Settings.SCREEN_HEIGHT);
+-        }
+-        for(int i = 0; i < Settings.ROW_COUNT; i++) {
+-            g.drawLine(0, i * Settings.WAY_SIZE
+-                    , Settings.SCREEN_WIDHT, i * Settings.WAY_SIZE);
+-        }
+-    }
++//    public Background(){
++//        tileSize = 28;
++//        //String s = "assets\\maps\\testmap.txt";
++//        String s = "assets\\maps\\map_2.txt";
++//        this.tileSize = tileSize;
++//        try {
++//            BufferedReader br = new BufferedReader(new FileReader(s));
++//            String x,y;
++//            x = br.readLine();
++//            y = br.readLine();
++//            mapWidth = Integer.parseInt(x);
++//            mapHeight = Integer.parseInt(y);
++//            map = new int[mapHeight][mapWidth];
++//
++//            String delimeter = " ";
++//            for(int row =0; row < mapHeight ;row++){
++//                String line = br.readLine();
++//                String[] tokens = line.split(delimeter);
++//                for(int col = 0;col<mapWidth;col++){
++//                    map[row][col] = Integer.parseInt(tokens[col]);
++//                }
++//            }
++//
++//        }catch (Exception e){
++//
++//        }
++//    }
++//    @Override
++//    public void render(Graphics g) {
++//        g.setColor(Color.CYAN);
++//        for(int i = 0; i < Settings.COL_COUNT; i++) {
++//            g.drawLine(i * Settings.WAY_SIZE, 0
++//                    , i * Settings.WAY_SIZE, Settings.SCREEN_HEIGHT);
++//        }
++//        for(int i = 0; i < Settings.ROW_COUNT; i++) {
++//            g.drawLine(0, i * Settings.WAY_SIZE
++//                    , Settings.SCREEN_WIDHT, i * Settings.WAY_SIZE);
++//        }
++//    }
+ 
+ //    @Override
+ //    public void render(Graphics g) {
+Index: src/base/scene/welcomeScene/Banner.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/base/scene/welcomeScene/Banner.java	(revision 4f7081d4805804e15bebb89c5623a07de2ab16de)
++++ src/base/scene/welcomeScene/Banner.java	(date 1541277497274)
+@@ -15,7 +15,8 @@
+         super();
+         BufferedImage image = SpriteUtils.loadImage("assets/spaceinvader.png");
+         this.renderer = new SingleImageRenderer(image);
+-        this.position.set(Settings.SCREEN_WIDHT / 2 , Settings.SCREEN_HEIGHT / 2);
++        this.position.set((Settings.SCREEN_WIDHT + Settings.WAY_SIZE*10) / 2 ,
++                (Settings.SCREEN_HEIGHT + Settings.WAY_SIZE + 8) / 2);
+     }
+ 
+     @Override
+Index: src/base/player/Tank.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/base/player/Tank.java	(revision 4f7081d4805804e15bebb89c5623a07de2ab16de)
++++ src/base/player/Tank.java	(date 1541277497271)
+@@ -7,7 +7,6 @@
+ import base.Vector2D;
+ import base.counter.FrameCounter;
+ import base.enemy.Enemy;
+-import base.enemy.EnemyBullet;
+ import base.enemy.EnemySummoner;
+ import base.event.KeyEventPress;
+ import base.item_bonus.Boom;
+@@ -21,12 +20,9 @@
+ import base.wall.*;
+ 
+ import java.awt.image.BufferedImage;
+-import java.util.ArrayList;
+ 
+ import tklibs.SpriteUtils;
+ 
+-import static base.wall.WallManagement.arrayShovel;
+-
+ public class Tank extends GameObject implements Physics {
+     FrameCounter fireCounter;
+     BoxCollider collider;
+@@ -46,7 +42,7 @@
+     Boolean checkTimeShovel = false;
+     Boom boom;
+     Gun gun;
+-
++    int bulletType;
+ 
+     public Tank() {
+        // arr= new WallManagement("assets\\maps\\map_2.txt" );
+@@ -57,6 +53,7 @@
+         this.fireCounter = new FrameCounter(40);
+         this.collider = new BoxCollider(54, 54);
+         this.moveCounter = new FrameCounter(6);
++        this.bulletType = 1;
+ 
+          clock = GameObject.recycle(Clock.class);
+          shovel = GameObject.recycle(Shovel.class);
+@@ -122,15 +119,13 @@
+ 
+        if(this.checkIntersectsGunBonus()){
+            gun.destroy();
++           this.bulletType = 2;
+        }
+-
+-
+-
+         if (!this.checkIntersects() || !this.checkIntersectsWall()) {
+             this.currentX = this.position.x;
+             this.currentY = this.position.y;
+         }
+-        //
++
+         boolean moveCounterRun = this.moveCounter.run();
+         if (KeyEventPress.isUpPress && moveCounterRun) {
+             BufferedImage imageUp = SpriteUtils.loadImage("assets/tank_image/selecttank_up.png");
+@@ -237,40 +232,73 @@
+     }
+ 
+     private void fire() {
+-        PlayBulletType1 bullet = (PlayBulletType1) GameObject.recycle(PlayBulletType1.class);
++        if (this.bulletType == 1) {
++            PlayerBulletType1 bullet = (PlayerBulletType1) GameObject.recycle(PlayerBulletType1.class);
++            if(this.way[0]) {
++                bullet.velocity.set(0, -12);
++                bullet.position.set(this.position.x, this.position.y - (float) Settings.WAY_SIZE);
++            }
++            else if(this.way[1]) {
++                bullet.velocity.set(0, 12);
++                bullet.position.set(this.position.x, this.position.y + (float) Settings.WAY_SIZE);
++            }
++            else if(this.way[2]) {
++                bullet.velocity.set(-12, 0);
++                bullet.position.set(this.position.x -(float) Settings.WAY_SIZE , this.position.y);
++            }
++            else if(this.way[3]) {
++                bullet.velocity.set(12, 0);
++                bullet.position.set(this.position.x + (float) Settings.WAY_SIZE, this.position.y);
++            }
++            else {
++                bullet.velocity.set(0, -12);
++                bullet.position.set(this.position.x, this.position.y - (float) Settings.WAY_SIZE);
++            }
++        }
+ 
+-        if(this.way[0]) {
+-            bullet.velocity.set(0, -12);
+-            bullet.position.set(this.position.x, this.position.y - (float) Settings.WAY_SIZE);
+-        }
+-        else if(this.way[1]) {
+-            bullet.velocity.set(0, 12);
+-            bullet.position.set(this.position.x, this.position.y + (float) Settings.WAY_SIZE);
+-        }
+-        else if(this.way[2]) {
+-            bullet.velocity.set(-12, 0);
+-            bullet.position.set(this.position.x -(float) Settings.WAY_SIZE , this.position.y);
+-        }
+-        else if(this.way[3]) {
+-            bullet.velocity.set(12, 0);
+-            bullet.position.set(this.position.x + (float) Settings.WAY_SIZE, this.position.y);
+-        }
+-        else {
+-            bullet.velocity.set(0, -12);
+-            bullet.position.set(this.position.x, this.position.y - (float) Settings.WAY_SIZE);
++        else {
++            PlayerBulletType2 bullet = (PlayerBulletType2) GameObject.recycle(PlayerBulletType2.class);
++            if(this.way[0]) {
++                bullet.velocity.set(0, -12);
++                bullet.position.set(this.position.x, this.position.y - (float) Settings.WAY_SIZE);
++                bullet.renderer = new SingleImageRenderer("assets/bullets/bulletU.gif");
++            }
++            else if(this.way[1]) {
++                bullet.velocity.set(0, 12);
++                bullet.position.set(this.position.x, this.position.y + (float) Settings.WAY_SIZE);
++                bullet.renderer = new SingleImageRenderer("assets/bullets/bulletD.gif");
++            }
++            else if(this.way[2]) {
++                bullet.velocity.set(-12, 0);
++                bullet.position.set(this.position.x -(float) Settings.WAY_SIZE , this.position.y);
++                bullet.renderer = new SingleImageRenderer("assets/bullets/bulletL.gif");
++            }
++            else if(this.way[3]) {
++                bullet.velocity.set(12, 0);
++                bullet.position.set(this.position.x + (float) Settings.WAY_SIZE, this.position.y);
++                bullet.renderer = new SingleImageRenderer("assets/bullets/bulletR.gif");
++            }
++            else {
++                bullet.velocity.set(0, -12);
++                bullet.position.set(this.position.x, this.position.y - (float) Settings.WAY_SIZE);
++                bullet.renderer = new SingleImageRenderer("assets/bullets/bulletU.gif");
++            }
+         }
++
++
++
+             this.fireCounter.reset();
+     }
+-
+-    public void setPositionBullet(){
+-
+-    }
+-
+-    public void move(int velocityX, int velocityY) {
+-        this.velocity.addThis((float)velocityX, (float)velocityY);
+-        this.velocity.set(this.clamp(this.velocity.x, -3.0F, 3.0F),
+-                        this.clamp(this.velocity.y, -3.0F, 3.0F));
+-    }
++//
++//    public void setPositionBullet(){
++//
++//    }
++//
++//    public void move(int velocityX, int velocityY) {
++//        this.velocity.addThis((float)velocityX, (float)velocityY);
++//        this.velocity.set(this.clamp(this.velocity.x, -3.0F, 3.0F),
++//                        this.clamp(this.velocity.y, -3.0F, 3.0F));
++//    }
+ 
+     public void setPosition(){
+         if(this.position.x < 0){
+@@ -280,13 +308,15 @@
+             this.position.set(200,300);
+         }
+     }
+-
+-    public float clamp(float number, float min, float max) {
+-        return number < min ? min : (number > max ? max : number);
+-    }
++//
++//    public float clamp(float number, float min, float max) {
++//        return number < min ? min : (number > max ? max : number);
++//    }
+ 
+     public void takeDamage(int damage) {
+         this.destroy();
++        base.player.Explosion explosion = GameObject.recycle(base.player.Explosion.class);
++        explosion.position.set(this.position);
+     }
+ 
+     public BoxCollider getBoxCollider() {
+Index: src/base/item_bonus/Gun.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/base/item_bonus/Gun.java	(revision 4f7081d4805804e15bebb89c5623a07de2ab16de)
++++ src/base/item_bonus/Gun.java	(date 1541277497266)
+@@ -2,25 +2,34 @@
+ 
+ import base.GameObject;
+ import base.Vector2D;
++import base.counter.FrameCounter;
+ import base.physics.BoxCollider;
+ import base.physics.Physics;
+ import base.renderer.SingleImageRenderer;
+ import tklibs.SpriteUtils;
+ 
++import java.awt.*;
+ import java.awt.image.BufferedImage;
+ 
+ public class Gun extends GameObject implements Physics {
+-
+     BoxCollider collider;
++    FrameCounter blinkCounter;
+     public Gun(){
+         BufferedImage imageGun = SpriteUtils.loadImage("assets/maps/item_bonus/gun.PNG");
+         this.renderer = new SingleImageRenderer(imageGun);
+         this.collider = new BoxCollider(53,53);
+         //this.position = new Vector2D(0.0F, 0.0F);
+         this.position = new Vector2D(446F, 502F);
++        this.blinkCounter = new FrameCounter(15);
+     }
+     @Override
+     public BoxCollider getBoxCollider() {
+         return this.collider;
+     }
++    public void render(Graphics g) {
++        if(this.blinkCounter.run()) {
++            super.render(g);
++            this.blinkCounter.reset();
++        }
++    }
+ }
+Index: src/base/renderer/AnimationRenderer.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/base/renderer/AnimationRenderer.java	(revision 4f7081d4805804e15bebb89c5623a07de2ab16de)
++++ src/base/renderer/AnimationRenderer.java	(date 1541277497272)
+@@ -12,21 +12,28 @@
+     ArrayList<BufferedImage> images;
+     int currentImage = 0;
+     FrameCounter frameCounter;
++    boolean isOnce;
+ 
+     public AnimationRenderer(String ...urls) {
+-        ArrayList<BufferedImage> images = SpriteUtils.loadImages(urls);
+-        this.images = images;
+-        this.frameCounter = new FrameCounter(5);
++        this(SpriteUtils.loadImages(urls), 5, false);
++    }
++
++    public AnimationRenderer(int frameCount, boolean isOnce, String ...urls) {
++        this(SpriteUtils.loadImages(urls), frameCount, isOnce);
+     }
+ 
+     public AnimationRenderer(ArrayList<BufferedImage> images) {
+-        this.images = images;
+-        this.frameCounter = new FrameCounter(5);
++        this(images, 5, false);
+     }
+ 
+     public AnimationRenderer(ArrayList<BufferedImage> images, int frameCount) {
++        this(images, frameCount, false);
++    }
++
++    public AnimationRenderer(ArrayList<BufferedImage> images, int frameCount, boolean isOnce) {
+         this.images = images;
+         this.frameCounter = new FrameCounter(frameCount);
++        this.isOnce = isOnce;
+     }
+ 
+     @Override
+@@ -39,6 +46,9 @@
+ 
+             if(this.frameCounter.run()) {
+                 currentImage++;
++                if(this.isOnce && this.currentImage == this.images.size() - 1) {
++                    master.destroy();
++                }
+                 if(currentImage >= images.size() - 1) {
+                     currentImage = 0;
+                 }
+Index: src/base/scene/SceneStage2.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/base/scene/SceneStage2.java	(revision 4f7081d4805804e15bebb89c5623a07de2ab16de)
++++ src/base/scene/SceneStage2.java	(date 1541277497273)
+@@ -23,7 +23,7 @@
+         tank.position.set(9* Settings.WAY_SIZE,25 * Settings.WAY_SIZE);
+         this.enemyType1 = GameObject.recycle(EnemyType1.class);
+         enemyType1.position.set(Settings.WAY_SIZE*5, Settings.WAY_SIZE*5);
+-        enemyType1.isLife =true;
++
+        SceneStage1.enemyBornManage.add(enemyType1);
+ 
+         this.enemyType2 = GameObject.recycle(EnemyType2.class);
+@@ -34,7 +34,6 @@
+ 
+         this.enemySummoner = GameObject.recycle(EnemySummoner.class);
+ 
+-        enemyType2.isLife = true;
+         SceneStage1.enemyBornManage.add(enemyType2);
+     }
+ }
+Index: src/base/item_bonus/Boom.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/base/item_bonus/Boom.java	(revision 4f7081d4805804e15bebb89c5623a07de2ab16de)
++++ src/base/item_bonus/Boom.java	(date 1541277497264)
+@@ -2,24 +2,34 @@
+ 
+ import base.GameObject;
+ import base.Vector2D;
++import base.counter.FrameCounter;
+ import base.physics.BoxCollider;
+ import base.physics.Physics;
+ import base.renderer.SingleImageRenderer;
+ import tklibs.SpriteUtils;
+ 
++import java.awt.*;
+ import java.awt.image.BufferedImage;
+ 
+ public class Boom extends GameObject implements Physics {
+     BoxCollider collider;
++    FrameCounter blinkCounter;
+     public Boom(){
+         BufferedImage imageBoom = SpriteUtils.loadImage("assets/maps/item_bonus/boom.PNG");
+         this.renderer = new SingleImageRenderer(imageBoom);
+         this.collider = new BoxCollider(53,53);
+         //this.position = new Vector2D(0.0F, 0.0F);
+         this.position = new Vector2D(334F, 502F);
++        this.blinkCounter = new FrameCounter(15);
+     }
+     @Override
+     public BoxCollider getBoxCollider() {
+         return this.collider;
+     }
++    public void render(Graphics g) {
++        if(this.blinkCounter.run()) {
++            super.render(g);
++            this.blinkCounter.reset();
++        }
++    }
+ }
+Index: src/base/item_bonus/Clock.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/base/item_bonus/Clock.java	(revision 4f7081d4805804e15bebb89c5623a07de2ab16de)
++++ src/base/item_bonus/Clock.java	(date 1541277497265)
+@@ -3,24 +3,34 @@
+ import base.GameObject;
+ import base.Settings;
+ import base.Vector2D;
++import base.counter.FrameCounter;
+ import base.physics.BoxCollider;
+ import base.physics.Physics;
+ import base.renderer.SingleImageRenderer;
+ import tklibs.SpriteUtils;
+ 
++import java.awt.*;
+ import java.awt.image.BufferedImage;
+ 
+ public class Clock extends GameObject implements Physics {
+     BoxCollider collider;
++    FrameCounter blinkCounter;
+     public Clock(){
+         BufferedImage imageClock = SpriteUtils.loadImage("assets/maps/item_bonus/clock.PNG");
+         this.renderer = new SingleImageRenderer(imageClock);
+         this.collider = new BoxCollider(53,53);
+         //this.position = new Vector2D(0.0F, 0.0F);
+         this.position = new Vector2D(334F, 334F);
++        this.blinkCounter = new FrameCounter(15);
+     }
+     @Override
+     public BoxCollider getBoxCollider() {
+         return this.collider;
+     }
++    public void render(Graphics g) {
++        if(this.blinkCounter.run()) {
++            super.render(g);
++            this.blinkCounter.reset();
++        }
++    }
+ }
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/workspace.xml	(revision 4f7081d4805804e15bebb89c5623a07de2ab16de)
++++ .idea/workspace.xml	(date 1541278180787)
+@@ -2,23 +2,50 @@
+ <project version="4">
+   <component name="ChangeListManager">
+     <list default="true" id="822bfce4-90fe-44fc-9e98-a5758b6a0d80" name="Default Changelist" comment="">
++      <change afterPath="$PROJECT_DIR$/assets/animation/big_explosion_1.png" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/assets/animation/big_explosion_2.png" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/assets/animation/big_explosion_3.png" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/assets/animation/big_explosion_4.png" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/assets/animation/big_explosion_5.png" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/assets/animation/explosion_1.png" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/assets/animation/explosion_2.png" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/assets/animation/explosion_3.png" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/src/base/enemy/Explosion.java" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/src/base/player/Explosion.java" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/src/base/player/PlayerBulletType1.java" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/src/base/player/PlayerBulletType2.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/out/production/tank-demo-core/base/enemy/Enemy$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tank-demo-core/base/enemy/Enemy$1.class" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/out/production/tank-demo-core/base/enemy/Enemy$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tank-demo-core/base/enemy/Enemy$2.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/tank-demo-core/base/Background.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tank-demo-core/base/Background.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/tank-demo-core/base/GameObject.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tank-demo-core/base/GameObject.class" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/out/production/tank-demo-core/base/enemy/Enemy.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tank-demo-core/base/enemy/Enemy.class" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/out/production/tank-demo-core/base/enemy/EnemyBullet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tank-demo-core/base/enemy/EnemyBullet.class" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/out/production/tank-demo-core/base/enemy/EnemySummoner.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tank-demo-core/base/enemy/EnemySummoner.class" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/out/production/tank-demo-core/base/enemy/EnemyType3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tank-demo-core/base/enemy/EnemyType3.class" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/out/production/tank-demo-core/base/physics/BoxCollider.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tank-demo-core/base/physics/BoxCollider.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/tank-demo-core/base/item_bonus/Boom.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tank-demo-core/base/item_bonus/Boom.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/tank-demo-core/base/item_bonus/Clock.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tank-demo-core/base/item_bonus/Clock.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/tank-demo-core/base/item_bonus/Shovel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tank-demo-core/base/item_bonus/Shovel.class" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/out/production/tank-demo-core/base/player/PlayBullet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tank-demo-core/base/player/PlayBullet.class" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/out/production/tank-demo-core/base/player/PlayBulletType1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tank-demo-core/base/player/PlayBulletType1.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/tank-demo-core/base/player/PlayBulletType1.class" beforeDir="false" />
+       <change beforePath="$PROJECT_DIR$/out/production/tank-demo-core/base/player/Tank.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tank-demo-core/base/player/Tank.class" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/out/production/tank-demo-core/base/scene/SceneStage1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tank-demo-core/base/scene/SceneStage1.class" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/out/production/tank-demo-core/base/wall/Brick.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tank-demo-core/base/wall/Brick.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/tank-demo-core/base/renderer/AnimationRenderer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tank-demo-core/base/renderer/AnimationRenderer.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/tank-demo-core/base/scene/welcomeScene/Banner.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tank-demo-core/base/scene/welcomeScene/Banner.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/tank-demo-core/game/GameWindow$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tank-demo-core/game/GameWindow$1.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/tank-demo-core/game/GameWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tank-demo-core/game/GameWindow.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/tank-demo-core/tklibs/SpriteUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tank-demo-core/tklibs/SpriteUtils.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/base/Background.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/Background.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/base/GameObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/GameObject.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/base/enemy/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/enemy/Enemy.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/base/enemy/EnemyBullet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/enemy/EnemyBullet.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/base/physics/BoxCollider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/physics/BoxCollider.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/base/item_bonus/Boom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/item_bonus/Boom.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/base/item_bonus/Clock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/item_bonus/Clock.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/base/item_bonus/Gun.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/item_bonus/Gun.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/base/item_bonus/Shovel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/item_bonus/Shovel.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/base/player/PlayBullet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/player/PlayBullet.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/base/player/PlayBulletType1.java" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/base/player/Tank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/player/Tank.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/base/renderer/AnimationRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/renderer/AnimationRenderer.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/base/scene/SceneStage2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/scene/SceneStage2.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/base/scene/welcomeScene/Banner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/scene/welcomeScene/Banner.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/game/GameWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/GameWindow.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/tklibs/SpriteUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tklibs/SpriteUtils.java" afterDir="false" />
+     </list>
+     <ignored path="$PROJECT_DIR$/out/" />
+     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+@@ -56,118 +83,1165 @@
+         </counts>
+       </usages-collector>
+     </session>
++    <session id="-868437932">
++      <usages-collector id="statistics.lifecycle.project">
++        <counts>
++          <entry key="project.open.time.0" value="1" />
++          <entry key="project.opened" value="1" />
++        </counts>
++      </usages-collector>
++      <usages-collector id="statistics.file.extensions.open">
++        <counts>
++          <entry key="java" value="46" />
++        </counts>
++      </usages-collector>
++      <usages-collector id="statistics.file.types.open">
++        <counts>
++          <entry key="JAVA" value="46" />
++        </counts>
++      </usages-collector>
++      <usages-collector id="statistics.file.extensions.edit">
++        <counts>
++          <entry key="dummy" value="2" />
++          <entry key="java" value="442" />
++        </counts>
++      </usages-collector>
++      <usages-collector id="statistics.file.types.edit">
++        <counts>
++          <entry key="JAVA" value="442" />
++          <entry key="PLAIN_TEXT" value="2" />
++        </counts>
++      </usages-collector>
++    </session>
+   </component>
+   <component name="FileEditorManager">
+-    <leaf>
++    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
++      <file pinned="false" current-in-tab="false">
++        <entry file="file://$PROJECT_DIR$/src/game/GameWindow.java">
++          <provider selected="true" editor-type-id="text-editor">
++            <state relative-caret-position="397">
++              <caret line="27" selection-start-line="27" selection-end-line="27" />
++            </state>
++          </provider>
++        </entry>
++      </file>
+       <file pinned="false" current-in-tab="false">
+-        <entry file="file://$PROJECT_DIR$/src/base/enemy/Enemy.java">
++        <entry file="file://$PROJECT_DIR$/src/base/enemy/EnemyBullet.java">
++          <provider selected="true" editor-type-id="text-editor">
++            <state relative-caret-position="305">
++              <caret line="58" column="55" selection-start-line="58" selection-start-column="55" selection-end-line="58" selection-end-column="55" />
++              <folding>
++                <element signature="imports" expanded="true" />
++              </folding>
++            </state>
++          </provider>
++        </entry>
++      </file>
++      <file pinned="false" current-in-tab="false">
++        <entry file="file://$PROJECT_DIR$/src/base/Settings.java">
++          <provider selected="true" editor-type-id="text-editor">
++            <state relative-caret-position="66">
++              <caret line="3" column="28" selection-start-line="3" selection-start-column="28" selection-end-line="3" selection-end-column="28" />
++            </state>
++          </provider>
++        </entry>
++      </file>
++      <file pinned="false" current-in-tab="false">
++        <entry file="file://$PROJECT_DIR$/src/base/scene/welcomeScene/Banner.java">
++          <provider selected="true" editor-type-id="text-editor">
++            <state relative-caret-position="198">
++              <caret line="17" column="36" selection-start-line="17" selection-start-column="36" selection-end-line="17" selection-end-column="36" />
++            </state>
++          </provider>
++        </entry>
++      </file>
++      <file pinned="false" current-in-tab="false">
++        <entry file="file://$PROJECT_DIR$/src/base/GameObject.java">
++          <provider selected="true" editor-type-id="text-editor">
++            <state relative-caret-position="167">
++              <caret line="111" column="20" selection-start-line="111" selection-start-column="20" selection-end-line="111" selection-end-column="20" />
++            </state>
++          </provider>
++        </entry>
++      </file>
++      <file pinned="false" current-in-tab="false">
++        <entry file="file://$PROJECT_DIR$/src/base/player/Tank.java">
++          <provider selected="true" editor-type-id="text-editor">
++            <state relative-caret-position="356">
++              <caret line="325" selection-start-line="325" selection-end-line="325" />
++              <folding>
++                <element signature="e#10096#10097#0" expanded="true" />
++                <element signature="e#10446#10447#0" expanded="true" />
++                <element signature="e#10482#10483#0" expanded="true" />
++              </folding>
++            </state>
++          </provider>
++        </entry>
++      </file>
++      <file pinned="false" current-in-tab="false">
++        <entry file="file://$PROJECT_DIR$/src/base/player/PlayBullet.java">
+           <provider selected="true" editor-type-id="text-editor">
+-            <state relative-caret-position="136">
+-              <caret line="110" column="42" lean-forward="true" selection-start-line="110" selection-start-column="42" selection-end-line="110" selection-end-column="42" />
++            <state relative-caret-position="62">
++              <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+             </state>
+           </provider>
+         </entry>
+       </file>
+       <file pinned="false" current-in-tab="true">
+-        <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
++        <entry file="file://$PROJECT_DIR$/src/base/player/PlayerBulletType2.java">
+           <provider selected="true" editor-type-id="text-editor">
+-            <state relative-caret-position="243">
+-              <caret line="459" column="10" selection-start-line="459" selection-start-column="10" selection-end-line="459" selection-end-column="10" />
++            <state relative-caret-position="238">
++              <caret line="22" column="8" lean-forward="true" selection-start-line="22" selection-start-column="8" selection-end-line="22" selection-end-column="8" />
+             </state>
+           </provider>
+         </entry>
+       </file>
+     </leaf>
+   </component>
++  <component name="FileTemplateManagerImpl">
++    <option name="RECENT_TEMPLATES">
++      <list>
++        <option value="Class" />
++      </list>
++    </option>
++  </component>
++  <component name="FindInProjectRecents">
++    <findStrings>
++      <find>signew</find>
++      <find>SCRee</find>
++      <find>BLACK</find>
++      <find>black</find>
++    </findStrings>
++  </component>
+   <component name="Git.Settings">
++    <option name="UPDATE_TYPE" value="MERGE" />
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+   </component>
+   <component name="IdeDocumentHistory">
+     <option name="CHANGED_PATHS">
+       <list>
+         <option value="$PROJECT_DIR$/src/base/physics/BoxCollider.java" />
++        <option value="$PROJECT_DIR$/src/base/scene/SceneStage2.java" />
++        <option value="$PROJECT_DIR$/src/base/item_bonus/Boom.java" />
++        <option value="$PROJECT_DIR$/src/base/item_bonus/Clock.java" />
++        <option value="$PROJECT_DIR$/src/base/item_bonus/Gun.java" />
++        <option value="$PROJECT_DIR$/src/base/item_bonus/Shovel.java" />
++        <option value="$PROJECT_DIR$/src/base/renderer/AnimationRenderer.java" />
++        <option value="$PROJECT_DIR$/src/base/enemy/Enemy.java" />
++        <option value="$PROJECT_DIR$/src/base/Explosion.java" />
++        <option value="$PROJECT_DIR$/src/tklibs/SpriteUtils.java" />
++        <option value="$PROJECT_DIR$/src/base/player/Explosion.java" />
++        <option value="$PROJECT_DIR$/src/game/GameCanvas.java" />
++        <option value="$PROJECT_DIR$/src/base/scene/welcomeScene/Banner.java" />
++        <option value="$PROJECT_DIR$/src/base/Background.java" />
++        <option value="$PROJECT_DIR$/src/base/player/PlayerBulletType1.java" />
+         <option value="$PROJECT_DIR$/src/base/GameObject.java" />
+-        <option value="$PROJECT_DIR$/src/base/enemy/EnemyBullet.java" />
+         <option value="$PROJECT_DIR$/src/base/player/PlayBullet.java" />
++        <option value="$PROJECT_DIR$/src/game/GameWindow.java" />
++        <option value="$PROJECT_DIR$/src/base/enemy/EnemyBullet.java" />
++        <option value="$PROJECT_DIR$/src/base/player/Tank.java" />
++        <option value="$PROJECT_DIR$/src/base/player/PlayerBulletType2.java" />
+       </list>
+     </option>
+   </component>
++  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
++  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
++  <component name="JsGulpfileManager">
++    <detection-done>true</detection-done>
++    <sorting>DEFINITION_ORDER</sorting>
++  </component>
+   <component name="ProjectFrameBounds" extendedState="6">
+-    <option name="x" value="172" />
+-    <option name="y" value="21" />
+-    <option name="width" value="713" />
+-    <option name="height" value="777" />
++    <option name="x" value="171" />
++    <option name="y" value="20" />
++    <option name="width" value="714" />
++    <option name="height" value="778" />
+   </component>
+   <component name="ProjectView">
+     <navigator proportions="" version="1">
+       <foldersAlwaysOnTop value="true" />
+     </navigator>
+     <panes>
+-      <pane id="Scope" />
+       <pane id="ProjectPane">
+         <subPane>
+           <expand>
+             <path>
+-              <item name="tank-demo-core" type="b2602c69:ProjectViewProjectNode" />
++              <item name="tank-demo-core-04-11-01-29" type="b2602c69:ProjectViewProjectNode" />
++              <item name="tank-demo-core-04-11-01-29" type="462c0819:PsiDirectoryNode" />
++            </path>
++            <path>
++              <item name="tank-demo-core-04-11-01-29" type="b2602c69:ProjectViewProjectNode" />
++              <item name="tank-demo-core-04-11-01-29" type="462c0819:PsiDirectoryNode" />
++              <item name="assets" type="462c0819:PsiDirectoryNode" />
++            </path>
++            <path>
++              <item name="tank-demo-core-04-11-01-29" type="b2602c69:ProjectViewProjectNode" />
++              <item name="tank-demo-core-04-11-01-29" type="462c0819:PsiDirectoryNode" />
++              <item name="assets" type="462c0819:PsiDirectoryNode" />
++              <item name="bullets" type="462c0819:PsiDirectoryNode" />
++            </path>
++            <path>
++              <item name="tank-demo-core-04-11-01-29" type="b2602c69:ProjectViewProjectNode" />
++              <item name="tank-demo-core-04-11-01-29" type="462c0819:PsiDirectoryNode" />
++              <item name="assets" type="462c0819:PsiDirectoryNode" />
++              <item name="maps" type="462c0819:PsiDirectoryNode" />
++            </path>
++            <path>
++              <item name="tank-demo-core-04-11-01-29" type="b2602c69:ProjectViewProjectNode" />
++              <item name="tank-demo-core-04-11-01-29" type="462c0819:PsiDirectoryNode" />
++              <item name="out" type="462c0819:PsiDirectoryNode" />
++            </path>
++            <path>
++              <item name="tank-demo-core-04-11-01-29" type="b2602c69:ProjectViewProjectNode" />
++              <item name="tank-demo-core-04-11-01-29" type="462c0819:PsiDirectoryNode" />
++              <item name="out" type="462c0819:PsiDirectoryNode" />
++              <item name="production" type="462c0819:PsiDirectoryNode" />
++            </path>
++            <path>
++              <item name="tank-demo-core-04-11-01-29" type="b2602c69:ProjectViewProjectNode" />
++              <item name="tank-demo-core-04-11-01-29" type="462c0819:PsiDirectoryNode" />
++              <item name="out" type="462c0819:PsiDirectoryNode" />
++              <item name="production" type="462c0819:PsiDirectoryNode" />
+               <item name="tank-demo-core" type="462c0819:PsiDirectoryNode" />
+             </path>
+             <path>
+-              <item name="tank-demo-core" type="b2602c69:ProjectViewProjectNode" />
++              <item name="tank-demo-core-04-11-01-29" type="b2602c69:ProjectViewProjectNode" />
++              <item name="tank-demo-core-04-11-01-29" type="462c0819:PsiDirectoryNode" />
++              <item name="out" type="462c0819:PsiDirectoryNode" />
++              <item name="production" type="462c0819:PsiDirectoryNode" />
+               <item name="tank-demo-core" type="462c0819:PsiDirectoryNode" />
+-              <item name=".idea" type="462c0819:PsiDirectoryNode" />
++              <item name="base" type="462c0819:PsiDirectoryNode" />
+             </path>
+             <path>
+-              <item name="tank-demo-core" type="b2602c69:ProjectViewProjectNode" />
++              <item name="tank-demo-core-04-11-01-29" type="b2602c69:ProjectViewProjectNode" />
++              <item name="tank-demo-core-04-11-01-29" type="462c0819:PsiDirectoryNode" />
++              <item name="out" type="462c0819:PsiDirectoryNode" />
++              <item name="production" type="462c0819:PsiDirectoryNode" />
+               <item name="tank-demo-core" type="462c0819:PsiDirectoryNode" />
+-              <item name="assets" type="462c0819:PsiDirectoryNode" />
++              <item name="base" type="462c0819:PsiDirectoryNode" />
++              <item name="item_bonus" type="462c0819:PsiDirectoryNode" />
+             </path>
+             <path>
+-              <item name="tank-demo-core" type="b2602c69:ProjectViewProjectNode" />
++              <item name="tank-demo-core-04-11-01-29" type="b2602c69:ProjectViewProjectNode" />
++              <item name="tank-demo-core-04-11-01-29" type="462c0819:PsiDirectoryNode" />
++              <item name="out" type="462c0819:PsiDirectoryNode" />
++              <item name="production" type="462c0819:PsiDirectoryNode" />
+               <item name="tank-demo-core" type="462c0819:PsiDirectoryNode" />
+-              <item name="src" type="462c0819:PsiDirectoryNode" />
++              <item name="base" type="462c0819:PsiDirectoryNode" />
++              <item name="scene" type="462c0819:PsiDirectoryNode" />
++            </path>
++            <path>
++              <item name="tank-demo-core-04-11-01-29" type="b2602c69:ProjectViewProjectNode" />
++              <item name="tank-demo-core-04-11-01-29" type="462c0819:PsiDirectoryNode" />
++              <item name="out" type="462c0819:PsiDirectoryNode" />
++              <item name="production" type="462c0819:PsiDirectoryNode" />
++              <item name="tank-demo-core" type="462c0819:PsiDirectoryNode" />
++              <item name="game" type="462c0819:PsiDirectoryNode" />
+             </path>
+             <path>
+-              <item name="tank-demo-core" type="b2602c69:ProjectViewProjectNode" />
++              <item name="tank-demo-core-04-11-01-29" type="b2602c69:ProjectViewProjectNode" />
++              <item name="tank-demo-core-04-11-01-29" type="462c0819:PsiDirectoryNode" />
++              <item name="out" type="462c0819:PsiDirectoryNode" />
++              <item name="production" type="462c0819:PsiDirectoryNode" />
+               <item name="tank-demo-core" type="462c0819:PsiDirectoryNode" />
++              <item name="tklibs" type="462c0819:PsiDirectoryNode" />
++            </path>
++            <path>
++              <item name="tank-demo-core-04-11-01-29" type="b2602c69:ProjectViewProjectNode" />
++              <item name="tank-demo-core-04-11-01-29" type="462c0819:PsiDirectoryNode" />
++              <item name="src" type="462c0819:PsiDirectoryNode" />
++            </path>
++            <path>
++              <item name="tank-demo-core-04-11-01-29" type="b2602c69:ProjectViewProjectNode" />
++              <item name="tank-demo-core-04-11-01-29" type="462c0819:PsiDirectoryNode" />
+               <item name="src" type="462c0819:PsiDirectoryNode" />
+               <item name="base" type="462c0819:PsiDirectoryNode" />
+             </path>
+             <path>
+-              <item name="tank-demo-core" type="b2602c69:ProjectViewProjectNode" />
+-              <item name="tank-demo-core" type="462c0819:PsiDirectoryNode" />
++              <item name="tank-demo-core-04-11-01-29" type="b2602c69:ProjectViewProjectNode" />
++              <item name="tank-demo-core-04-11-01-29" type="462c0819:PsiDirectoryNode" />
+               <item name="src" type="462c0819:PsiDirectoryNode" />
+               <item name="base" type="462c0819:PsiDirectoryNode" />
+               <item name="enemy" type="462c0819:PsiDirectoryNode" />
+             </path>
+             <path>
+-              <item name="tank-demo-core" type="b2602c69:ProjectViewProjectNode" />
+-              <item name="tank-demo-core" type="462c0819:PsiDirectoryNode" />
++              <item name="tank-demo-core-04-11-01-29" type="b2602c69:ProjectViewProjectNode" />
++              <item name="tank-demo-core-04-11-01-29" type="462c0819:PsiDirectoryNode" />
+               <item name="src" type="462c0819:PsiDirectoryNode" />
+               <item name="base" type="462c0819:PsiDirectoryNode" />
+               <item name="item_bonus" type="462c0819:PsiDirectoryNode" />
+             </path>
+             <path>
+-              <item name="tank-demo-core" type="b2602c69:ProjectViewProjectNode" />
+-              <item name="tank-demo-core" type="462c0819:PsiDirectoryNode" />
++              <item name="tank-demo-core-04-11-01-29" type="b2602c69:ProjectViewProjectNode" />
++              <item name="tank-demo-core-04-11-01-29" type="462c0819:PsiDirectoryNode" />
+               <item name="src" type="462c0819:PsiDirectoryNode" />
+               <item name="base" type="462c0819:PsiDirectoryNode" />
+               <item name="player" type="462c0819:PsiDirectoryNode" />
+             </path>
+             <path>
+-              <item name="tank-demo-core" type="b2602c69:ProjectViewProjectNode" />
+-              <item name="tank-demo-core" type="462c0819:PsiDirectoryNode" />
++              <item name="tank-demo-core-04-11-01-29" type="b2602c69:ProjectViewProjectNode" />
++              <item name="tank-demo-core-04-11-01-29" type="462c0819:PsiDirectoryNode" />
++              <item name="src" type="462c0819:PsiDirectoryNode" />
++              <item name="base" type="462c0819:PsiDirectoryNode" />
++              <item name="renderer" type="462c0819:PsiDirectoryNode" />
++            </path>
++            <path>
++              <item name="tank-demo-core-04-11-01-29" type="b2602c69:ProjectViewProjectNode" />
++              <item name="tank-demo-core-04-11-01-29" type="462c0819:PsiDirectoryNode" />
++              <item name="src" type="462c0819:PsiDirectoryNode" />
++              <item name="base" type="462c0819:PsiDirectoryNode" />
++              <item name="scene" type="462c0819:PsiDirectoryNode" />
++            </path>
++            <path>
++              <item name="tank-demo-core-04-11-01-29" type="b2602c69:ProjectViewProjectNode" />
++              <item name="tank-demo-core-04-11-01-29" type="462c0819:PsiDirectoryNode" />
++              <item name="src" type="462c0819:PsiDirectoryNode" />
++              <item name="base" type="462c0819:PsiDirectoryNode" />
++              <item name="scene" type="462c0819:PsiDirectoryNode" />
++              <item name="gameoverScen" type="462c0819:PsiDirectoryNode" />
++            </path>
++            <path>
++              <item name="tank-demo-core-04-11-01-29" type="b2602c69:ProjectViewProjectNode" />
++              <item name="tank-demo-core-04-11-01-29" type="462c0819:PsiDirectoryNode" />
++              <item name="src" type="462c0819:PsiDirectoryNode" />
++              <item name="base" type="462c0819:PsiDirectoryNode" />
++              <item name="scene" type="462c0819:PsiDirectoryNode" />
++              <item name="welcomeScene" type="462c0819:PsiDirectoryNode" />
++            </path>
++            <path>
++              <item name="tank-demo-core-04-11-01-29" type="b2602c69:ProjectViewProjectNode" />
++              <item name="tank-demo-core-04-11-01-29" type="462c0819:PsiDirectoryNode" />
++              <item name="src" type="462c0819:PsiDirectoryNode" />
++              <item name="base" type="462c0819:PsiDirectoryNode" />
++              <item name="wall" type="462c0819:PsiDirectoryNode" />
++            </path>
++            <path>
++              <item name="tank-demo-core-04-11-01-29" type="b2602c69:ProjectViewProjectNode" />
++              <item name="tank-demo-core-04-11-01-29" type="462c0819:PsiDirectoryNode" />
+               <item name="src" type="462c0819:PsiDirectoryNode" />
+               <item name="game" type="462c0819:PsiDirectoryNode" />
+             </path>
++            <path>
++              <item name="tank-demo-core-04-11-01-29" type="b2602c69:ProjectViewProjectNode" />
++              <item name="tank-demo-core-04-11-01-29" type="462c0819:PsiDirectoryNode" />
++              <item name="src" type="462c0819:PsiDirectoryNode" />
++              <item name="tklibs" type="462c0819:PsiDirectoryNode" />
++            </path>
+           </expand>
+           <select />
+         </subPane>
+       </pane>
++      <pane id="Scope" />
+       <pane id="PackagesPane" />
+     </panes>
+   </component>
+   <component name="PropertiesComponent">
+-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1541268272889" />
++    <property name="WebServerToolWindowFactoryState" value="false" />
++    <property name="aspect.path.notification.shown" value="true" />
++    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1541278034421" />
++    <property name="last_opened_file_path" value="$PROJECT_DIR$/../ci-begin" />
++  </component>
++  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
++    <UpdatedFiles>
++      <FILE-GROUP>
++        <option name="myUpdateName" value="Updated from server" />
++        <option name="myStatusName" value="Changed on server" />
++        <option name="mySupportsDeletion" value="false" />
++        <option name="myCanBeAbsent" value="false" />
++        <option name="myId" value="CHANGED_ON_SERVER" />
++        <FILE-GROUP>
++          <option name="myUpdateName" value="Updated" />
++          <option name="myStatusName" value="Changed" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="false" />
++          <option name="myId" value="UPDATED" />
++        </FILE-GROUP>
++        <FILE-GROUP>
++          <option name="myUpdateName" value="Created" />
++          <option name="myStatusName" value="Created" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="false" />
++          <option name="myId" value="CREATED" />
++        </FILE-GROUP>
++        <FILE-GROUP>
++          <option name="myUpdateName" value="Deleted" />
++          <option name="myStatusName" value="Deleted" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="true" />
++          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
++        </FILE-GROUP>
++        <FILE-GROUP>
++          <option name="myUpdateName" value="Restored" />
++          <option name="myStatusName" value="Will be restored" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="false" />
++          <option name="myId" value="RESTORED" />
++        </FILE-GROUP>
++      </FILE-GROUP>
++      <FILE-GROUP>
++        <option name="myUpdateName" value="Modified" />
++        <option name="myStatusName" value="Modified" />
++        <option name="mySupportsDeletion" value="false" />
++        <option name="myCanBeAbsent" value="false" />
++        <option name="myId" value="MODIFIED" />
++      </FILE-GROUP>
++      <FILE-GROUP>
++        <option name="myUpdateName" value="Skipped" />
++        <option name="myStatusName" value="Skipped" />
++        <option name="mySupportsDeletion" value="false" />
++        <option name="myCanBeAbsent" value="false" />
++        <option name="myId" value="SKIPPED" />
++      </FILE-GROUP>
++      <FILE-GROUP>
++        <option name="myUpdateName" value="Merged with conflicts" />
++        <option name="myStatusName" value="Will be merged with conflicts" />
++        <option name="mySupportsDeletion" value="false" />
++        <option name="myCanBeAbsent" value="false" />
++        <option name="myId" value="MERGED_WITH_CONFLICTS" />
++      </FILE-GROUP>
++      <FILE-GROUP>
++        <option name="myUpdateName" value="Merged with tree conflicts" />
++        <option name="myStatusName" value="Merged with tree conflicts" />
++        <option name="mySupportsDeletion" value="false" />
++        <option name="myCanBeAbsent" value="false" />
++        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
++      </FILE-GROUP>
++      <FILE-GROUP>
++        <option name="myUpdateName" value="Merged with property conflicts" />
++        <option name="myStatusName" value="Will be merged with property conflicts" />
++        <option name="mySupportsDeletion" value="false" />
++        <option name="myCanBeAbsent" value="false" />
++        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
++      </FILE-GROUP>
++      <FILE-GROUP>
++        <option name="myUpdateName" value="Merged" />
++        <option name="myStatusName" value="Will be merged" />
++        <option name="mySupportsDeletion" value="false" />
++        <option name="myCanBeAbsent" value="false" />
++        <option name="myId" value="MERGED" />
++      </FILE-GROUP>
++      <FILE-GROUP>
++        <option name="myUpdateName" value="Not in repository" />
++        <option name="myStatusName" value="Not in repository" />
++        <option name="mySupportsDeletion" value="true" />
++        <option name="myCanBeAbsent" value="false" />
++        <option name="myId" value="UNKNOWN" />
++      </FILE-GROUP>
++      <FILE-GROUP>
++        <option name="myUpdateName" value="Locally added" />
++        <option name="myStatusName" value="Locally added" />
++        <option name="mySupportsDeletion" value="false" />
++        <option name="myCanBeAbsent" value="false" />
++        <option name="myId" value="LOCALLY_ADDED" />
++      </FILE-GROUP>
++      <FILE-GROUP>
++        <option name="myUpdateName" value="Locally removed" />
++        <option name="myStatusName" value="Locally removed" />
++        <option name="mySupportsDeletion" value="false" />
++        <option name="myCanBeAbsent" value="false" />
++        <option name="myId" value="LOCALLY_REMOVED" />
++      </FILE-GROUP>
++      <FILE-GROUP>
++        <option name="myUpdateName" value="Switched" />
++        <option name="myStatusName" value="Switched" />
++        <option name="mySupportsDeletion" value="false" />
++        <option name="myCanBeAbsent" value="false" />
++        <option name="myId" value="SWITCHED" />
++      </FILE-GROUP>
++      <FILE-GROUP>
++        <option name="myUpdateName" value="Updated from server" />
++        <option name="myStatusName" value="Changed on server" />
++        <option name="mySupportsDeletion" value="false" />
++        <option name="myCanBeAbsent" value="false" />
++        <option name="myId" value="CHANGED_ON_SERVER" />
++        <FILE-GROUP>
++          <option name="myUpdateName" />
++          <option name="myStatusName" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="false" />
++          <option name="myId" />
++        </FILE-GROUP>
++        <FILE-GROUP>
++          <option name="myUpdateName" />
++          <option name="myStatusName" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="false" />
++          <option name="myId" />
++        </FILE-GROUP>
++        <FILE-GROUP>
++          <option name="myUpdateName" />
++          <option name="myStatusName" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="false" />
++          <option name="myId" />
++        </FILE-GROUP>
++        <FILE-GROUP>
++          <option name="myUpdateName" />
++          <option name="myStatusName" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="false" />
++          <option name="myId" />
++        </FILE-GROUP>
++        <FILE-GROUP>
++          <option name="myUpdateName" />
++          <option name="myStatusName" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="false" />
++          <option name="myId" />
++        </FILE-GROUP>
++        <FILE-GROUP>
++          <option name="myUpdateName" value="Updated" />
++          <option name="myStatusName" value="Changed" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="false" />
++          <option name="myId" value="UPDATED" />
++          <PATH vcs="Git" revision="">$PROJECT_DIR$/assets/maps/testmap.txt</PATH>
++          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/tank-demo-core/base/wall/WallManagement.class</PATH>
++          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/base/enemy/Enemy.java</PATH>
++          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/base/player/Tank.java</PATH>
++          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/base/scene/SceneStage1.java</PATH>
++          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/base/wall/WallManagement.java</PATH>
++          <FILE-GROUP>
++            <option name="myUpdateName" />
++            <option name="myStatusName" />
++            <option name="mySupportsDeletion" value="false" />
++            <option name="myCanBeAbsent" value="false" />
++            <option name="myId" />
++          </FILE-GROUP>
++          <FILE-GROUP>
++            <option name="myUpdateName" />
++            <option name="myStatusName" />
++            <option name="mySupportsDeletion" value="false" />
++            <option name="myCanBeAbsent" value="false" />
++            <option name="myId" />
++          </FILE-GROUP>
++          <FILE-GROUP>
++            <option name="myUpdateName" />
++            <option name="myStatusName" />
++            <option name="mySupportsDeletion" value="false" />
++            <option name="myCanBeAbsent" value="false" />
++            <option name="myId" />
++          </FILE-GROUP>
++          <FILE-GROUP>
++            <option name="myUpdateName" />
++            <option name="myStatusName" />
++            <option name="mySupportsDeletion" value="false" />
++            <option name="myCanBeAbsent" value="false" />
++            <option name="myId" />
++          </FILE-GROUP>
++          <FILE-GROUP>
++            <option name="myUpdateName" />
++            <option name="myStatusName" />
++            <option name="mySupportsDeletion" value="false" />
++            <option name="myCanBeAbsent" value="false" />
++            <option name="myId" />
++          </FILE-GROUP>
++          <FILE-GROUP>
++            <option name="myUpdateName" />
++            <option name="myStatusName" />
++            <option name="mySupportsDeletion" value="false" />
++            <option name="myCanBeAbsent" value="false" />
++            <option name="myId" />
++          </FILE-GROUP>
++          <FILE-GROUP>
++            <option name="myUpdateName" />
++            <option name="myStatusName" />
++            <option name="mySupportsDeletion" value="false" />
++            <option name="myCanBeAbsent" value="false" />
++            <option name="myId" />
++          </FILE-GROUP>
++          <FILE-GROUP>
++            <option name="myUpdateName" />
++            <option name="myStatusName" />
++            <option name="mySupportsDeletion" value="false" />
++            <option name="myCanBeAbsent" value="false" />
++            <option name="myId" />
++          </FILE-GROUP>
++          <FILE-GROUP>
++            <option name="myUpdateName" />
++            <option name="myStatusName" />
++            <option name="mySupportsDeletion" value="false" />
++            <option name="myCanBeAbsent" value="false" />
++            <option name="myId" />
++          </FILE-GROUP>
++          <FILE-GROUP>
++            <option name="myUpdateName" />
++            <option name="myStatusName" />
++            <option name="mySupportsDeletion" value="false" />
++            <option name="myCanBeAbsent" value="false" />
++            <option name="myId" />
++          </FILE-GROUP>
++          <FILE-GROUP>
++            <option name="myUpdateName" />
++            <option name="myStatusName" />
++            <option name="mySupportsDeletion" value="false" />
++            <option name="myCanBeAbsent" value="false" />
++            <option name="myId" />
++          </FILE-GROUP>
++        </FILE-GROUP>
++        <FILE-GROUP>
++          <option name="myUpdateName" value="Created" />
++          <option name="myStatusName" value="Created" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="false" />
++          <option name="myId" value="CREATED" />
++          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/base/item_bonus/Gun.java</PATH>
++          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/base/scene/SceneStage2.java</PATH>
++          <FILE-GROUP>
++            <option name="myUpdateName" />
++            <option name="myStatusName" />
++            <option name="mySupportsDeletion" value="false" />
++            <option name="myCanBeAbsent" value="false" />
++            <option name="myId" />
++          </FILE-GROUP>
++          <FILE-GROUP>
++            <option name="myUpdateName" />
++            <option name="myStatusName" />
++            <option name="mySupportsDeletion" value="false" />
++            <option name="myCanBeAbsent" value="false" />
++            <option name="myId" />
++          </FILE-GROUP>
++          <FILE-GROUP>
++            <option name="myUpdateName" />
++            <option name="myStatusName" />
++            <option name="mySupportsDeletion" value="false" />
++            <option name="myCanBeAbsent" value="false" />
++            <option name="myId" />
++          </FILE-GROUP>
++          <FILE-GROUP>
++            <option name="myUpdateName" />
++            <option name="myStatusName" />
++            <option name="mySupportsDeletion" value="false" />
++            <option name="myCanBeAbsent" value="false" />
++            <option name="myId" />
++          </FILE-GROUP>
++          <FILE-GROUP>
++            <option name="myUpdateName" />
++            <option name="myStatusName" />
++            <option name="mySupportsDeletion" value="false" />
++            <option name="myCanBeAbsent" value="false" />
++            <option name="myId" />
++          </FILE-GROUP>
++          <FILE-GROUP>
++            <option name="myUpdateName" />
++            <option name="myStatusName" />
++            <option name="mySupportsDeletion" value="false" />
++            <option name="myCanBeAbsent" value="false" />
++            <option name="myId" />
++          </FILE-GROUP>
++          <FILE-GROUP>
++            <option name="myUpdateName" />
++            <option name="myStatusName" />
++            <option name="mySupportsDeletion" value="false" />
++            <option name="myCanBeAbsent" value="false" />
++            <option name="myId" />
++          </FILE-GROUP>
++        </FILE-GROUP>
++        <FILE-GROUP>
++          <option name="myUpdateName" value="Deleted" />
++          <option name="myStatusName" value="Deleted" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="true" />
++          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
++          <FILE-GROUP>
++            <option name="myUpdateName" />
++            <option name="myStatusName" />
++            <option name="mySupportsDeletion" value="false" />
++            <option name="myCanBeAbsent" value="false" />
++            <option name="myId" />
++          </FILE-GROUP>
++          <FILE-GROUP>
++            <option name="myUpdateName" />
++            <option name="myStatusName" />
++            <option name="mySupportsDeletion" value="false" />
++            <option name="myCanBeAbsent" value="false" />
++            <option name="myId" />
++          </FILE-GROUP>
++          <FILE-GROUP>
++            <option name="myUpdateName" />
++            <option name="myStatusName" />
++            <option name="mySupportsDeletion" value="false" />
++            <option name="myCanBeAbsent" value="false" />
++            <option name="myId" />
++          </FILE-GROUP>
++          <FILE-GROUP>
++            <option name="myUpdateName" />
++            <option name="myStatusName" />
++            <option name="mySupportsDeletion" value="false" />
++            <option name="myCanBeAbsent" value="false" />
++            <option name="myId" />
++          </FILE-GROUP>
++          <FILE-GROUP>
++            <option name="myUpdateName" />
++            <option name="myStatusName" />
++            <option name="mySupportsDeletion" value="false" />
++            <option name="myCanBeAbsent" value="false" />
++            <option name="myId" />
++          </FILE-GROUP>
++        </FILE-GROUP>
++        <FILE-GROUP>
++          <option name="myUpdateName" value="Restored" />
++          <option name="myStatusName" value="Will be restored" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="false" />
++          <option name="myId" value="RESTORED" />
++          <FILE-GROUP>
++            <option name="myUpdateName" />
++            <option name="myStatusName" />
++            <option name="mySupportsDeletion" value="false" />
++            <option name="myCanBeAbsent" value="false" />
++            <option name="myId" />
++          </FILE-GROUP>
++          <FILE-GROUP>
++            <option name="myUpdateName" />
++            <option name="myStatusName" />
++            <option name="mySupportsDeletion" value="false" />
++            <option name="myCanBeAbsent" value="false" />
++            <option name="myId" />
++          </FILE-GROUP>
++          <FILE-GROUP>
++            <option name="myUpdateName" />
++            <option name="myStatusName" />
++            <option name="mySupportsDeletion" value="false" />
++            <option name="myCanBeAbsent" value="false" />
++            <option name="myId" />
++          </FILE-GROUP>
++          <FILE-GROUP>
++            <option name="myUpdateName" />
++            <option name="myStatusName" />
++            <option name="mySupportsDeletion" value="false" />
++            <option name="myCanBeAbsent" value="false" />
++            <option name="myId" />
++          </FILE-GROUP>
++          <FILE-GROUP>
++            <option name="myUpdateName" />
++            <option name="myStatusName" />
++            <option name="mySupportsDeletion" value="false" />
++            <option name="myCanBeAbsent" value="false" />
++            <option name="myId" />
++          </FILE-GROUP>
++        </FILE-GROUP>
++      </FILE-GROUP>
++      <FILE-GROUP>
++        <option name="myUpdateName" value="Modified" />
++        <option name="myStatusName" value="Modified" />
++        <option name="mySupportsDeletion" value="false" />
++        <option name="myCanBeAbsent" value="false" />
++        <option name="myId" value="MODIFIED" />
++        <FILE-GROUP>
++          <option name="myUpdateName" />
++          <option name="myStatusName" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="false" />
++          <option name="myId" />
++        </FILE-GROUP>
++        <FILE-GROUP>
++          <option name="myUpdateName" />
++          <option name="myStatusName" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="false" />
++          <option name="myId" />
++        </FILE-GROUP>
++        <FILE-GROUP>
++          <option name="myUpdateName" />
++          <option name="myStatusName" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="false" />
++          <option name="myId" />
++        </FILE-GROUP>
++        <FILE-GROUP>
++          <option name="myUpdateName" />
++          <option name="myStatusName" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="false" />
++          <option name="myId" />
++        </FILE-GROUP>
++        <FILE-GROUP>
++          <option name="myUpdateName" />
++          <option name="myStatusName" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="false" />
++          <option name="myId" />
++        </FILE-GROUP>
++      </FILE-GROUP>
++      <FILE-GROUP>
++        <option name="myUpdateName" value="Skipped" />
++        <option name="myStatusName" value="Skipped" />
++        <option name="mySupportsDeletion" value="false" />
++        <option name="myCanBeAbsent" value="false" />
++        <option name="myId" value="SKIPPED" />
++        <FILE-GROUP>
++          <option name="myUpdateName" />
++          <option name="myStatusName" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="false" />
++          <option name="myId" />
++        </FILE-GROUP>
++        <FILE-GROUP>
++          <option name="myUpdateName" />
++          <option name="myStatusName" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="false" />
++          <option name="myId" />
++        </FILE-GROUP>
++        <FILE-GROUP>
++          <option name="myUpdateName" />
++          <option name="myStatusName" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="false" />
++          <option name="myId" />
++        </FILE-GROUP>
++        <FILE-GROUP>
++          <option name="myUpdateName" />
++          <option name="myStatusName" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="false" />
++          <option name="myId" />
++        </FILE-GROUP>
++        <FILE-GROUP>
++          <option name="myUpdateName" />
++          <option name="myStatusName" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="false" />
++          <option name="myId" />
++        </FILE-GROUP>
++      </FILE-GROUP>
++      <FILE-GROUP>
++        <option name="myUpdateName" value="Merged with conflicts" />
++        <option name="myStatusName" value="Will be merged with conflicts" />
++        <option name="mySupportsDeletion" value="false" />
++        <option name="myCanBeAbsent" value="false" />
++        <option name="myId" value="MERGED_WITH_CONFLICTS" />
++        <FILE-GROUP>
++          <option name="myUpdateName" />
++          <option name="myStatusName" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="false" />
++          <option name="myId" />
++        </FILE-GROUP>
++        <FILE-GROUP>
++          <option name="myUpdateName" />
++          <option name="myStatusName" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="false" />
++          <option name="myId" />
++        </FILE-GROUP>
++        <FILE-GROUP>
++          <option name="myUpdateName" />
++          <option name="myStatusName" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="false" />
++          <option name="myId" />
++        </FILE-GROUP>
++        <FILE-GROUP>
++          <option name="myUpdateName" />
++          <option name="myStatusName" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="false" />
++          <option name="myId" />
++        </FILE-GROUP>
++        <FILE-GROUP>
++          <option name="myUpdateName" />
++          <option name="myStatusName" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="false" />
++          <option name="myId" />
++        </FILE-GROUP>
++      </FILE-GROUP>
++      <FILE-GROUP>
++        <option name="myUpdateName" value="Merged with tree conflicts" />
++        <option name="myStatusName" value="Merged with tree conflicts" />
++        <option name="mySupportsDeletion" value="false" />
++        <option name="myCanBeAbsent" value="false" />
++        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
++        <FILE-GROUP>
++          <option name="myUpdateName" />
++          <option name="myStatusName" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="false" />
++          <option name="myId" />
++        </FILE-GROUP>
++        <FILE-GROUP>
++          <option name="myUpdateName" />
++          <option name="myStatusName" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="false" />
++          <option name="myId" />
++        </FILE-GROUP>
++        <FILE-GROUP>
++          <option name="myUpdateName" />
++          <option name="myStatusName" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="false" />
++          <option name="myId" />
++        </FILE-GROUP>
++        <FILE-GROUP>
++          <option name="myUpdateName" />
++          <option name="myStatusName" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="false" />
++          <option name="myId" />
++        </FILE-GROUP>
++        <FILE-GROUP>
++          <option name="myUpdateName" />
++          <option name="myStatusName" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="false" />
++          <option name="myId" />
++        </FILE-GROUP>
++      </FILE-GROUP>
++      <FILE-GROUP>
++        <option name="myUpdateName" value="Merged with property conflicts" />
++        <option name="myStatusName" value="Will be merged with property conflicts" />
++        <option name="mySupportsDeletion" value="false" />
++        <option name="myCanBeAbsent" value="false" />
++        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
++        <FILE-GROUP>
++          <option name="myUpdateName" />
++          <option name="myStatusName" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="false" />
++          <option name="myId" />
++        </FILE-GROUP>
++        <FILE-GROUP>
++          <option name="myUpdateName" />
++          <option name="myStatusName" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="false" />
++          <option name="myId" />
++        </FILE-GROUP>
++        <FILE-GROUP>
++          <option name="myUpdateName" />
++          <option name="myStatusName" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="false" />
++          <option name="myId" />
++        </FILE-GROUP>
++        <FILE-GROUP>
++          <option name="myUpdateName" />
++          <option name="myStatusName" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="false" />
++          <option name="myId" />
++        </FILE-GROUP>
++        <FILE-GROUP>
++          <option name="myUpdateName" />
++          <option name="myStatusName" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="false" />
++          <option name="myId" />
++        </FILE-GROUP>
++      </FILE-GROUP>
++      <FILE-GROUP>
++        <option name="myUpdateName" value="Merged" />
++        <option name="myStatusName" value="Will be merged" />
++        <option name="mySupportsDeletion" value="false" />
++        <option name="myCanBeAbsent" value="false" />
++        <option name="myId" value="MERGED" />
++        <FILE-GROUP>
++          <option name="myUpdateName" />
++          <option name="myStatusName" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="false" />
++          <option name="myId" />
++        </FILE-GROUP>
++        <FILE-GROUP>
++          <option name="myUpdateName" />
++          <option name="myStatusName" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="false" />
++          <option name="myId" />
++        </FILE-GROUP>
++        <FILE-GROUP>
++          <option name="myUpdateName" />
++          <option name="myStatusName" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="false" />
++          <option name="myId" />
++        </FILE-GROUP>
++        <FILE-GROUP>
++          <option name="myUpdateName" />
++          <option name="myStatusName" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="false" />
++          <option name="myId" />
++        </FILE-GROUP>
++        <FILE-GROUP>
++          <option name="myUpdateName" />
++          <option name="myStatusName" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="false" />
++          <option name="myId" />
++        </FILE-GROUP>
++      </FILE-GROUP>
++      <FILE-GROUP>
++        <option name="myUpdateName" value="Not in repository" />
++        <option name="myStatusName" value="Not in repository" />
++        <option name="mySupportsDeletion" value="true" />
++        <option name="myCanBeAbsent" value="false" />
++        <option name="myId" value="UNKNOWN" />
++        <FILE-GROUP>
++          <option name="myUpdateName" />
++          <option name="myStatusName" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="false" />
++          <option name="myId" />
++        </FILE-GROUP>
++        <FILE-GROUP>
++          <option name="myUpdateName" />
++          <option name="myStatusName" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="false" />
++          <option name="myId" />
++        </FILE-GROUP>
++        <FILE-GROUP>
++          <option name="myUpdateName" />
++          <option name="myStatusName" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="false" />
++          <option name="myId" />
++        </FILE-GROUP>
++        <FILE-GROUP>
++          <option name="myUpdateName" />
++          <option name="myStatusName" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="false" />
++          <option name="myId" />
++        </FILE-GROUP>
++        <FILE-GROUP>
++          <option name="myUpdateName" />
++          <option name="myStatusName" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="false" />
++          <option name="myId" />
++        </FILE-GROUP>
++      </FILE-GROUP>
++      <FILE-GROUP>
++        <option name="myUpdateName" value="Locally added" />
++        <option name="myStatusName" value="Locally added" />
++        <option name="mySupportsDeletion" value="false" />
++        <option name="myCanBeAbsent" value="false" />
++        <option name="myId" value="LOCALLY_ADDED" />
++        <FILE-GROUP>
++          <option name="myUpdateName" />
++          <option name="myStatusName" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="false" />
++          <option name="myId" />
++        </FILE-GROUP>
++        <FILE-GROUP>
++          <option name="myUpdateName" />
++          <option name="myStatusName" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="false" />
++          <option name="myId" />
++        </FILE-GROUP>
++        <FILE-GROUP>
++          <option name="myUpdateName" />
++          <option name="myStatusName" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="false" />
++          <option name="myId" />
++        </FILE-GROUP>
++        <FILE-GROUP>
++          <option name="myUpdateName" />
++          <option name="myStatusName" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="false" />
++          <option name="myId" />
++        </FILE-GROUP>
++        <FILE-GROUP>
++          <option name="myUpdateName" />
++          <option name="myStatusName" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="false" />
++          <option name="myId" />
++        </FILE-GROUP>
++      </FILE-GROUP>
++      <FILE-GROUP>
++        <option name="myUpdateName" value="Locally removed" />
++        <option name="myStatusName" value="Locally removed" />
++        <option name="mySupportsDeletion" value="false" />
++        <option name="myCanBeAbsent" value="false" />
++        <option name="myId" value="LOCALLY_REMOVED" />
++        <FILE-GROUP>
++          <option name="myUpdateName" />
++          <option name="myStatusName" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="false" />
++          <option name="myId" />
++        </FILE-GROUP>
++        <FILE-GROUP>
++          <option name="myUpdateName" />
++          <option name="myStatusName" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="false" />
++          <option name="myId" />
++        </FILE-GROUP>
++        <FILE-GROUP>
++          <option name="myUpdateName" />
++          <option name="myStatusName" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="false" />
++          <option name="myId" />
++        </FILE-GROUP>
++        <FILE-GROUP>
++          <option name="myUpdateName" />
++          <option name="myStatusName" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="false" />
++          <option name="myId" />
++        </FILE-GROUP>
++        <FILE-GROUP>
++          <option name="myUpdateName" />
++          <option name="myStatusName" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="false" />
++          <option name="myId" />
++        </FILE-GROUP>
++      </FILE-GROUP>
++      <FILE-GROUP>
++        <option name="myUpdateName" value="Switched" />
++        <option name="myStatusName" value="Switched" />
++        <option name="mySupportsDeletion" value="false" />
++        <option name="myCanBeAbsent" value="false" />
++        <option name="myId" value="SWITCHED" />
++        <FILE-GROUP>
++          <option name="myUpdateName" />
++          <option name="myStatusName" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="false" />
++          <option name="myId" />
++        </FILE-GROUP>
++        <FILE-GROUP>
++          <option name="myUpdateName" />
++          <option name="myStatusName" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="false" />
++          <option name="myId" />
++        </FILE-GROUP>
++        <FILE-GROUP>
++          <option name="myUpdateName" />
++          <option name="myStatusName" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="false" />
++          <option name="myId" />
++        </FILE-GROUP>
++        <FILE-GROUP>
++          <option name="myUpdateName" />
++          <option name="myStatusName" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="false" />
++          <option name="myId" />
++        </FILE-GROUP>
++        <FILE-GROUP>
++          <option name="myUpdateName" />
++          <option name="myStatusName" />
++          <option name="mySupportsDeletion" value="false" />
++          <option name="myCanBeAbsent" value="false" />
++          <option name="myId" />
++        </FILE-GROUP>
++      </FILE-GROUP>
++    </UpdatedFiles>
+   </component>
+   <component name="RunDashboard">
+     <option name="ruleStates">
+@@ -205,23 +1279,28 @@
+       <option name="number" value="Default" />
+       <option name="presentableId" value="Default" />
+       <updated>1541263268738</updated>
++      <workItem from="1541269797913" duration="7193000" />
+     </task>
+     <servers />
++  </component>
++  <component name="TimeTrackingManager">
++    <option name="totallyTimeSpent" value="7640000" />
+   </component>
+   <component name="ToolWindowManager">
+-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
++    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+     <editor active="true" />
+     <layout>
+-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25718608" />
++      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26107383" />
+       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+       <window_info id="Capture Tool" order="2" />
+       <window_info id="Image Layers" order="3" />
+       <window_info id="Designer" order="4" />
+       <window_info id="UI Designer" order="5" />
+       <window_info id="Favorites" order="6" side_tool="true" />
++      <window_info id="Learn" order="7" />
+       <window_info anchor="bottom" id="Message" order="0" />
+       <window_info anchor="bottom" id="Find" order="1" />
+-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.22" />
++      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49932885" visible="true" weight="0.21985815" />
+       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+@@ -229,7 +1308,8 @@
+       <window_info anchor="bottom" id="Terminal" order="7" />
+       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
+       <window_info anchor="bottom" id="Version Control" order="9" />
+-      <window_info anchor="bottom" id="Messages" order="10" weight="0.32923076" />
++      <window_info anchor="bottom" id="Messages" order="10" weight="0.32907802" />
++      <window_info anchor="bottom" id="Database Changes" order="11" show_stripe_button="false" />
+       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+@@ -238,6 +1318,7 @@
+       <window_info anchor="right" id="Theme Preview" order="5" />
+       <window_info anchor="right" id="Palette&#9;" order="6" />
+       <window_info anchor="right" id="Maven Projects" order="7" />
++      <window_info anchor="right" id="Database" order="8" />
+     </layout>
+     <layout-to-restore>
+       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25718608" />
+@@ -268,6 +1349,9 @@
+       <window_info anchor="right" id="Maven Projects" order="7" />
+     </layout-to-restore>
+   </component>
++  <component name="TypeScriptGeneratedFilesManager">
++    <option name="version" value="1" />
++  </component>
+   <component name="VcsContentAnnotationSettings">
+     <option name="myLimit" value="2678400000" />
+   </component>
+@@ -279,87 +1363,264 @@
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/base/scene/SceneStage1.java">
++    <entry file="file://$PROJECT_DIR$/src/base/physics/Physics.java">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="44">
++          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
++        </state>
++      </provider>
++    </entry>
++    <entry file="file://$PROJECT_DIR$/src/base/wall/Brick.java">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="88">
++        <state relative-caret-position="308">
++          <caret line="25" column="25" lean-forward="true" selection-start-line="25" selection-start-column="25" selection-end-line="25" selection-end-column="25" />
++        </state>
++      </provider>
++    </entry>
++    <entry file="file://$PROJECT_DIR$/src/base/physics/BoxCollider.java">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="330">
++          <caret line="45" selection-start-line="45" selection-end-line="45" />
++        </state>
++      </provider>
++    </entry>
++    <entry file="file://$PROJECT_DIR$/src/base/enemy/EnemyType2.java">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="-611">
++          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
++        </state>
++      </provider>
++    </entry>
++    <entry file="file://$PROJECT_DIR$/src/base/enemy/EnemyType4.java">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="132">
++          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
++        </state>
++      </provider>
++    </entry>
++    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="379">
++          <caret line="678" column="21" lean-forward="true" selection-start-line="678" selection-start-column="21" selection-end-line="678" selection-end-column="21" />
++        </state>
++      </provider>
++    </entry>
++    <entry file="file://$PROJECT_DIR$/src/base/wall/WallManagement.java">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="22">
++          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
++        </state>
++      </provider>
++    </entry>
++    <entry file="file://$PROJECT_DIR$/src/base/enemy/EnemySummoner.java">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="-333">
++          <caret line="11" column="35" selection-start-line="11" selection-start-column="35" selection-end-line="11" selection-end-column="35" />
++        </state>
++      </provider>
++    </entry>
++    <entry file="file://$PROJECT_DIR$/src/base/item_bonus/Clock.java">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="484">
++          <caret line="34" column="5" selection-start-line="34" selection-start-column="5" selection-end-line="34" selection-end-column="5" />
++        </state>
++      </provider>
++    </entry>
++    <entry file="file://$PROJECT_DIR$/src/base/item_bonus/Boom.java">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="484">
++          <caret line="33" column="5" selection-start-line="33" selection-start-column="5" selection-end-line="33" selection-end-column="5" />
++        </state>
++      </provider>
++    </entry>
++    <entry file="file://$PROJECT_DIR$/src/base/item_bonus/Gun.java">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="374">
++          <caret line="28" column="4" selection-start-line="28" selection-start-column="4" selection-end-line="33" selection-end-column="5" />
++        </state>
++      </provider>
++    </entry>
++    <entry file="file://$PROJECT_DIR$/src/base/item_bonus/Shovel.java">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="484">
++          <caret line="34" column="5" selection-start-line="34" selection-start-column="5" selection-end-line="34" selection-end-column="5" />
++        </state>
++      </provider>
++    </entry>
++    <entry file="file://$PROJECT_DIR$/src/base/renderer/AnimationRenderer.java">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="255">
++          <caret line="27" selection-start-line="27" selection-end-line="27" />
++        </state>
++      </provider>
++    </entry>
++    <entry file="file://$PROJECT_DIR$/src/tklibs/SpriteUtils.java">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="-766">
+           <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/base/scene/SceneManager.java">
++    <entry file="file://$PROJECT_DIR$/src/base/enemy/Explosion.java">
+       <provider selected="true" editor-type-id="text-editor">
+         <state relative-caret-position="44">
+-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
++          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="18" selection-end-column="1" />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/base/physics/Physics.java">
++    <entry file="file://$PROJECT_DIR$/src/base/enemy/Enemy.java">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="44">
+-          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
++        <state relative-caret-position="255">
++          <caret line="178" column="8" selection-start-line="178" selection-start-column="8" selection-end-line="179" selection-end-column="46" />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/base/wall/Brick.java">
++    <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/src.zip!/java/awt/Window.java">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="308">
+-          <caret line="25" column="25" lean-forward="true" selection-start-line="25" selection-start-column="25" selection-end-line="25" selection-end-column="25" />
++        <state relative-caret-position="175">
++          <caret line="800" column="16" selection-start-line="800" selection-start-column="16" selection-end-line="800" selection-end-column="16" />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/base/GameObject.java">
++    <entry file="file://$PROJECT_DIR$/src/base/scene/Scene.java">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="-883">
+-          <caret line="74" column="25" lean-forward="true" selection-start-line="74" selection-start-column="25" selection-end-line="74" selection-end-column="25" />
++        <state relative-caret-position="88">
++          <caret line="5" column="22" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/base/physics/BoxCollider.java">
++    <entry file="file://$PROJECT_DIR$/src/base/scene/SceneStage1.java">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="330">
+-          <caret line="45" selection-start-line="45" selection-end-line="45" />
++        <state relative-caret-position="88">
++          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+           <folding>
+             <element signature="imports" expanded="true" />
+           </folding>
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/base/player/PlayBullet.java">
++    <entry file="file://$PROJECT_DIR$/src/base/scene/SceneStage2.java">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="282">
++          <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
++          <folding>
++            <element signature="e#329#330#0" expanded="true" />
++            <element signature="e#366#367#0" expanded="true" />
++          </folding>
++        </state>
++      </provider>
++    </entry>
++    <entry file="file://$PROJECT_DIR$/src/base/Background.java">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="242">
++          <caret line="45" column="3" selection-start-line="45" selection-start-column="3" selection-end-line="56" selection-end-column="7" />
++        </state>
++      </provider>
++    </entry>
++    <entry file="file://$PROJECT_DIR$/src/base/scene/welcomeScene/WelcomeScene.java">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="88">
++          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
++        </state>
++      </provider>
++    </entry>
++    <entry file="file://$PROJECT_DIR$/src/base/scene/SceneManager.java">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="132">
++          <caret line="6" column="23" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
++          <folding>
++            <element signature="e#172#173#0" expanded="true" />
++            <element signature="e#205#206#0" expanded="true" />
++          </folding>
++        </state>
++      </provider>
++    </entry>
++    <entry file="file://$PROJECT_DIR$/src/game/GameCanvas.java">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="352">
+-          <caret line="45" column="30" lean-forward="true" selection-start-line="45" selection-start-column="30" selection-end-line="45" selection-end-column="30" />
++        <state relative-caret-position="308">
++          <caret line="24" column="28" lean-forward="true" selection-start-line="24" selection-start-column="28" selection-end-line="24" selection-end-column="28" />
+           <folding>
+-            <element signature="e#2215#2216#0" expanded="true" />
+-            <element signature="e#2251#2252#0" expanded="true" />
++            <element signature="e#224#225#0" expanded="true" />
++            <element signature="e#285#286#0" expanded="true" />
+           </folding>
++        </state>
++      </provider>
++    </entry>
++    <entry file="file://$PROJECT_DIR$/src/base/Settings.java">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="66">
++          <caret line="3" column="28" selection-start-line="3" selection-start-column="28" selection-end-line="3" selection-end-column="28" />
++        </state>
++      </provider>
++    </entry>
++    <entry file="file://$PROJECT_DIR$/src/base/player/Explosion.java">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="330">
++          <caret line="15" column="49" selection-start-line="15" selection-start-column="49" selection-end-line="15" selection-end-column="49" />
++        </state>
++      </provider>
++    </entry>
++    <entry file="file://$PROJECT_DIR$/src/game/GameWindow.java">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="397">
++          <caret line="27" selection-start-line="27" selection-end-line="27" />
+         </state>
+       </provider>
+     </entry>
+     <entry file="file://$PROJECT_DIR$/src/base/enemy/EnemyBullet.java">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="423">
+-          <caret line="49" column="31" selection-start-line="49" selection-start-column="31" selection-end-line="49" selection-end-column="31" />
++        <state relative-caret-position="305">
++          <caret line="58" column="55" selection-start-line="58" selection-start-column="55" selection-end-line="58" selection-end-column="55" />
++          <folding>
++            <element signature="imports" expanded="true" />
++          </folding>
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/base/enemy/EnemyType2.java">
++    <entry file="file://$PROJECT_DIR$/src/base/player/PlayerBulletType1.java">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="-611">
+-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
++        <state relative-caret-position="264">
++          <caret line="16" column="1" lean-forward="true" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/base/enemy/Enemy.java">
++    <entry file="file://$PROJECT_DIR$/src/base/scene/welcomeScene/Banner.java">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="136">
+-          <caret line="110" column="42" lean-forward="true" selection-start-line="110" selection-start-column="42" selection-end-line="110" selection-end-column="42" />
++        <state relative-caret-position="198">
++          <caret line="17" column="36" selection-start-line="17" selection-start-column="36" selection-end-line="17" selection-end-column="36" />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/base/enemy/EnemyType4.java">
++    <entry file="file://$PROJECT_DIR$/src/base/GameObject.java">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="132">
+-          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
++        <state relative-caret-position="167">
++          <caret line="111" column="20" selection-start-line="111" selection-start-column="20" selection-end-line="111" selection-end-column="20" />
++        </state>
++      </provider>
++    </entry>
++    <entry file="file://$PROJECT_DIR$/src/base/player/Tank.java">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="356">
++          <caret line="325" selection-start-line="325" selection-end-line="325" />
++          <folding>
++            <element signature="e#10096#10097#0" expanded="true" />
++            <element signature="e#10446#10447#0" expanded="true" />
++            <element signature="e#10482#10483#0" expanded="true" />
++          </folding>
++        </state>
++      </provider>
++    </entry>
++    <entry file="file://$PROJECT_DIR$/src/base/player/PlayBullet.java">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="62">
++          <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
++        </state>
++      </provider>
++    </entry>
++    <entry file="file://$PROJECT_DIR$/src/base/player/PlayerBulletType2.java">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="238">
++          <caret line="22" column="8" lean-forward="true" selection-start-line="22" selection-start-column="8" selection-end-line="22" selection-end-column="8" />
+         </state>
+       </provider>
+     </entry>
+Index: src/base/item_bonus/Shovel.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/base/item_bonus/Shovel.java	(revision 4f7081d4805804e15bebb89c5623a07de2ab16de)
++++ src/base/item_bonus/Shovel.java	(date 1541277497267)
+@@ -3,15 +3,17 @@
+ import base.GameObject;
+ import base.Settings;
+ import base.Vector2D;
++import base.counter.FrameCounter;
+ import base.physics.BoxCollider;
+ import base.physics.Physics;
+ import base.renderer.SingleImageRenderer;
+ import tklibs.SpriteUtils;
+ 
++import java.awt.*;
+ import java.awt.image.BufferedImage;
+ 
+ public class Shovel extends GameObject implements Physics {
+-
++    FrameCounter blinkCounter;
+     BoxCollider collider;
+     public Shovel(){
+         BufferedImage imageClock = SpriteUtils.loadImage("assets/maps/item_bonus/shovel.PNG");
+@@ -19,9 +21,16 @@
+         this.collider = new BoxCollider(53,53);
+         //this.position = new Vector2D(0.0F, 0.0F);
+         this.position = new Vector2D(278F, 446F);
++        this.blinkCounter = new FrameCounter(15);
+     }
+     @Override
+     public BoxCollider getBoxCollider() {
+         return this.collider;
+     }
++    public void render(Graphics g) {
++        if(this.blinkCounter.run()) {
++            super.render(g);
++            this.blinkCounter.reset();
++        }
++    }
+ }
+Index: src/game/GameWindow.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/game/GameWindow.java	(revision 4f7081d4805804e15bebb89c5623a07de2ab16de)
++++ src/game/GameWindow.java	(date 1541277497275)
+@@ -14,16 +14,18 @@
+     GameCanvas canvas;
+     public GameWindow() {
+         //setup window
+-        //this.setSize(Settings.SCREEN_WIDHT, Settings.SCREEN_HEIGHT);
++        this.setSize(Settings.SCREEN_WIDHT + Settings.WAY_SIZE*10,
++                        Settings.SCREEN_HEIGHT + Settings.WAY_SIZE + 8);
+         this.setResizable(false);
+         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+         this.setupEventListtener();
+         //init game
+         this.canvas = new GameCanvas();
+-        this.canvas.setPreferredSize(new Dimension(Settings.SCREEN_WIDHT, Settings.SCREEN_HEIGHT));//size ko tinh sisegame window
++        this.canvas.setPreferredSize(new Dimension(Settings.SCREEN_WIDHT , Settings.SCREEN_HEIGHT));//size ko tinh sisegame window
+         this.add(canvas);
+         this.setVisible(true);
+         this.pack();
++
+     }
+ 
+     private void setupEventListtener() {
+Index: src/base/player/PlayerBulletType2.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/base/player/PlayerBulletType2.java	(date 1541277697476)
++++ src/base/player/PlayerBulletType2.java	(date 1541277697476)
+@@ -0,0 +1,32 @@
++//
++// Source code recreated from a .class file by IntelliJ IDEA
++// (powered by Fernflower decompiler)
++//
++
++package base.player;
++
++import base.GameObject;
++import base.physics.BoxCollider;
++import base.renderer.SingleImageRenderer;
++import base.wall.Stone;
++
++import java.util.ArrayList;
++
++public class PlayerBulletType2 extends PlayBullet {
++    public PlayerBulletType2() {
++        this.collider = new BoxCollider(16, 16);
++        this.damage = 1;
++    }
++
++    public void run() {
++        super.run();
++        ArrayList<Stone> stones = GameObject.intersectManyItems(Stone.class, this);
++        if(stones.size() > 0){
++            for(Stone i : stones){
++                i.destroy();
++                this.destroy();
++            }
++        }
++    }
++
++}
+\ No newline at end of file
+Index: src/base/player/PlayerBulletType1.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/base/player/PlayerBulletType1.java	(date 1541277497287)
++++ src/base/player/PlayerBulletType1.java	(date 1541277497287)
+@@ -0,0 +1,17 @@
++//
++// Source code recreated from a .class file by IntelliJ IDEA
++// (powered by Fernflower decompiler)
++//
++
++package base.player;
++
++import base.physics.BoxCollider;
++import base.renderer.SingleImageRenderer;
++
++public class PlayerBulletType1 extends PlayBullet {
++    public PlayerBulletType1() {
++        this.renderer = new SingleImageRenderer("assets/bullets/red.png");
++        this.collider = new BoxCollider(16, 16);
++        this.damage = 1;
++    }
++}
+\ No newline at end of file
+Index: src/tklibs/SpriteUtils.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/tklibs/SpriteUtils.java	(revision 4f7081d4805804e15bebb89c5623a07de2ab16de)
++++ src/tklibs/SpriteUtils.java	(date 1541277497276)
+@@ -6,19 +6,28 @@
+ import java.io.File;
+ import java.io.IOException;
+ import java.util.ArrayList;
++import java.util.HashMap;
+ 
+ /**
+  * Created by huynq on 5/11/17.
+  */
+ public class SpriteUtils {
++    public static HashMap<String, BufferedImage> images = new HashMap<>();
+ 
+     public static BufferedImage loadImage(String url) {
+-        try {
+-            return ImageIO.read(new File(url));
+-        } catch (IOException e) {
+-            e.printStackTrace();
+-        }
+-        return null;
++        BufferedImage image = images.get(url);
++        if(image != null) {
++            return image;
++        } else {
++            try {
++                image = ImageIO.read(new File(url));
++                images.put(url, image);
++                return image;
++            } catch (IOException e) {
++                e.printStackTrace();
++            }
++            return null;
++        }
+     }
+ 
+     public static ArrayList<BufferedImage> loadImages(String ...urls) {
+Index: src/base/enemy/Explosion.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/base/enemy/Explosion.java	(date 1541277497263)
++++ src/base/enemy/Explosion.java	(date 1541277497263)
+@@ -0,0 +1,19 @@
++package base.enemy;
++
++import base.GameObject;
++import base.Vector2D;
++import base.renderer.AnimationRenderer;
++
++public class Explosion extends GameObject {
++    public Explosion() {
++        this.position = new Vector2D();
++        this.renderer = new AnimationRenderer(
++                5, true,
++                "assets/animation/explosion_1.png",
++                "assets/animation/explosion_2.png",
++                "assets/animation/explosion_3.png",
++                "assets/animation/explosion_2.png",
++                "assets/animation/explosion_1.png"
++        );
++    }
++}
+Index: src/base/GameObject.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/base/GameObject.java	(revision 4f7081d4805804e15bebb89c5623a07de2ab16de)
++++ src/base/GameObject.java	(date 1541277497261)
+@@ -12,10 +12,14 @@
+     public static ArrayList<GameObject> gameObjects = new ArrayList<>();
+     public static ArrayList<GameObject> newGameObjects = new ArrayList<>();
+ 
+-    public static BufferedImage backBuffer = new BufferedImage(Settings.SCREEN_WIDHT
+-            , Settings.SCREEN_HEIGHT, BufferedImage.TYPE_INT_ARGB);
++    public static BufferedImage backBuffer = new BufferedImage(Settings.SCREEN_WIDHT,
++            Settings.SCREEN_HEIGHT, BufferedImage.TYPE_INT_ARGB);
+     public static Graphics backBufferGraphics = backBuffer.createGraphics();
+ 
++//    public static BufferedImage backBuffer2 = new BufferedImage(Settings.WAY_SIZE*10,
++//            Settings.SCREEN_HEIGHT, BufferedImage.TYPE_INT_ARGB);
++//    public static Graphics backBufferGraphics2 = backBuffer2.createGraphics();
++
+     public static <E extends GameObject> E create(Class<E> childClass) {
+         try {
+             GameObject newGameObject = childClass.newInstance();
+@@ -86,16 +90,22 @@
+ 
+     public static void renderAllToBackBuffer() {
+         backBufferGraphics.setColor(Color.BLACK);
+-        backBufferGraphics.fillRect(0, 0, Settings.SCREEN_WIDHT, Settings.SCREEN_HEIGHT);
++//        backBufferGraphics2.setColor(Color.BLUE);
++        backBufferGraphics.fillRect(0, 0, Settings.SCREEN_WIDHT,
++                Settings.SCREEN_HEIGHT);
++//        backBufferGraphics2.fillRect(Settings.SCREEN_WIDHT, 0, Settings.WAY_SIZE*10,
++//                Settings.SCREEN_HEIGHT);
+         for(GameObject go : gameObjects) {
+             if(go.isActive) {
+                 go.render(backBufferGraphics);
++//                go.render(backBufferGraphics2);
+             }
+         }
+     }
+ 
+     public static void renderBackBufferToGame(Graphics g) {
+         g.drawImage(backBuffer, 0, 0, null);
++//        g.drawImage(backBuffer2,Settings.SCREEN_WIDHT,0,null);
+     }
+ 
+     public Renderer renderer;
+Index: src/base/player/Explosion.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/base/player/Explosion.java	(date 1541277497267)
++++ src/base/player/Explosion.java	(date 1541277497267)
+@@ -0,0 +1,19 @@
++package base.player;
++
++import base.GameObject;
++import base.Vector2D;
++import base.renderer.AnimationRenderer;
++
++public class Explosion extends GameObject {
++    public Explosion() {
++        this.position = new Vector2D();
++        this.renderer = new AnimationRenderer(
++                5, true,
++                "assets/animation/big_explosion_1.png",
++                "assets/animation/big_explosion_2.png",
++                "assets/animation/big_explosion_3.png",
++                "assets/animation/big_explosion_4.png",
++                "assets/animation/big_explosion_5.png"
++        );
++    }
++}
+\ No newline at end of file
+Index: src/base/enemy/EnemyBullet.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/base/enemy/EnemyBullet.java	(revision 4f7081d4805804e15bebb89c5623a07de2ab16de)
++++ src/base/enemy/EnemyBullet.java	(date 1541277497263)
+@@ -45,25 +45,23 @@
+                 i.destroy();
+                 this.destroy();
+             }
+-
+         }
+ 
+         if(stones.size() > 0){
+             for(Stone i : stones){
+                 this.destroy();
+             }
+-
+         }
+ 
+         if (tank != null) {
+             tank.takeDamage(this.damage);
+             this.destroy();
+             SceneManager.signNewScene(new SceneStage2());
++
+         }
+         if(playBullet != null){
+             this.destroy();
+             playBullet.destroy();
+-
+         }
+ 
+         if(this.position.y < 0 || this.position.y > Settings.SCREEN_HEIGHT ||
+@@ -73,17 +71,6 @@
+         }
+     }
+ 
+-
+-    private void hitEnemy() {
+-        this.destroy();
+-    }
+-
+-    public void takeDamage(int damage) {
+-        if (damage > 0) {
+-            this.destroy();
+-        }
+-    }
+-
+     public BoxCollider getBoxCollider() {
+         return this.collider;
+     }
+Index: src/base/player/PlayBullet.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/base/player/PlayBullet.java	(revision 4f7081d4805804e15bebb89c5623a07de2ab16de)
++++ src/base/player/PlayBullet.java	(date 1541277497268)
+@@ -37,7 +37,6 @@
+                 i.destroy();
+                 this.destroy();
+             }
+-
+         }
+ 
+         if(stones.size() > 0){
+@@ -45,7 +44,6 @@
+ //                i.destroy();
+                 this.destroy();
+             }
+-
+         }
+ 
+         //xu ly va cham Enemy
+@@ -63,11 +61,6 @@
+             this.position.addThis(this.velocity);
+         }
+ 
+-        if (enemyBullet != null) {
+-            enemyBullet.takeDamage(this.damage);
+-            this.destroy();
+-        }
+-
+     }
+ 
+     @Override
+Index: src/base/enemy/Enemy.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/base/enemy/Enemy.java	(revision 4f7081d4805804e15bebb89c5623a07de2ab16de)
++++ src/base/enemy/Enemy.java	(date 1541277497262)
+@@ -33,7 +33,7 @@
+     boolean isStuck = false;
+     FrameCounter startCounter;
+ 
+-     public Boolean isLife;// check xem hien tai co o tren map khi ma da khoi tao ko
++//     public Boolean isLife;// check xem hien tai co o tren map khi ma da khoi tao ko
+     public static Boolean checkClock = true;
+ 
+     public Enemy() {
+@@ -45,7 +45,7 @@
+         this.defineAction();
+         this.enemyMoveX = 0;
+         this.enemyMoveY = 0;
+-        isLife = false;
++//        isLife = false;
+     }
+ 
+     void defineAction(){
+@@ -176,6 +176,8 @@
+     public void destroy() {
+         super.destroy();
+         EnemySummoner.enemyNow -= 1;
++        base.enemy.Explosion explosion = GameObject.recycle(base.enemy.Explosion.class);
++        explosion.position.set(this.position);
+     }
+ 
+     @Override
+diff --git out/production/tank-demo-core/base/player/PlayBulletType1.class out/production/tank-demo-core/base/player/PlayBulletType1.class
+deleted file mode 100644
+index 19424036fb3f43cd6d3c4d2e2088acca4211899f..0000000000000000000000000000000000000000
+GIT binary patch
+literal 0
+Hc$@<O00001
+
+diff --git assets/bullets/bulletL.gif assets/bullets/bulletL.gif
+new file mode 100644
+index 0000000000000000000000000000000000000000..6f0853b7870b406984285a0e839ee7ff1c214c50
+GIT binary patch
+literal 881
+zc$~FUze|^K5PlMoZ!IB8iw!ym4Y_nn(imh8f@|Y9@-UY$1V^Qa2nwMvxGDdGvLT6r
+zh;oSo2bZ>>p@xR0h9J70=l+L2+i`c#JwM)eVe!hv`Qao6_zsj_Rz;OpSrt@eRz{^)
+zS|!wstcVJ)unK6_vpmYZ+{&R<%d#l*GAjd-3R#GP7pwpQ3z}G5<}`FiFETyTGNH4q
+zA~HO~G9VUgdZc^0r9-4RYmw$@mIiX<Y9bPzumnU|8c3QfNefb-ON1sCmmxu_`8>iR
+zAbmW`%01k|A-QD1rg@l!f$B+$vjGoS05U^nahrBfKje)h5sakC60%B%iA`u?LC&eo
+zn$O%JBdL#PS(&+kzEUn(u<0-dWV2EU&B|!Vb$J(Bl^swBQW!!KX($u%2muQkib&I;
+zJ9=PZG?MywmX$#t2ReRqz~~6kA)#YH8;!OSZ5G-Nv|zL(G-)&~^kFnKdKukjz4dZy
+z=k1+mhxeWzJ$U!|;nCNfFFzjt{Iy&E`OW+tzkGXTxUq6$dh_PS>h!|m(lTa#kDfS1
+ziswlT`cW{LN1Z%-^~K)%yMu|f<8MpbAMT$%82>Z2fBo>*#N68C_WItdM`zy5etbGN
+Vb@1fe>*3V33$vegYh(nM{sBn0*bx8#
+
+diff --git assets/bullets/bulletR.gif assets/bullets/bulletR.gif
+new file mode 100644
+index 0000000000000000000000000000000000000000..3c5deeb021138cfac31ba69a09480e60a4f9fc6f
+GIT binary patch
+literal 883
+zc$~FUJ!_R=3_U^%S8<U#bnJzWB84nUClM?i1o0nSv_YYDkcw^<#X%G<3L>F{;$AGB
+zg(Ag^&_D-8>Lj>0IOyWwpz)mi2cIn@IXNHiyR>}a%-PXN4Dbyoy{w8Vud*tr%B+k^
+zue3_28Cek(USSo`tY>+Yd%2ZEtCnR^=4Dm}A{DX_1us|u0v0r}xXfwjj$UMXre#8B
+zSw&=chGjr3*z`#EbW4Xwan>Tu(<}|-$kjw7JYfllvNVu1S&|l{K$i$jEG|QWRP%X+
+zML_y^mX&+Bg+p@5f=%-<3j@`Y6lVh-umEI+%;Glfpnk|3Ng^0YlO<%84ilTu#Dbht
+zn>C-gLq<{`&$2Re1AV1jvS8C;4#;Mu5}K9Kkn8d;v?@EG5Tr1KB+^hO;t>KCG!&7h
+zLwEGR#Aqb-@hmHYJ`QyJ=z!4?qC-N*fHoR!CE6^s9caO5Nodk&TIj=QX!J6=&3a>J
+zWBlgci+2xRA3WSWe0=bA{N?-8AHSZ}e}2QiC(hqo8Lh8eox6Q~{o35p^2JLS{+>E=
+zj1*6i81$oHu!#DzH`#i5?#Abx(aihp;oJMuGpAP%w>R%Tnl=CU>F4HTJiB{q>geV9
+Wy|wx2J0B)bUhO|$xH36Dz~VoXG~8|g
+
+diff --git assets/bullets/bulletU.gif assets/bullets/bulletU.gif
+new file mode 100644
+index 0000000000000000000000000000000000000000..b473a7a06ac29e891cdc5652d0a5876b70a66d56
+GIT binary patch
+literal 911
+zc$~FU&uhqW7=FlMmIK*php9~|mV<gFA{R0{OdJpgHQAe$AElMU4y%pBO0E1jyixoE
+zvXosYKf>v)l^mv&OmWb17|O-#c|QMx&+YAf-{*aPe7}Q3hj#B7=|UI20i~B!QRP)u
+z1yz}qQR$Ud2{j`tqQWbz0-E(Kk8&@!a%k1EEXush%0Q$-7NXz<D?q@4CKi`D4c*a;
+zOwY7T=q#&<49~C(hy|M->7H)s5Gl@Dq<Na9fgHJ-h=eCB0a2C)k|s;if)wZyp^3$1
+zNRVnikFW?xAJ4LK54UhgE?KZ?9%f;ndXnO7zylV5%#c~!rXAD|c_T>#BWbdPtkPj(
+z6Pj3%b855ZGk3^H>f>2fW^SObluH(DI?MsttW-j?G8%GS-i20W2NZ%7hLA)W%0xUu
+zz=DP%(sbyK9+()7q&}WyWzffg7C&0RXc3}?gcbvu(P&npnT2KtnqV|ZXr$3-p&dqp
+zMq5T}vz~lBIs0tt{+sKM7G|C=-dI?g{q+6jk6(A{KfnIJ8xC9<9T^`z*LQVn{CwZw
+z(C|_8|5>xDlN7g;81$o{<0NWr@8P)zFQ+>;cE10;eD~G#>dpIi_8fchdaC=$*wd{$
+zzPz1ToIC#W>+;$83*B3e?2C6x2QPg*edgM>mC?LymrvxWmHy#-yCw$KeR%kJ{$lT~
+KflWQ@vG*Td;pnvh
+
+diff --git out/production/tank-demo-core/game/GameWindow$1.class out/production/tank-demo-core/game/GameWindow$1.class
+index 9f34eba0fd58302f928120da6b7e8c5eb4a309d3..06612681aa7b67b9e1f996b19ed22a12ebf3e8ce
+GIT binary patch
+literal 1223
+zc$|$>T~8B16g|rp)|SOqKmkQXEm%HF5tZ*y`7lT^S`-rBmUb*7Ww+@r5dIBseI`at
+ze9(7)l<~}TBczqYZ1(n^JGW=fxikCg_xB$Frm+x3J08Yh<53hz493ukAq$TcNU1Qa
+z!iWl^DvVhew=iL#E!dZSa?-$!T*)~U>6Z+<(k*%?^ITkzt_+q8bf=nDhj$D_R=lDx
+z5YI_hygoYI6V-RlUYV87oL6wlJ5E(992O&LD+Bh1>x$}1+3|fr*wx6K%y8$}fjE6r
+z6>KRQ=uhQ7Imb@gISJC@ShzuYQ=G1;M5{2!-FIb&fsXCKDI9D$l~6}Jx$~kd98DhE
+z_KvCru`bn8{6fZrB4lOFEtEZ9x}_}<?0ZEEX&aNs*yzA@8*yYTOxbvXX&X=R%s|f-
+zLTo%&Ju@oIsxYU*Jf=DNrU}qcGflSWR02_@riOkF(HFr{Memc7eh>&(^_eL(p58qg
+zZ4jeJ%gIPT>z;0gqvj+(a2_QQuu?x+GHe)#O8<Q&Y-yK%PJ9e5(5iRhhRBwFUY7PR
+zEw0O|&<F#(pEj?mkw~b?F*EtbkpTTOTS5yTAT~1k1;)rXw44*Qpp&tUJs?9D<E?rZ
+zx|u;|ijC6IgWizqXULV0e1<vt6_Ld58Da!&H7skKtz)Z(NsYJb_*xAE8n4!Iw1$Mn
+z181;^W9M48(ln*rBoV<N6%0{N3U@KAzAubpjGyEL7Lmp(GT37GTUIXg=l|-@qYt;K
+z`wnvpt=;i>+$QXAHe+5kV>XyE8_bvuX3PdN=0D8L(9A5&%u(DT%`DMOmS$d1`Wh?i
+jG_yf7uV^Os|7J{5sgt~i`}~dY93SAOJ~>_y{Wtsp?r-yC
+
+diff --git assets/bullets/bulletD.gif assets/bullets/bulletD.gif
+new file mode 100644
+index 0000000000000000000000000000000000000000..546b125cf81c04ccd35988bc0c355a96474fd5ee
+GIT binary patch
+literal 916
+zc$~FU&uh<d7=LZ8%nk~>$PSw_)DHAq$Wgwtv=UdB$)0eSvK8g9A_v75MLjuKl(v)k
+z5hW#u-JV)*D~pnHkX$$@?eTiO{|E2e)AKy9=k??B86E2!JT%ddetZK;FRP-;tE>vD
+zGApCfE3Fc0Mpi_HS6Br!>scP<UT)>ks%2S}d6|`gNQEp!!3$P^fCWt~E^`{XqZgT;
+zX_?SjRuLJVVHpq$Ha*fk-O?daoV7^vG)n_Hay1bNPgnw?EDa=0mZSwK&?Q0>i_4H8
+z)qEad5s*HfW#t}j;gDRiVADLz!a(&T#o2%dEC87yv$#z=s2}o1k_bl9WC>ZN!^9>u
+zu^{KvX3b~rkdf5Kv#iYAKwl}BEZB6I1F~7Egl1(l<hr~It;!B41St$5i8Pdnc!Yoj
+z4Mn8s&>cN6F&asIJj=?Uj{_}!w1CkfL<<Qm1~jA5tVA;l%?>odXp+!KqtQY;j0TOi
+zjMip7`+Ro(?X`z1H=eHEe7AOM^~?O{?{|OxzE}VG4Q*^aa%pm6X7cRd<?}P=21m!n
+zPhjXzPgfr)j*uAiqoDURYV*Lc<%Rdxd$(^{fA!<z>#4QneFJ+J&K#XuAMSg3<-p_4
+zT=)J9e>a`{IyyJJ=l-w7ZM%=(7<@6gbI0_P&c#n7oq?tC2P=2FuWt0bdA94rqwcwl
+O>BaG-Q@6XiaQGidPUqtQ
+
+diff --git out/production/tank-demo-core/base/renderer/AnimationRenderer.class out/production/tank-demo-core/base/renderer/AnimationRenderer.class
+index a0864da1ebef233f032d8918170293ad27baa8fd..ba93b27103d4020adbb841d6ebae259ae12493a0
+GIT binary patch
+literal 2564
+zc$}S8-%}G;6#kZ7vSeALfcz9C*0w?bQ~XsCYs-(KX%Sjb5VS3uWJwmohVE`ueDlFh
+zU*xS1`p~KT2b}@zv@@MP_b=*`)9>C*6Of=YW@hi6d+s^sJLfxRZ~l4p$6o-><B@?0
+zd|{v+lLk6)ElTOSSdu!vG!Vg8VlyR{8wRE^BbKjqd=tei=AyWXTLw(bi|vBg-WJ<M
+z153Cg-0vDZ_*O{Y>G)p9vVw@SW@T+(LF?42b>B)911Fyt^*n21%JG8{1<^St>smq4
+zvlU#ZW^*M}S`UJRjFlKGuB_Oeok@z_$W_KL(?!p--9Ty-C`qbTJZsG!FBILt_7ohO
+zN?E?0NQe8x<etM3k)%K4riJGcH&-0j39c$=>%9{~=Pfszm<v3|&5rcVE6~OZ85%cE
+zIj%ijTua&BO)HhBrg^H6w(|3q=ZJktsRcQQ^`8tgV44{w?<GcERueb{cebQq9$L}M
+z)3l`uu7Zx<<kBGt8I@v%T~(%qUEBWrHrD^o@lsWvw=yqcc2<W=inHN&3oCuQ4vD)Y
+z4lloBVCftQd!XQSZ^hx7XRYU)v_BHI=^FW*Nv+!HkhoeWoU9XXM&JNF<TJr%gHM*N
+ztb)J{)+}F+WzzvP1r2k7mA-ewT9>`y$H)H86^dTko^(X7+73+48G)h0GLb^s#3`H;
+zOUA@;oG{UeE_UhA@fW7Hi5|pEoW%P&R!n4(GvQ!WLHC>L)p5^69&0*W6T>K&SQm~z
+zV9msc*m}t6@J$3Lnz)Y#CLW5kHjq)!^Onznh3>bg95e^_@=nT6%&mJ)VBg{l@S`#E
+z1uIO8n|Rev_mCS%?Uf&OuN=FUDmFayokzB`<kg~PZK_&nzXzk-zQ)%&s-SMY;5(u;
+zab?KUdFl(^*$L6@eF_fEBpnE_;ADavC&hBpxdLmBQg_{UvN;B9Ixtf_&v@2@(*1XC
+z&s>LtnM}SuxKclp@@?-vubw{Md#YD-Wr>vajO_<rfkRyD*}ffcGTQlv0cd<UP~eS9
+zsRrF#Ib{$(j*xtFinvDbn3MGZEkERLoSrp&*T?&Rhf=4$M9pt9z(-sSdDP5z3r<sN
+z3r*3BJ{hncar85g2sls*xWIs#3^>Su$GWQoY=iix69MC)>7Iat%vq6=$hM{oqEdSb
+zXQ&Y%v!$%-;{D~6)jbGZ(8)t3<+?ILU5TXxWm6&vO?R2Mk0s7f3Fj_x)DWk;8qNvg
+z^hlgoXm<cdNTQ~iLlMtP#B(LY%@TdF_)Dm9bq89!e+RYkKM`3Zm--HKIlhBvC6g|8
+zRP<Iu1ES>Y2%~kezdejs;W$>#ELP4eR?19Bf^BtAj<J0?o~LvH7sD1SW2j{fz*c-4
+zwYxBW!E+(;(RNY)H_YjQZ8U7-$lxv-f28~#<<*s^!&<0sqQ1GLZxZ@Q|6qr<*%8@P
+zcG0rHICZ-?`V15CMTXRt1qs`TK0~{JD1mC3U!f1|qII9{1?f>kd&X$1uym2^fD9Pq
+zqm%PA#DPt+{(08C%&xCe^O(JO!dic3t<UiZUf{B1@G2SZ#81>*VzeP%ro%kZ=zp8n
+q>1E0PR+--|T*0T3!!3G#M)p3Zd<5z%Jkc?#sz?8&hk`N5?D&7#D=<0$
+
+diff --git out/production/tank-demo-core/base/player/PlayBullet.class out/production/tank-demo-core/base/player/PlayBullet.class
+index 4271c288bc105f14fa2aeee3a8a35fa959b6a7fc..f901c8930a946d347013133247823ecd17e640cf
+GIT binary patch
+literal 2137
+zc$|$@TW=dh6#gbzdwto)jdP(%L)(y+Iu41Uw3NnaAU7wb&V?jRXt<QMJtUi~y<vBq
+z#06T3hd%JYTagf=;*D3RN(x0n6+#GjLgE!9c;QD>h;n9piIYaCmVM^Txy(7|J7>nf
+z{CoF10H<*+fDVkP7!9BfV}2Y)LXdG46GD?z@sf%Qf=#KI3}6b=g3JW*GG+yt3&4;0
+z0Qt-d$BO}YvEZk}7X5eymjt&YxL1YtH4)`?!M&m4vWhoV=nTG$Wtv8o+YIfgwC?cO
+z`byC;GEQvR+8QbA;$*kMO)F!#MTStxZh>c9%RV(qN^e%r>C2pfC22EY<PCR_p+3^R
+zz@Us+SuUK6JfAA$(%hcc(<Vv6DJ!F!3%YHHeOaiuD~7{xsGN$a7r7mqp=G#Wn%t#W
+z^>!gofeePmlF_Danz3Qq$gIV8%jR4w&q?Otd7dkZfKn%Su`xkO8I;@7>D9P3Ce^s!
+zv<N}DwWL<{4Lw$H4Kp@m+j=o&IMToo@yMWccVWf#N^z0>JO>`CVle&)rlsP9>47;{
+z&#X=A>oSUL?S!11w2BNv!!mbkTFKB6>Hfb)2j;ATo#6>XWE|RozE32i;W$oE$Xx><
+zgjo$7of?jzli}cA5H-AoWdde@a4F0l2sEs~*d><bQb`(CL245@Do#TlmWFk_t-;0#
+z4Nss;g9BGX0UIhdHEan<5gQt=2<{!ctKmId)o=tyD+xU`WtGU|dX7)0SE)>f=3S7@
+zlvakOecD8mwj)it+|~&u8pB8;Aufb(-Es`quxN_?MxNA;4A5V0xvA%uV<V>SIPuhe
+zG2`X#?IcG{3s(=C)bmA(nWNkWAN|DrCt7igD_q`Vy4F6UT1ji9)}vA(IjAeTGsU-D
+z>9a%!<mINhVlOkPCaq?<<JuP8%z&$}@zL@dqC}DcCPs3WsLa|NcU>dD?1*t6nH?LO
+zx;!zK9G{pcn=J;dEL%*D3X#unhBB_PAs!^kLe;a`dHJjyi|l#2y7%nSNzY>k7#>GG
+zQ5q764^6dPX}*XG4P67GPtxupJj4M<qj$if-=gkPFn9;`UqPwec)lc)I-DdLhC;NB
+zXgeAy+z|>GA&FKx2Hl9#%Ft5@!Tuyqm1KW}z0t3s-h($4_LVr_WY|w!U@9CGOTW^)
+z4ecg+XgSdDY4d!828NGuSa2bRd+_&r+q~O27~MwW=MVmBQ>6V#vDP}YRvm)<-jeO#
+zJwGDU6TOY_HkyQpSmidFgCBi@-ZFm+E!S^+iX)|Mt5Ai@{4G3o{l-nGWzR#(X9x)u
+z{XE-fTND5(5}*aNNFV})d$a6_z`cuLIgSK@a)CgZCd*lpED=nb=%tI@hpRY+_wg(~
+zpug4+aTY(|9Dc$8e#LqGju$1!69i;}{xqK=A1`?-#PtzJ;Ff_8;5WqZG(q2tpYaTx
+zSw|UsPv@Sd&UfK1&Jd^IIkIi7>dsbm&y(&P>3ZOMK*xAh^s9)g7*KIueg}d3===u_
+s#NJ0o=uCYR1$%)KEDcnQRxt@4LZ<zT>ezUtaI|JrJk?Pdl2*h20WF>Ls{jB1
+
+diff --git out/production/tank-demo-core/base/enemy/EnemyBullet.class out/production/tank-demo-core/base/enemy/EnemyBullet.class
+index f371064ed63ad777baa68f3f1604c6e799b49fad..9e4237b2728ef12fd51c6a59ac7dc122414fa46a
+GIT binary patch
+literal 2652
+zc$|$^TU1n482%0n9A@T-Iv|Q7N@)xOGDd017$!HF1T+URth6&T$ML{nhR!*|rTa}Q
+zE6WN?O<O(n&_ihgmaCR8`OxaQ_g;GIp?Y(*vTvWcI3T%X!N2$Z@B91z{U3h*_xm3K
+zJc!Rds7JqyJ!RPI!Q<HHK@lQu+=l@f`#q2`C=Lf?JmG-{L*j5ykS7IsN|2|8)*%^(
+zg{x;|s4}8r8<P?DK*JG15?&mIF37M4l^F5RkYqUw8KWN5qThogQXW)b#7%!=ZafQ9
+z>@2afWu#?{%b1W*7E2k19@k6>t9zrWr3J^1PFZ@)3bv;vJF>D6^~N<L71Ql02}?72
+zgIdf^nJt|Zmd4dlHK9q6!aQu(le*m|q1fLrD8bc{ifh71Pip<?(Wqt)s8NF)UvDa=
+z8iT5-i*uIgvXAPPgjJakT2dRG3U&$Fo;D24W~^c}on#<g!t#vLglZVUc2kdygy!=i
+zb}Ffbgikd&BI0GPXQ)$}85|&wGLJZBeCMNPHTLEu;)YQXfSIl69ahKHVA|G=;7-$2
+zr+RhEQLscbDpbwC*3?+;YW~G6x8HV$w$NRuX09ewmqcteHqxh#IZ>R#9(KBBQU+^P
+zp3v-qLQ1IdH{7Yro=7Tf#<Xr-WW1~Z`DT%kf*>|asB;{cT9P&dDxxP7h87kburJG#
+zuu`=w&9;J3$C|5=)|$tX2^r5RcpfhZS1&4f2`}>w^ZH3hUQzHWnplzlOI0Ynrl0`<
+z1&wG@unElyUdI~>j^Q{{Us!7eZ{jUhXYmTNKNr+N!P_`7kL_SiTot^7cNM&clSEj-
+z`}jb?DSW8lBWzaiF{X1-tQh+@7!j03N@y)IPAm8XpDH+mvog*p_)KJd9%mI?Ky%LS
+zwyw{mu}dA*_C$w?lZ487$n4Fm5-JvH9Jc-~ZrIjLl{k}Wj~IH?3P#3E-PZO~NPD-D
+zQsd#wV{XZ|p`j)dyuHaXhZ-_0b;1tnLMzywK5~Q=&)Bem>il=s5F???%(qGQ$>n<~
+z*Ff}C;_vQuw8v7GZtJO}V1>gDOSg8$Y<*lzoP!c%H69;u=Ei#eg4xt?+pKcyNkU*b
+zAhs6Xu)|=>hI$vnHRtA50qDq=chsjQr-<t)6KK18kBiR{m!&_aIkPh??wPMvmA}v;
+zS4A4gM^&p|o3tGpg5gR!hsvD3lSw{lIj&i@nc`&d*y@PZnVs7%zk}<_g?-DLQO@v+
+zr6-d8+JwX96wKmWpz2gsqGPE$_o5@3ZL?`CF{L{8b#?V0?&%8e>KUNUBwc2C2g02_
+z1E}LCtR5VFDCVb>?;7HVPn%Q{ubXQzcN{>Z_w#fNCENiWfjLNlt0)@s6<>jC4ka@v
+z<yju`dgo9!12+$zp=JD;gLei>p=?P&o<aFVx+y{nX)V8zz#6zv!w>6Prd7*;>+lHH
+zqn)P*C{;3H`MuxbB)2t}QjwQlg#F)v%UF5_OS!oDw`3N}4)~S_uE2MVUnpNiW>?YY
+ztK@D)zpqLxt*%Y8Sa|`BTvoM~RF`~*YKfC#jo7W0a1E8MrPZagSQD5<&6hWSt9Cj1
+z^<phFsLC5uwU%ade{Z~w>PDtgK8v-2brrQkb69r;>zl5_D>zNFs1x~K#y#HC=ddZe
+zzl3{_PoGC^=D0zKeA)daY&<@F0cFDaqJYrlKsb!mq#FptM*ja%PZ0g24Xj{*P&E?D
+zCJeEnhscSto*J!23G4|1dXkWy!o!%xHjc$se1Q<YLL0uu4t$G8F-O?{Ko|Z*H~vD8
+zQ;r@+8iE@S(XNzUT-<Hrj%CP}Xf1xFuMmq=k6*Bz85A-0PxQNkJ+&1-(DM%3?WAs1
+zUe=zMbx_txSrgn9H<@v%j4m17GIq)6ael+V4b=UEa&B*+rrNv3#b}RVceYo9Tt(BA
+Y5IW_Xe7BW4%-scDRg&+jUPr6%KM44ey#N3J
+
+diff --git out/production/tank-demo-core/tklibs/SpriteUtils.class out/production/tank-demo-core/tklibs/SpriteUtils.class
+index 78afcd55b49c91c8aebfaf3c07ed0a5a2f5a04f7..bcfb9f1447635fb739239d5539bc10c9c917343e
+GIT binary patch
+literal 2665
+zc$|$^-%}G;6#g#B?m}2a2~m(A6|goWNGfV<0n@4|MuW7XAlh1&WKC8=5;q%!K6HF=
+zrsGTB`|69Y*v>?!%s73ro&FL1JKBzxes?$gP^ieT_nv$1z2|)AobT-BkAHu80pK{k
+z4WI+#4QR*Z0NOC2;R_942B6?d0F$^XmDe;(1<-(L4c7x`#CU+mXQXr^06%W3pTql;
+ztFHq18n>kMjT~<KR=MHB>guXo8X9J$$#D&74H*H|nm4j$Ss<9YYb+SCieu$t7mRXl
+z+$aqTG)!9Ag5gwbQ{ddz6C<7~ZxphzNyoMd*<nv(+;?KG<=C0Zojay&W|DF>oS;p0
+z#41=$Lcka9n-cJ!EoNxFDP<MR%a!?A)4poV=Ba5;71Kt3%CIfDt||Ra&LY~DlrxvN
+zX3Me3l5IKWHDW4DxcQ>tc@h{5Zw1%)Zgc{I7en45s~Ag8oLfwrCC4fjxaX_bd5LO^
+zRRP8Fe0J?*f7hgAr01A9HypRvOhI5BHbaYqZ~iZEH}|J)+gM6jWrz0s#3YNi&6V{)
+zwp`lxW@490Yso#a-Gz~zDykt)VhUV*Z{Rzc6xeN>g^X#RcFvjw$Fv3F;f+gUwo%Gi
+z>GBR_8y%JWs?XL=uXFqj6Ri0npHV(bB+$H3o}12*QUZzayUp)NCM8|W7YSV?DI57x
+z&Jbv{O?FeE#?ktbbiURMfyrXUPMhZ~S%^KGXgwgk=;%g|j!tyxFmXqq<6XW5^fd}g
+zd-8HtLr#Z<yE^7T8V9%GxQ==BtZltnF&$y_=_sJ6ql9}pY~0gO*5RNc%`fP<k3}6z
+zSP<B|<vqc++1jrRbAv7uvv<w3!zRm`91m~qU2khG-J4aU_;yXsqKBk*(aVhtQqIW<
+z_KR&AeCrK_Q=1dCb18kL3SoV+4XpPB+QhgEj@$iLZ6nPR`HW2FtpL^x+>op_ooOrM
+z<lNUJ3DiKv1=GsroV5gRrZM+3wsF5!{bQS$>qU@Ez8#^fpO`J1_JV1<F4b@{nUu*>
+z>FUbZ8IqP7>02$k3f8%uUn_v#Bo#S-z*QX%LZwWGa_prh##wMyBF`Y6x<?LiR9)q6
+ze8^Gv4&X38;@lwVRlEFzUn`$9@)PPJRrr2|KNWomCAz!<Wrh~j=g?AeGg?LcbaZ*V
+zzlwlZ=JmZa7N#+u>+UcmpqZb^Aezv^-Tg$}N_`to9iYQ@9HB<SImkPG{60nyC0H3j
+zKli}9hcMvA^RWxM?iKcGI69?a5RY(-AMiRC^lzLs&L>yUIP(m8Dl*>xBH@esL;lXk
+z=;;sn2Zxk4<vDf@scq^@1fp$f6}zV&`o)vgKcmaM>UTkRxn_D$PqQ7=^b%f}kYkii
+z5TXPd;n`k-k-$`*3c6qw>7Hleoa?#M$rUME%eANZv=&G!__JUS6b(Zf_yQjitVY*g
+zwBZ$WgsD4)M6Dw8T&bM9BhfH(-t>J7_7t-}wEDSdt}R3r!Rd`s2iz<kVO|H;A=3ap
+zgZEpdyOvccoyHmWbT`gY^3&NU&UvndLP*l}?G^ZE$c839&B`-=|9z)Ar2H7?eTh!F
+z^BD0+XGawwne^s;-^G=X@*`TJogG~6e-Kh0RMGkbjjn>?LmyNB`@=ep&)ouetQla<
+zfum&0Ao+2O=#Mjw6CC4A-$`8Lc!m1w+`q*X$><Wqc!bh<j1m8F7V!clg$W;KbYrv}
+z#3e>I=Eiy3jUDtbf#f>3+M&KiklYfl&>&u;Ux>e<{R4&ntlq`-=IV8gkeVxKBh?Q4
+TjJl_8Pj0kW6UR$#EmHph8x?0U
+
+diff --git out/production/tank-demo-core/base/scene/welcomeScene/Banner.class out/production/tank-demo-core/base/scene/welcomeScene/Banner.class
+index 2f12c8746602fe9be1b0c3cb2ebeec662b121981..b6d9c8673c5a64adb2cb6537d0553c6b44c1b6d3
+GIT binary patch
+literal 1144
+zc$|e(+foxj5IsW@Hd!_hKmuL?uSrl=5fubcE&-weEf%5R1twt#3!6=9cY)%;SO3A!
+zkW!(f$`A0PEPE!w60E{~=-Ix^>C<Ose*XIY1Hd3&>u5!H6g@h6aZ|%B9bw##A%Q#6
+z+>PNLQqrWQ$>`|A{TLpgUxTS5j&2<f@kqmfhQ|zzqqb`YV+^5GdWj)CS=kT_EqU7&
+z^SkAO@D_Q&p-5Z4QsmAO_iX9cgW+Jy_8EHe1?~&eFA7(f`@$(!%ED641b1EGjW9&)
+zGB44N8~JU%$4$N;m?~mU>~3xfPi*9*M};A8*JX%X0Wa>%@oK%1ZdG=@qL{X&(^Nz4
+zmq-TM(9Y1weP0B==~sDC*zO+RpnTOWX&5x{1Wy@y6-7_Dlo6h3*>1@Zs_8;KCZV1g
+z7{aiD=NQp2YTyON47`-)6~;7-8<@bPhA9JCOfw|^np+J_v`d1toiQ+r9F2RiFeJ1p
+znBisdwy-UV0SO)KICjA|t*U1S;(cH{q;Sls@R~#n1F4#Z4tGnY6?insNcw-W_NFeb
+zkY^t~RfnM~e^#zjjR+}Pt@w6eS6q2ZRMisku6P4el#Hu@C4zuh5pTnqT*zkU*Oqfr
+zvx^LjB#ADMudG?Q)vP?_T6Q*@n~~}G892HNbfygLsp;wTKb^W%K<o)OFyDxSto(WB
+z37?wAZGYT7pkUo+t8_umpVS<8X>J<T@a>X2FZNZGp(B+)UrOT8OH0tJlV1avymMqP
+zk@tb#UIVSenIo{ahGT^CnG=Lp`i>C!ipI<rXorX%B9_p%)+5fxL+IqJC!*5%hNk7u
+z3bKQ25)ra31ekz);z?>VL`{+^r<$M>U9{>jaT!;L0>jlmRPu@%(0T~t6XGX`uN<NI
+k7%j3zNVRCD6$H^p+Y_`^LL0SBb?9rVmL({7T`{}y8&#GMlmGw#
+
+diff --git out/production/tank-demo-core/base/enemy/Enemy.class out/production/tank-demo-core/base/enemy/Enemy.class
+index 7083efb2a5cbbdb13f844505fb9a1eb0e706f900..801917152d1288b0c45f9b60c1fddc6c876a92ab
+GIT binary patch
+literal 5043
+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
+
+diff --git out/production/tank-demo-core/base/player/Tank.class out/production/tank-demo-core/base/player/Tank.class
+index 60d0e9dc6eaaa4e6381915d106a1f9f69a2fecee..068dcc35523089a8eba6e73c0a09d8d40d495995
+GIT binary patch
+literal 7914
+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
+UPgRFflB9S_oT0EzDXdri7Y7a6y#N3J
+
+diff --git out/production/tank-demo-core/base/item_bonus/Boom.class out/production/tank-demo-core/base/item_bonus/Boom.class
+index 91b8932fc8639c90c37e5e390d828f8314fd966c..7b5d89392e90735a9a8a22bb8420b57e382db66a
+GIT binary patch
+literal 1353
+zc$|e)Yg5xe6g>-VLt~&&usj9v*%l>=peTsaVi7G5sWMZ)Xj+yMNRv*I`uG!m_ZRq8
+zW~_B|#vkBca>ns)5(H)dVP?DM?%A{F-n-dff4=_&Fo|^;35>Tvm2m?%B}~W&;Z_u9
+zF)3k6hJ@P!+>tOH%6<Yu+24Rn|93_Bo`e}0G0X~ZU(Du&-UBgvC}CbgMnaaMt!x>F
+zzR7KdfqY4GxLVtO@91Sm%~<cU!P*RiQZjUNH*3{RS8xY?ZrR6b&ep0tSR`^}RyTEb
+zj-fS~+F<0&+T;weyl(Q9dbPyu=UU02NIY+qHDg1wb%BFm$lcZ*hJ=5D?(*uZl4aI~
+zA*)K_QN5~FxBv{p`5o<zrfP3p)r+c``qmb=`R0;9MDD0?_fR4XL&?->X+~^rdb~vP
+zKzh;EYTLw}5y`L$L-#Rj4DAJ1EAK9AwIC6>VAbt1&*=h0h2e3rO~DY(F^p)A!(B(M
+zYBlF@mL<VkTUnH_px_a545OZ3-x$@ppqmwgdkL-wF(J9A;4zjM`cBGDke(>$LqA#d
+zNE^KDTK2?(Sb3@-k7b7b6Z<MyD+&fMs9+Uq3a%ol;F-v!=eSl;!@ck#NvxK3=&XI>
+zzPUC3m+pbPYv?6ME!1ohdEx2?1*3+g`F&)V2)bctW<@QyHkDu|^}pVaCQoOGZno{0
+zl?s<XTIc=Zl2SOiv?SQ!WG?6Js#%Wi>Xs=k^^sB%Ih6Fct#;k?K7g0B&*s!?jMAr=
+z07EZY=nJPtK>SfbX>6r9-3uCr34K7=<7CoJuz1TiwC2-45Gsx}5pEztbE()l)j8Ef
+zTLV#oaxs1;t~Al!KnKBCu`||0X9Hb(q|$;B8i(n{0J`WAiPIy|O-_1nnZ`--Gf!^L
+z(`v#$m7HFHcub~o5tqmlBj%OBo9ba8oc@C7=YR4MFF5GQC_W*OVdAC)n_m-K9MMag
+zyS^g+5wSES)$PNcJ+Bf%E>1p$XPHopL=z-+;IKE47PA!6BtGWXP?YzY=jr-iX>T*F
+
+diff --git out/production/tank-demo-core/base/item_bonus/Shovel.class out/production/tank-demo-core/base/item_bonus/Shovel.class
+index d6cd27254b8fb83eea15aabebe6900edd638d81a..19f9e48b977d430974fb8038d26ae271ecaed73c
+GIT binary patch
+literal 1362
+zc$|e)>r&G|7(ELufe>gZP_BY_ZHp2`P_&3bv51z7RGGm)nwF)6rb#DBQJ=vX|N9m)
+zBi7LwAHbLJO&q^X!fghyo!RX7?b);EyX^k{`{NgY39QM8W2_mfj9a)ZVO&NCcUsVm
+z2?>)jB-|CoJqc5x%ts)U`2)!Gzc1VmB&20TFfELSVm2fA9*Nmw39}OBBxD$rf}xw`
+zj8!vTZZizz3Yx>!qHn8NTdVM3G0o6iv<ySv6u^ETSl#~M=tW1Jv)*TdHNrJb>!$9`
+zFf=BT>x`6Ho17t%(@nlys}#8XQY#qbiRG-KW~^(rF6_V=a<_Gdq1Qh^cX{Pa!7^)(
+zn%}l|xk2=@UeQWCV_3y9!%%KV+tpO<ovV6ob*{Fx#cjU1C@ey^m$-XO9>ZWFd9HYy
+zn;tHnIHF##wdyuu(;^;LV(2_&jiD{?YQ^%BRt;j2^H$9+@~ke5RzH9-u~ESwE-;K}
+zj>BC?t!P!}c&Lt#TwPv}Ft6YVvV`?C`{JlHdEG1-+zWCo@Cnid1y8X^={qYz0eYsO
+z9|I)U1FiF-YuV%TV&%Dl9F`dR&TIpLT2|1DJ_RdSRd5{%1usN2@zX0tmG>4Fh-9U(
+zL#HuxoshTcf2kqdvY{7fW7Q^_SFUc5v&FD9znTo=K}`(JEU9_drX-}3|LcH}#Q6wO
+z)8>Q39(LYgrVr9fOyR`hqCkfe*{rv#YB{>ATc+sl6UiiSDB)on?V9P`gx9ps=2UNt
+z(4CBfp$83g)hU$_KPm~0jpV1^pmB(-PY8RMxl|o2*6<yTxztaDHb(0R@1u$4(nfSL
+zI$1~aK3d3>H)5?ZrH;0Jw38Xxh(_v&?xSOmSQ;=);}AU^K#X3KPI@i6NJ%%Yl9mZl
+zGD})6(rVm4m6TqBcvYrw8COUXBjmL}o9fv>IQ11RUk>S;Jm;WCqxgV;hKXJYHoqmb
+zIHHF(cYH(aGa@Mps?#^S_Pk6C2RcDBnFu396elG|3VQ--F-syv<fDELMS5>|nr{9B
+DaUwT)
+
+diff --git assets/animation/explosion_3.png assets/animation/explosion_3.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..145f0bff8d77b52d517c211d8a18dcdd8980cd58
+GIT binary patch
+literal 454
+zc$@*o0XhDOP)<h;3K|Lk000e1NJLTq001BW001Be1^@s6b9#F800009a7bBm001r{
+z001r{0eGc9b^rhXAY({UO#lFTB>(_`g8%^e{{R4h=>PzAFaQARU;qF*m;eA5Z<1fd
+zMgRZ-Oi4sRRCwCVS21$JFc4fZ%$O(8<qM&s3>_V9o{=tZNS9~O($PWbF8M+_o?ur>
+z!_Gt-uVpIVRd70aw0nDZQp!1F%ueYe1Hd7_r=kB-_c{LpGux6s`o7Nq&@@ePVxE-i
+zib(f4<cw3Boq<FR@Z_|8_f`ZdGm1#pHSWCn#1J!a7*Lfe6GTw+t7d3n8Ca@A>;1Oh
+z-VwKhA5bP7a@Qx~Xu#F8Rs$JXpW8zHikxxZ*H?^n&bU?JkQ34K%duF0x_l)7_}Ojp
+z-#FDsygtx%-RL;f9FqwmrV%-{G1cbp1FHIgIxqapE$)bwiCX=~p9O9vxL&WCcyy}9
+z>x6FVX>RFvRl;g;-{Zb`8gO?vhfF(NE$8w2fSUpTbJva{bsDMNn&VbM?M34l({-o*
+wc++qya(C~qsa+Y1+Xo)Csc*xuujAhV09DE~w6H^=e*gdg07*qoM6N<$g20x?kN^Mx
+
+diff --git assets/animation/big_explosion_2.png assets/animation/big_explosion_2.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..af1ff61eb63f5824edfa4e01ca59a3865d61dd8c
+GIT binary patch
+literal 525
+zc%17D@N?(olHy`uVBq!ia0vp^4j|0I1|(Ny7TyC=oCO|{#S9F3${@^GvDCf{D5#L^
+z5#-CjP^HSi(9q1l@bf>Ae#yX4YQVtoDuIE)Y6b&?c>bjLqizfgjFUZG978H@y_sp~
+zci2I|H9b(Jn8j)xgRE-F%S%N(yXGj$9$(-)ozKf^2a~LO!s?|`Cu`mwVY_*3;{7S-
+zZcV)R|9AQxzojD4MRRW+;%2}Cdg6a?(f+-K+dr}Boa*zKf&(s7+pL6&ug+TLxoXGE
+zo6B;7tM5MibMaTq```8!5Bj%Cy>eW4=hy3p?Mp*WUfUIK>HYrx6kSOJZT20PW_@_a
+z5x&klaqqhCt~VQ)|Lx|!@~gIbef_%pGiTmB`cP%!ye@D4s@FDOx2}HBu+u^zNUiA5
+z)6daH#=m#$)-yeN{N8Vigf~1dW<9^l8TF2*v`=jEgBY0wUb~HM9gp?=fA{-7EqUL%
+zGmOh8F;4aTkg@;zr#u18^D+fmu@1&g>W;PV-_Me1_o|gK2xa>cYBr1iUi`b&l15vE
+z3l4<jH(T*%oO1Vak8SlVSP<3w^?^s`S`F<*C)ZCkOgW%qyx?_B{Q0ko*BO4ZWZ;{T
+mB{Zk{W2pqT&|*l){A$a<=Eip+V(;I%AOTNTKbLh*2~7aY%GH(t
+
+diff --git assets/animation/big_explosion_1.png assets/animation/big_explosion_1.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..a898b6ba93eb43e1300e2027a6cdb2f7e43bfcdd
+GIT binary patch
+literal 466
+zc%17D@N?(olHy`uVBq!ia0vp^4j|0I1|(Ny7TyC=oCO|{#S9F3${@^GvDCf{D5#L^
+z5#-CjP^HSi(9q1l@bf>Ae#yX4YQVtoDuIE)Y6b&?c>bjLqizfgj1itLjv*Dd-ptf3
+zI&2`&I^Sq!VZXpN?Ik)JQqvY%wnd&3xRyMnZKmpmHG7>R`veq4w^%1<Kk=(`>kF<w
+zopY1ves$IE<lO>I$6|zg_b}i94QHP2<-hlP!s|+zf;8V^4INL{z#ZB5c9+P@6lAks
+z;a@*#$)|{|=hkXUu0PH-`_s2OMr&R&S)P9S%Xmxa>}$uKZuGKJjmy_~|BJza?a8eh
+zB0X~pG{pCJ?ccs`sn$)=M?41^ozFL{Te)`PKi#MD<??=$_QlO>QmK6x?x{YJ@%tpk
+zkC9t>44z8AUbynlntvx*F0%eRDRW^eXW2L3!qaU(KSzJElPp-z=W*tXUg`d9r#IO~
+zM;LcLYlzsnF7Jc;^c}B$Gx14yiCctv7CXiNm1qC*wqc>ze^y+cWnk!8wU3?Q5c8({
+T&exO=fCM~U{an^LB{Ts5ta+~Y
+
+diff --git assets/animation/big_explosion_4.png assets/animation/big_explosion_4.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..4a1dd5c91e4db5f2da01221157999b9c186d92f1
+GIT binary patch
+literal 801
+zc$@(t1K#|JP)<h;3K|Lk000e1NJLTq002M$002M;1^@s6s%dfF00009a7bBm001r{
+z001r{0eGc9b^rhXAY({UO#lFTB>(_`g8%^e{{R4h=>PzAFaQARU;qF*m;eA5Z<1fd
+zMgRZ;r%6OXRCwC#n>|v)Fc5`phM91L90NK^=+dR-7<4%U9mk-hOG%lME6{O-xDu5Z
+z@+L3ut!y$d-tFQ@NO-^fmC~0|x;e{5H*?7s@Lx7M3_}@)p-eqL2{_lAP80Z}(z7sF
+zwYXR;`Z3R|y!KB=7h0E1|8sto?bY+a_wG9G|B(bJ0#I{NO)x)DHH)&^Kb{<iq||lU
+zKG?pKfG7b><BE)`LDXy&r9u2VND7;e<SAc~1VoFWsO=*Os43<XSagVzlzG5d0$iJ#
+zD*IEuV`>tTfYycx%k0qB-MoP10r(uF5L=J!7sn?7tx>?u=%Ti+;<+1T+~_rX0xsR0
+z8Q(m{X+}hq&(&?$bzQgI?hZ7D&rfK$L<mK4vKmxA05w@P%)BS_>Q$pvs%8}#?{5z$
+zeF)mRn_(*7kOW{9aH}ho`7sjE=J7L|&j?YqMG_G80dB6ZY>sK#6-9`u1+pLD<^igj
+zVj5QQzt!e(+_&uq`xNzac7<I6n9ZPuSv3~T1To)OZg=Hq#u%*s8JX*{Ngpt2HOMkF
+z=IyIS-Hh$y{-zw8hvYFbuwTJyog^T7E)W%!5mqmMefM&boM`{SJzLBu&^pnr37F>9
+zI3#Gb-&yOcXoU092e_xhsvn?g0hJfHeF0|cO!9PiDgw~!wswW<JoNgi+H+5vvB#OU
+zz}SuuBcWCEINq)I6$#l7n7SH75|}qdGTa^=vwcI8)_ThOCjlxGbkEn7?Yp+x>Vw>q
+zsU%>kT7cOa>%p<xWr`rzhoEn8Z9fT!5`Y<&I;}+;XEyKJy1FUKZk1&oFt!$Gy?>`N
+z$EdAF_m_8t#}Y90z5KBnZQYN`43hvPz_p#<CW4(jMfashNCMn`z`4c!Wyn|}lYsp3
+f^vq@UFW_qcAEzv2o{lX+00000NkvXXu0mjfsPAt|
+
+diff --git out/production/tank-demo-core/game/GameWindow.class out/production/tank-demo-core/game/GameWindow.class
+index 2d944fc8899fae66c068992643eaaf37b7277608..19b46115b3d9d9b9476b5734690100873d2f16de
+GIT binary patch
+literal 1504
+zc${riT~ixX7=D&~ENqq%3Z=B5SgbXy*jR0?O06v+Kxm*Xfuw;d9FhZFO?ET88<74E
+zuf6cbJ7>yhaO{jf!2jS+@#8tWvC!7c<T>ZO?|Yv2^Xwmg|Mok8>)12!2CnttLwuy*
+zx`G=9#__R&n>s#G>!%7n(=lVfP}bwPrQ>r0{kW|pUnun*1$Pz9>c|-w!kjwf6Nr9k
+z1M^r==8FmnO1Y%to{pjhv*0+=%Qb}WOJ75>CY*i2&0uj)G-Y;ykPAgKRNk^3JGiYO
+zmYFJRi09n8)G$!A9l6qO?nrM<>@+AjTXbupQ5K%9&Rt<Vcw)cITd|$GdqCbHUk2?~
+zeqTC4(e{HtG9nGV%CP9VEe)w!+w-VhvzuhnmNX>lvLOy>#K61a{!$=n-z<w(*P&5z
+z+g?r1+v+fI;_&L%VqciJgh?ICCRT9Y!~+En6|ACUVh!sW#+2Q+S^vOx_Oj8{oa^|3
+za01^%85I*5Op^MQLYbJrTP%XQo)rf{c8=jWzU?~7DcK*PYGMPMCLUwm#FvU>@Rh1u
+zzNU=7GO>ki9SnB|H4}AAnve>1U-leb>N@=|=B0U0goW7=zRZ?n5Kzh%n5EomKEJY6
+zDa<Xdv77~#v2wS%RVr-cRT(4gV!p7T)H<6}vY(PCktq~Z-%UzZrEfp&Ha4@Nq@$G1
+z$z9QI1i6Om%lj?qiGW!vi|}5W77skRE7{9>M0q|_e7#IF$~Y$Kbq&@jea>yRT!&LI
+zGxdK$Hk|xr+qa{rS{w!q!<pCSO|hRL`#pK6rY#z_iBpcG8pP}=b$BHm>KlTEEge$c
+zWYbQK<+9yqsQKp8;CRNoHuFwWSy$}3CtJdH0=9IVuO86&=adj*+;bF(Z}apM5~1#~
+zbqviqLeCLmY2(TE5#ro!r+c?MNLaBBl2)>VURw28&tX)Lk@^Lu^)t-p=&y$N;>S4C
+z!GNWN9i%H(yn{ijgR{@b--FA<t4I+C5XT_n8e$y7xPo)Aa2_`>iUKb1JzPWuW7uTe
+z@6g(e;-lTWAy4K->@(z1x_(A9RAp$x9h^IHW^e^lRxj>^sJ~03Vd@3Z4<ypLP7h<`
+zPT%aW7`>SoNnDZ>-+hnKD4h$@a*_FrjU;A&{O8ZGl*-Q)^bsGDV--oh<P_GKR+%YO
+z=;0CdRr=ZtW3XtI!kb**gZf%dccY0jt!c{GLQ3A}F2-U3z3BN1$#{H{xn#r4KHzPY
+K8$V*v$M#=m_&vq|
+
+diff --git assets/animation/explosion_2.png assets/animation/explosion_2.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..158573c52865ddf54552dca693306162aa5485ab
+GIT binary patch
+literal 436
+zc$@*W0ZaagP)<h;3K|Lk000e1NJLTq001BW001Be1^@s6b9#F800009a7bBm001r{
+z001r{0eGc9b^rhXAY({UO#lFTB>(_`g8%^e{{R4h=>PzAFaQARU;qF*m;eA5Z<1fd
+zMgRZ-I!Q!9RCwCtS21$JFc4fZnK4hG;|ocb5;{6so{^3>xZ@eL?%aiv4!%Ig6Hs-j
+zZsu5YmM4v+;X2Fm_;$6sl7fg}%9>%~`d0&8Xr&9SOI?gnVvJG+1Ho!QyKb5$Fk%4M
+z%0Ae6{rrG2<0*#pKa(@?VIQ>f&Ew~3{TPXvH|i&>2g4A`VnC6y!j%#2Jcp3S`8&&K
+zSuRNV-LCb0^9=x4^ylP!Mf$lqCg-WUtgFgmfc>6hV)=Us0B~D>Nec1M+Sj3hT%Icv
+zT*?eH$5liU1`&Bds%m8)D-wOLYtP8N<f|tK5=l7dcP@2<hrHYz$hm=&koWyua`HK&
+zd<~36=H<inv`cEpGEvuV$a%mj_mFz7D(_6l<ss$rwBqf8Mq`C)Aa}m!`-A72p>seT
+eE_jRE@!tTKQx1?HF?w_W0000<MNUMnLSTYFn7r)(
+
+diff --git assets/animation/explosion_1.png assets/animation/explosion_1.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..65f727850c619d43d830b1788d9441b978cd23a5
+GIT binary patch
+literal 387
+zc$@))0et?6P)<h;3K|Lk000e1NJLTq001BW001Be1^@s6b9#F800009a7bBm001r{
+z001r{0eGc9b^rhXAY({UO#lFTB>(_`g8%^e{{R4h=>PzAFaQARU;qF*m;eA5Z<1fd
+zMgRZ-2}wjjRCwC#SFsJkFc7>)k-`XctN<M)bm?drBONo)F$OJNIw<L21v*BEtEYgM
+z?3W#k1d1)iUHne;cYk+sh?&vn8lmSkG>~Tl#uzrn@Gs8y&Oj0B7y!z$q;HwA-;4Q9
+znhZ4KJpiC;YiDkPMAtP!K`!UkyiL~y)D^`?+BwClt-Va?x`mvQ&w-+=C<rtYk81Ho
+zd~u$E+Up9fq4YHnN-azM4)W>gN&s+Q%^3i0=Z%-id^DhEB^nUqR-J9+ljfxf<m3X1
+zxsqv3$m|8NXk)fKc=wamKqmv9Oef!dC?R8#G3^}Corm1e;gXN{i#%Kqds7l7V*H;c
+h1H*s8(7->|a{%)=vY$vMSHu7S002ovPDHLkV1oQin^FJ(
+
+diff --git assets/animation/big_explosion_3.png assets/animation/big_explosion_3.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..90cd91ee0702a10bcd21b32a67e60951b57aeb04
+GIT binary patch
+literal 556
+zc%17D@N?(olHy`uVBq!ia0vp^4j|0I1|(Ny7TyC=oCO|{#S9F3${@^GvDCf{D5#L^
+z5#-CjP^HSi(9q1l@bf>Ae#yX4YQVtoDuIE)Y6b&?c>bjLqizfgjGH`N978H@y_uyO
+zbi_fRwOV7<A;E$eMj4?yRyxNI6t<PhFz?QjJz=qfsZUwJbjI6NOFWGyC$TL%ab54T
+z@W*?vuistSBC&XlWnaouMg}Y(K(Q=Qx;#;O@AEs=-tQMToUzdRx+qa%QHRI%(!@P=
+z!tW1P#LwSbeQI4fAHRmo!Yk&Ev!~DQ-+gjlXj|%)cejgwPiCJP%*K`B%BZQT(Y&(s
+zwWO5Bg0ET$k|C;l^7Z(8zHffMR><a=?b5#?f)x&${2yNJT+6nq<8rNiVg2bn^Qvq2
+zt)28+V?mkdhZ*5+=hw@r|4#SUcXWC3_LoxM`N;kSTw9hkg!JbX$4p(&ldbXj74Oc6
+zr4uwBZ2!gZ`j>HO-KKRrb=i-t6$<()&!4fEtHQYP`s--_2&>RV4cDw3^IvV=x%PG3
+z)C*Y;_O72I6yT7_|KS%?f8_0#SI<?71iY?pn9I2DS>Au$%k$iy)S0?5t_@{8Jt6g6
+zaL?WKPycBw_+m2S^qzA2qiaHWY8_s0J`lwEbeB!&gZ-Kh);HU`U<u8H){mA9{+*6<
+THq5-q1QPIc^>bP0l+XkK`i9{g
+
+diff --git out/production/tank-demo-core/base/item_bonus/Clock.class out/production/tank-demo-core/base/item_bonus/Clock.class
+index 9cc668efea4663cb9918945c0bd5b8299899f7a8..760ea4204dc70f9e7d2ba724cdcd5ff227922c52
+GIT binary patch
+literal 1353
+zc$|e)Yg5xe6g>+qfe>gd?}rFJOHrZ-ih>VXETZM1Rc7#ureP_8H0dO%k3Zpee}P|R
+zMy#VV{s4cJ<K0aVm;r2Ol0A3No}7E{?*9Js;}?KQJX6tyYt0x}q2s!O8!BR$XhA1#
+zDwtHEU`l{n3U0@8p8=Kr(;{+5!Ce*Ym=R!BjP41k`(pG!!9xXe3bG8%rfb{Q2KN~H
+z3njzndUflAZ<)THb>HWrxfuqnWLwTo&aF9t;0}abGsJq{Gb%iqBy!WN<ygUehQ{>h
+z8bd7SZg7S~!E*R=ty1FN3!`LHBvo)t!(KByOW-IN3$`qup(p%;74XXIlIzrbJ!iY-
+z4ymhF#VB)$7={Yl##=)--UYf0>)G1oCinQpqCmuMFZ19~Dhz|^(bE!b^0*^;-RT4A
+z1<$B%5qCzU!^#XD$ILOb6$8WESu(0oDr(WKc_z<W5=h76Vx5Ko3^EKGzRv?+uNYPT
+zaH6Ipt}ZVq$Z43zBZd*_IJ8FfE?Q36<}$_SQA}v&H7wvUL+?rX3DTm59`uq~Nm}D(
+z;Cd7DV&;j4rzkM=o!DE!TGG&mehtf5(Qp}8G^~nbx{hrZbzR06NMoh6O&??EJmPLO
+zeA8wKc5JKU>&2=^DlY@ereKTh8euCLCZdMehEvvyfk!o%8U0`TN7AP=L_?eR>q?a?
+z94+*IbxA3nUR)IHcsie#tE#SV1(xfGoqeR1M2@8;x6!LP@)W$Hbsnc~V}#CQ7ifE-
+zflfGe0^&y%rDr3>X=l*$ETNBxOHMXZ2TL`4M`I!L6S4KNI^uh1qOr1`oJvmB(Y%Ki
+zg6evzHPu>&wud%??d!=z9f>_8cS)rIL-ZV?8v{tuCDK7RMJKuF!X<JsNj~Pt#W|V{
+zon<jhUd4?vjq|ubo)|6?H}s}U48${E(emY=e3J|gN*OIAL^4clm1yxBV$0-daq=6^
+vd_p2aNu@&Au`4Sv6!`>+sU(shnQroN;IJo>7NayqNjwwQu$zWs($m$y#DO#J
+
+diff --git out/production/tank-demo-core/base/GameObject.class out/production/tank-demo-core/base/GameObject.class
+index 2efadb7ca107f03da66991660b776852d427bfd5..9b8a5792d978603ea9074ee1f8c1a4c34435d671
+GIT binary patch
+literal 4590
+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
+Sj}6#_dd8%IC+8&8^Zx<64*v`Q
+
+diff --git assets/animation/big_explosion_5.png assets/animation/big_explosion_5.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..f99532dc13013704f4654453d02f6c73bc6f0abe
+GIT binary patch
+literal 900
+zc$@)*1AF|5P)<h;3K|Lk000e1NJLTq002M$002M;1^@s6s%dfF00009a7bBm001r{
+z001r{0eGc9b^rhXAY({UO#lFTB>(_`g8%^e{{R4h=>PzAFaQARU;qF*m;eA5Z<1fd
+zMgRZ<3Q0skRCwC#n>}(9K@f#|DXPQ~$hd->5t>YyQ;y-xS1_56;Se%s5R$<a$T-3(
+z8lraDul)AC-jzwzlSw<;UCsNZ|7K>I=Xpd#>~^~;&al0SGjDGn-rYq+#9_W(B;j~G
+z{#R1IO<%^-&xiT?+4Z&Wf&b&|37Ezh&qh2)nvHPwyBarBWyF&-Y<VAiK5KX%^&a?q
+z?B4_=0c`HMBaCwszefdK<&i{26uzfYz6oFixFp~RGX?)1K1M{u`-h*43M-OONtXm=
+zvzh=!08^e><^AP-L`3}l@i`o;UTum5*E=-<iU8NIx_-M#0+PidL1iOU<k$o#0#r=C
+zbuPR2RV1nVbtJfz0HqL{lc!R6ElDZ|X#!j?psXs3{i~5-wI3r#5!nP}MaWg$&Gxn`
+zoZqYd%4T5YCo5h^LK9H6`qjCf4VBK%OmV!9zh~Co^&<H{ngIMFN6@vdtbO?YYl?{Y
+z^XXzN&EfrJO?kH|FOZ*`05)<F@uJ^XHX;>E<(ZYg8cE3gs3@<zfg6$bx`2uUUdW<W
+zJ%CyHR46M)d+3KsyWW7=rmhL9TmT~{6$zp(U`jI^p{({=FW^>^ngB+?sTvZIbDh=f
+z6hUjVLPkbsgGoT{5Mc_s^?lcBtNZ5lj3m(}RLNNIYE8gm9Pl`@q^9QP|4g}5AR|T<
+zNmi9s-mJ61v;kk^b~yQUwbG;VepL^s&hcvY+Swoyz?!PFvq&(lyz0l4Ru!e{x&xBX
+z*&s%OY)8mzMTk|au6|ctAIN@9z}l6eYUH(c&F@sJ(Ts#9KoQ{X19Yp!N}*HRA|$D8
+zz*YiSWyRe|qUN@{>RjCu#H!g%z*+*-oKqyYHiHpU-7Adm(~+P{Ky@F#Yqi~7<<;Co
+z<uqLtRs^uKK}dqTOIs<({6C8WSWckkI%`b;vjK_(ru^ERLY-DqHo`sG(l$U5fae6Z
+zo)Tlf+Zx-ex$gdtCV;IDvyrSeb>dW=Kw)0To%{IyT@yqCUhDLD^{laq1GbXLo_F>H
+a{2KrmURHlJQS0dd0000<MNUMnLSTXes-qeJ
+
+diff --git out/production/tank-demo-core/base/Background.class out/production/tank-demo-core/base/Background.class
+index f884c5021aa5738f1ae45bd44afc64edb8be3a78..dd8566fcc872088409e05948fe99ca615e045ea2
+GIT binary patch
+literal 264
+zc${61%?`mp6ot>|A61Gsu){((cEo~&O~Zn8KdlMlr%kH$URDwd58$E1?Sx3&Nlxzh
+z?m5XkU-t)q0U9<m)GX93xD4h<#xff-Xq|4rpih&HU~qjIi$#74MY`tUkx0u=B7O{b
+zDhvOCdbX2ihNd6#v+yQ7I&9M<k2gaGdzIvABxbV6xxZ6?&oA784ukMt?MvqTB$nY`
+rL>byB(Qk`k^r%H@lJk@YjNT3GN=peAsi~lYvQia51-7bJRmyn-kK{EO
+

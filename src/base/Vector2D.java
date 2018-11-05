@@ -107,9 +107,9 @@ public class Vector2D {
         return (float)Math.sqrt(x * x + y * y);
     }
 
-    public void print() {
-        System.out.println(x + "; " + y);
-    }
+//    public void print() {
+//        System.out.println(x + "; " + y);
+//    }
 
     @Override
     public String toString() {

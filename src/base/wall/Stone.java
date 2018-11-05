@@ -27,8 +27,7 @@ public class Stone extends GameObject implements Physics {
             this.destroy();
         }
     }
-    @Override
-    public void run() {
+
 //        PlayBullet a = (PlayBullet)GameObject.intersect(PlayBullet.class,this);
 //        if(a!=null ){
 //            if(this.dem==0){
@@ -47,7 +46,7 @@ public class Stone extends GameObject implements Physics {
 //                this.destroy();
 //            }
 //        }
-    }
+
     @Override
     public BoxCollider getBoxCollider() {
         return this.collider;

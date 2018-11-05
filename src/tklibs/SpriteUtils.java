@@ -6,19 +6,28 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by huynq on 5/11/17.
  */
 public class SpriteUtils {
+    public static HashMap<String, BufferedImage> images = new HashMap<>();
 
     public static BufferedImage loadImage(String url) {
-        try {
-            return ImageIO.read(new File(url));
-        } catch (IOException e) {
-            e.printStackTrace();
+        BufferedImage image = images.get(url);
+        if(image != null) {
+            return image;
+        } else {
+            try {
+                image = ImageIO.read(new File(url));
+                images.put(url, image);
+                return image;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
         }
-        return null;
     }
 
     public static ArrayList<BufferedImage> loadImages(String ...urls) {

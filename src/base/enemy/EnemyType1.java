@@ -18,7 +18,7 @@ public class EnemyType1 extends Enemy {
     // EnemyType1 có tốc độ 4, máu 1.
     public EnemyType1() {
         this.renderer = new SingleImageRenderer("assets/tank_image/enemy1_down.png");
-        this.collider = new BoxCollider(54, 54);
+
     }
 
     public void takeDamage(int damage) {

@@ -42,33 +42,37 @@ public class EnemyBullet extends GameObject implements Physics {
         PlayBullet playBullet = (PlayBullet)GameObject.intersect(PlayBullet.class, this);
         ArrayList<Brick> bricks = GameObject.intersectManyItems(Brick.class, this);
         ArrayList<Stone> stones = GameObject.intersectManyItems(Stone.class, this);
+        Eagle eagle = GameObject.intersect(Eagle.class,this);
         if(bricks.size() > 0){
             for(Brick i : bricks){
                 i.destroy();
                 this.destroy();
             }
-
         }
 
         if(stones.size() > 0){
             for(Stone i : stones){
                 this.destroy();
             }
-
         }
 
         if (tank != null) {
             tank.takeDamage(this.damage);
             this.destroy();
-           // SceneManager.signNewScene(new SceneStage2());
+            SceneManager.signNewScene(new GameoverScene());
         }
+
         if(playBullet != null){
             this.destroy();
             playBullet.destroy();
-
         }
+
         if(this.checkIntersectsEagle()){//check aegle
             SceneManager.signNewScene(new GameoverScene());
+        }
+
+        if(eagle != null){
+            this.destroy();
         }
 
         if(this.position.y < 0 || this.position.y > Settings.SCREEN_HEIGHT ||
@@ -77,6 +81,7 @@ public class EnemyBullet extends GameObject implements Physics {
             return;
         }
     }
+
     private boolean checkIntersectsEagle(){// check  eagle
         Eagle eagle = GameObject.intersect(Eagle.class,this);
         return eagle != null;

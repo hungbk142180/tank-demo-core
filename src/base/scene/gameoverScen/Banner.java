@@ -12,7 +12,7 @@ import tklibs.SpriteUtils;
 public class Banner extends GameObject {
     public Banner(){
         super();
-        this.renderer = new SingleImageRenderer(SpriteUtils.loadImage("assets/gameover.jpg"));
+        this.renderer = new SingleImageRenderer(SpriteUtils.loadImage("assets/06.png"));
         this.position.set(Settings.SCREEN_WIDHT / 2 , Settings.SCREEN_HEIGHT / 2);
     }
 

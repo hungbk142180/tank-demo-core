@@ -1,5 +1,7 @@
 package base.scene;
 
+import base.enemy.EnemySummoner;
+
 public class SceneManager {
     public static Scene currentScene;
     public static Scene nextScene;
@@ -16,6 +18,7 @@ public class SceneManager {
             nextScene.init();
             currentScene = nextScene;
             nextScene = null;
+
         }
     }
 }

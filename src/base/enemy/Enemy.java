@@ -9,10 +9,7 @@ import base.player.Tank;
 import base.renderer.AnimationRenderer;
 import base.renderer.SingleImageRenderer;
 import base.scene.SceneStage1;
-import base.wall.Brick;
-import base.wall.Stone;
-import base.wall.WallManagement;
-import base.wall.Water;
+import base.wall.*;
 import tklibs.SpriteUtils;
 
 import java.awt.image.BufferedImage;
@@ -29,16 +26,16 @@ public class Enemy extends GameObject implements Physics {
     Random random = new Random();
     int enemyMoveX;
     int enemyMoveY;
-   // WallManagement arr;
+    // WallManagement arr;
     boolean isStuck = false;
     FrameCounter startCounter;
 
-     public Boolean isLife;// check xem hien tai co o tren map khi ma da khoi tao ko
+    public Boolean isLife;// check xem hien tai co o tren map khi ma da khoi tao ko
     public static Boolean checkClock = true;
 
     public Enemy() {
         super();
-     //   arr = new WallManagement();
+        //   arr = new WallManagement();
         this.position = new Vector2D(200, 100);
         this.moveCounter = new FrameCounter(139);
         this.startCounter = new FrameCounter(27);
@@ -46,6 +43,7 @@ public class Enemy extends GameObject implements Physics {
         this.enemyMoveX = 0;
         this.enemyMoveY = 0;
         isLife = false;
+        this.collider = new BoxCollider(55,55);
     }
 
     void defineAction(){
@@ -115,7 +113,8 @@ public class Enemy extends GameObject implements Physics {
                 Brick brick = (Brick)GameObject.intersect(Brick.class, this);
                 Stone stone = (Stone)GameObject.intersect(Stone.class, this);
                 Water water = (Water)GameObject.intersect(Water.class, this);
-                return brick!=null || stone!=null || water!=null;
+                Eagle eagle = (Eagle)GameObject.intersect(Eagle.class, this);
+                return brick!=null || stone!=null || water!=null || eagle!=null;
             }
 
         }
@@ -176,6 +175,8 @@ public class Enemy extends GameObject implements Physics {
     public void destroy() {
         super.destroy();
         EnemySummoner.enemyNow -= 1;
+        base.enemy.Explosion explosion = GameObject.recycle(base.enemy.Explosion.class);
+        explosion.position.set(this.position);
     }
 
     @Override

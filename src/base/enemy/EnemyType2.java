@@ -12,7 +12,6 @@ public class EnemyType2 extends Enemy {
     // EnemyType2 có tốc độ 6, máu 1.
     public EnemyType2() {
         this.renderer = new SingleImageRenderer("assets/tank_image/enemy2_down.png");
-        this.collider = new BoxCollider(54, 54);
         this.moveCounter = new FrameCounter(83);
     }
 

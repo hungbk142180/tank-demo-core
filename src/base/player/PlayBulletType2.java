@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class PlayBulletType2 extends PlayBullet {
     public PlayBulletType2() {
         super();
-        this.renderer = new SingleImageRenderer("assets/bullets/white.png");
+        this.renderer = new SingleImageRenderer("assets/bullets/bulletLua.png");
         this.collider = new BoxCollider(16, 16);
         this.damage = 1;
     }

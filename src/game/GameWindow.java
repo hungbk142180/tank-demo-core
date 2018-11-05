@@ -12,18 +12,24 @@ import java.awt.event.KeyEvent;
 
 public class GameWindow extends JFrame {
     GameCanvas canvas;
+    public boolean visibleLoading=true;
     public GameWindow() {
         //setup window
-        //this.setSize(Settings.SCREEN_WIDHT, Settings.SCREEN_HEIGHT);
+        this.setSize(Settings.SCREEN_WIDHT + Settings.WAY_SIZE*10,
+                Settings.SCREEN_HEIGHT + Settings.WAY_SIZE + 8);
         this.setResizable(false);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setupEventListtener();
+
         //init game
         this.canvas = new GameCanvas();
-        this.canvas.setPreferredSize(new Dimension(Settings.SCREEN_WIDHT, Settings.SCREEN_HEIGHT));//size ko tinh sisegame window
+        this.canvas.setPreferredSize(new Dimension(Settings.SCREEN_WIDHT , Settings.SCREEN_HEIGHT));//size ko tinh sisegame window
+
         this.add(canvas);
         this.setVisible(true);
         this.pack();
+        //Render loading
+
     }
 
     private void setupEventListtener() {
@@ -35,42 +41,48 @@ public class GameWindow extends JFrame {
                 if(e.getKeyCode() == KeyEvent.VK_W) {
                     KeyEventPress.isUpPress = true;
                 }
-               else if(e.getKeyCode() == KeyEvent.VK_A) {
+                else if(e.getKeyCode() == KeyEvent.VK_A) {
                     KeyEventPress.isLeftPress = true;
                 }
-               else if(e.getKeyCode() == KeyEvent.VK_S) {
+                else if(e.getKeyCode() == KeyEvent.VK_S) {
                     KeyEventPress.isDownPress = true;
                 }
-               else if(e.getKeyCode() == KeyEvent.VK_D) {
+                else if(e.getKeyCode() == KeyEvent.VK_D) {
                     KeyEventPress.isRightPress = true;
                 }
-               else if(e.getKeyCode() == KeyEvent.VK_SPACE) {
+                else if(e.getKeyCode() == KeyEvent.VK_J) {
                     KeyEventPress.isFirePress = true;
                 }
+                /*else if(e.getKeyCode() == KeyEvent.VK_ENTER) {//go to SceneImageStage1
+                    KeyEventPress.isGoStageKeyPress = true;
+                }*/
             }
 
             @Override
             public void keyReleased(KeyEvent e) {
                 KeyEventPress.isAnyKeyPress = false;//
                 if(e.getKeyCode() == KeyEvent.VK_W) {
-                   KeyEventPress.isUpPress = false;
+                    KeyEventPress.isUpPress = false;
 
                 }
-               else if(e.getKeyCode() == KeyEvent.VK_A) {
+                else if(e.getKeyCode() == KeyEvent.VK_A) {
                     KeyEventPress.isLeftPress = false;
 
                 }
-               else if(e.getKeyCode() == KeyEvent.VK_S) {
+                else if(e.getKeyCode() == KeyEvent.VK_S) {
                     KeyEventPress.isDownPress = false;
 
                 }
-               else if(e.getKeyCode() == KeyEvent.VK_D) {
+                else if(e.getKeyCode() == KeyEvent.VK_D) {
                     KeyEventPress.isRightPress = false;
 
                 }
-               else if(e.getKeyCode() == KeyEvent.VK_SPACE) {
+                else if(e.getKeyCode() == KeyEvent.VK_J) {
                     KeyEventPress.isFirePress = false;
                 }
+                /*else if(e.getKeyCode() == KeyEvent.VK_ENTER) {//go to SceneImageStage1
+                    KeyEventPress.isGoStageKeyPress = false;
+                }*/
             }
         });
     }

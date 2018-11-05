@@ -12,7 +12,6 @@ public class EnemyType3 extends Enemy {
     int hp;
     public EnemyType3() {
         this.renderer = new SingleImageRenderer("assets/tank_image/enemy3_down.png");
-        this.collider = new BoxCollider(54, 54);
         this.hp = 2;
     }
 

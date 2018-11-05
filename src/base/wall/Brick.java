@@ -27,7 +27,7 @@ public class Brick extends GameObject implements Physics {
         if (damage > 0) {
             this.destroy();
         }
-        System.out.println(damage);
+//        System.out.println(damage);
     }
 
 //    public void run() {
